@@ -1,1 +1,129 @@
-<h1>En construction</h1>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fabien Brinjean | Conseiller technopédagogique</title>
+    <!-- Chargement de Tailwind CSS via CDN pour le Vibe Coding -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-zinc-50 text-zinc-800 font-sans antialiased selection:bg-zinc-200">
+
+    <!-- Navigation Minimaliste -->
+    <header class="max-w-6xl mx-auto px-6 py-6 flex justify-between items-center">
+        <div class="text-xl font-bold tracking-tight text-zinc-900">fbrinjean<span class="text-indigo-600">.</span></div>
+        <nav class="space-x-6 text-sm font-medium text-zinc-600">
+            <a href="#approche" class="hover:text-zinc-950 transition">Approche</a>
+            <a href="#realisations" class="hover:text-zinc-950 transition">Réalisations</a>
+            <a href="#parcours" class="hover:text-zinc-950 transition">Parcours</a>
+        </nav>
+    </header>
+
+    <!-- Conteneur Principal -->
+    <main class="max-w-6xl mx-auto px-6 py-12 md:py-20">
+        
+        <!-- Section Hero (Mise en page asymétrique 50/50) -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center border-b border-zinc-200 pb-16">
+            <!-- Gauche : Emplacement Photo -->
+            <div class="overflow-hidden rounded-2xl bg-zinc-200 aspect-[4/5] shadow-sm relative group">
+                <!-- La balise tentera de charger "photo.jpg". Si absente, le rectangle gris de secours s'affiche -->
+                <img src="photo.jpg" alt="Fabien Brinjean" class="w-full h-full object-cover object-center" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-zinc-500 p-6 text-center bg-zinc-200">
+                    <span class="font-semibold text-zinc-700">Votre Photo ici</span>
+                    <span class="text-xs mt-2 text-zinc-500 max-w-xs">Nommez votre portrait "photo.jpg" et glissez-le à la racine de votre dépôt GitHub.</span>
+                </div>
+            </div>
+
+            <!-- Droite : Positionnement et Accroche -->
+            <div class="space-y-6">
+                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-zinc-900 leading-none">
+                    Fabien Brinjean
+                </h1>
+                <p class="text-xl font-medium text-indigo-600">
+                    Conseiller technopédagogique à l'Université de Montréal
+                </p>
+                <p class="text-zinc-600 leading-relaxed text-lg">
+                    J'accompagne les institutions et le corps enseignant dans la transition numérique de l'enseignement supérieur. Ma double expertise allie une haute maîtrise technique à un profond discernement pédagogique, pour une adoption technologique réfléchie, sobre et ancrée dans la réalité du terrain.
+                </p>
+                <div class="pt-4">
+                    <a href="#realisations" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium rounded-lg text-white bg-zinc-900 hover:bg-zinc-800 transition shadow-sm">
+                        Découvrir mes réalisations
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Approche (Les 3 Piliers en Grille) -->
+        <section id="approche" class="py-16 border-b border-zinc-200">
+            <h2 class="text-2xl font-bold text-zinc-900 mb-10 tracking-tight">Mon Alignement Stratégique</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Pilier 1 -->
+                <div class="bg-white p-8 rounded-xl border border-zinc-200 shadow-sm space-y-4 hover:shadow-md transition">
+                    <div class="h-10 w-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold">01</div>
+                    <h3 class="text-lg font-bold text-zinc-950">Expertise technologique <span class="italic">et</span> discernement</h3>
+                    <p class="text-sm text-zinc-600 leading-relaxed">
+                        Je dispose d'une aisance et d'une expertise techniques avancées : production multimédia, programmation agile en <span class="italic">vibe coding</span>, production de ressources pédagogiques multiples avec l'IA, et rôle de personne-ressource auprès du corps enseignant pour une plateforme institutionnelle. Pourtant, je refuse le solutionnisme, qui parfois se présente masqué. Ainsi, je ne pousse pas l'innovation pour sa nouveauté, mais pour sa valeur ajoutée, et je prône un usage sobre et ciblé du numérique, garantissant la préservation des compétences humaines fondamentales (lecture, analyse, attention).
+                    </p>
+                </div>
+
+                <!-- Pilier 2 -->
+                <div class="bg-white p-8 rounded-xl border border-zinc-200 shadow-sm space-y-4 hover:shadow-md transition">
+                    <div class="h-10 w-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold">02</div>
+                    <h3 class="text-lg font-bold text-zinc-950">Accompagnement pédagogique</h3>
+                    <p class="text-sm text-zinc-600 leading-relaxed">
+                        Ma force réside dans ma capacité d'écoute et d'adaptation. Qu'il s'agisse d'un professeur sceptique ou d'un décanat tiraillé par des enjeux modernes, je m'efforce de cibler les besoins et les habiletés de mes interlocuteurs pour concevoir des parcours de transition (hybride, comodal) réalistes et fructueux.
+                    </p>
+                </div>
+
+                <!-- Pilier 3 -->
+                <div class="bg-white p-8 rounded-xl border border-zinc-200 shadow-sm space-y-4 hover:shadow-md transition">
+                    <div class="h-10 w-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold">03</div>
+                    <h3 class="text-lg font-bold text-zinc-950">Évaluation & intégrité académique</h3>
+                    <p class="text-sm text-zinc-600 leading-relaxed">
+                        Je collabore avec des experts sectoriels pour répondre aux défis actuels. Cela se traduit par le soutien au déploiement technique et humain d'outils de sécurisation des examens (Safe Exam Browser) ou par la conception de formules de calcul visant à optimiser l'équité lors des travaux d'équipe notés (facteur de pondération individuel).
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Section Portfolio (Catégories Thématiques) -->
+        <section id="realisations" class="py-16 border-b border-zinc-200">
+            <div class="mb-12">
+                <h2 class="text-2xl font-bold text-zinc-900 tracking-tight">Réalisations Choisies</h2>
+                <p class="text-zinc-500 mt-1">Regroupement thématique des chantiers techniques et stratégiques.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Bloc Catégorie A -->
+                <div class="space-y-4 border-l-2 border-indigo-600 pl-6">
+                    <h3 class="text-xl font-bold text-zinc-900">Transformation numérique & Ingénierie</h3>
+                    <p class="text-zinc-600 text-sm leading-relaxed">Pilotage de chantiers d'hybridation et restructuration des formats de prestation.</p>
+                    <ul class="space-y-2 text-sm text-zinc-700 pt-2">
+                        <li><strong class="text-zinc-950">Hybridation massive (FSÉ) :</strong> Accompagnement stratégique et méthodologique.</li>
+                        <li><strong class="text-zinc-950">Comodal multi-campus (FMV) :</strong> Modélisation et déploiement de l'infrastructure pédagogique.</li>
+                    </ul>
+                </div>
+
+                <!-- Bloc Catégorie B -->
+                <div class="space-y-4 border-l-2 border-indigo-600 pl-6">
+                    <h3 class="text-xl font-bold text-zinc-900">IA, Innovation & Développement agile</h3>
+                    <p class="text-zinc-600 text-sm leading-relaxed">Conception d'outils sur mesure et intégration raisonnée des technologies émergentes.</p>
+                    <ul class="space-y-2 text-sm text-zinc-700 pt-2">
+                        <li><strong class="text-zinc-950">Outil d'autodiagnostic web :</strong> Développement rapide et autonome en <span class="italic">vibe coding</span>.</li>
+                        <li><strong class="text-zinc-950">Ateliers IA & Lecture :</strong> Optimisation de l'engagement étudiant via des plateformes ciblées (Perusall).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Pied de page -->
+    <footer class="bg-zinc-100 text-zinc-500 text-xs py-8 text-center border-t border-zinc-200">
+        <p>&copy; 2026 Fabien Brinjean. Tous droits réservés. Site hébergé sur GitHub Pages.</p>
+    </footer>
+
+</body>
+</html>
