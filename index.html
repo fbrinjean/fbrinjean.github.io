@@ -1,236 +1,170 @@
-<!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fabien Brinjean | Conseiller technopédagogique</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        darkBg: '#09090b',
-                        cardBg: '#141417',
-                        accentColor: '#6366f1',
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        /* Lueur d'arrière-plan personnalisée */
-        .glow-bg {
-            position: absolute;
-            top: -20%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(0,0,0,0) 70%);
-            pointer-events: none;
-            z-index: 0;
-        }
-    </style>
-</head>
-<body class="bg-darkBg text-zinc-400 font-sans antialiased selection:bg-indigo-500/30 selection:text-indigo-200 relative overflow-x-hidden">
+< !DOCTYPE html >
+< html lang="fr" class="scroll-smooth" >
+< head >
+< meta charset="UTF-8" >
+< meta name="viewport" content="width=device-width, initial-scale=1.0" >
+< title >Fabien Brinjean | Conseiller technopédagogique< /title >
+< link rel="preconnect" href="https://fonts.googleapis.com" >
+< link rel="preconnect" href="[suspicious link removed]" crossorigin >
+< link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" >
+< script src="https://cdn.tailwindcss.com" >< /script >
+< script >
+tailwind.config = {
+theme: {
+extend: {
+fontFamily: {
+serif: ['"Cormorant Garamond"', 'serif'],
+sans: ['Inter', 'sans-serif'],
+},
+colors: {
+studioBg: '#F8F9FA',
+charcoal: '#111111',
+sage: '#3D5246',
+rust: '#8B3A2A',
+mutedGray: '#555555',
+borderGray: '#E5E7EB'
+}
+}
+}
+}
+< /script >
+< /head >
+< body class="bg-studioBg text-charcoal font-sans antialiased" >
+< nav class="w-full border-b border-borderGray bg-white/80 backdrop-blur-md sticky top-0 z-50" >
+    < div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center" >
+        < a href="#" class="font-serif text-xl font-semibold tracking-tight text-sage" >
+            Fabien Brinjean
+        < /a >
+        < div class="flex items-center space-x-6 text-xs font-medium uppercase tracking-wider text-mutedGray" >
+            < a href="#approche" class="hover:text-charcoal transition-colors" >Approche< /a >
+            < a href="#laboratoire" class="hover:text-charcoal transition-colors" >Laboratoire< /a >
+            < a href="#contact" class="hover:text-charcoal transition-colors" >Contact< /a >
+        < /div >
+    < /div >
+< /nav >
 
-    <!-- Effet de halo lumineux en arrière-plan -->
-    <div class="glow-bg"></div>
+< main class="max-w-5xl mx-auto px-6" >
 
-    <!-- Header Flottant Réactionnel -->
-    <header class="sticky top-0 z-50 backdrop-blur-md bg-darkBg/70 border-b border-zinc-900/80">
-        <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-lg font-bold tracking-tighter text-zinc-100 hover:text-indigo-400 transition-colors">
-                fbrinjean<span class="text-indigo-500">.</span>
-            </a>
-            <nav class="flex items-center space-x-8 text-xs font-medium tracking-widest uppercase text-zinc-400">
-                <a href="#approche" class="hover:text-zinc-100 transition-colors">Approche</a>
-                <a href="#realisations" class="hover:text-zinc-100 transition-colors">Réalisations</a>
-                <a href="#parcours" class="hover:text-zinc-100 transition-colors">Parcours</a>
-            </nav>
-        </div>
-    </header>
+    < section class="py-16 md:py-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center" >
+        < div class="lg:col-span-7 space-y-6" >
+            < div class="inline-block text-xs font-medium uppercase tracking-widest text-rust border-b-2 border-rust/20 pb-1" >
+                Postures &amp; Perspectives Technopédagogiques
+            < /div >
+            < h1 class="font-serif text-4xl md:text-6xl font-medium tracking-tight text-charcoal leading-tight" >
+                Accompagner l'innovation numérique avec < span class="italic text-sage" >discernement< /span >.
+            < /h1 >
+            < p class="text-mutedGray text-base md:text-lg font-light leading-relaxed max-w-xl" >
+                Conseiller technopédagogique à l’Université de Montréal. J’allie une expertise en production multimédia à une approche réflexive pour structurer des transitions d’apprentissage durables et adaptées aux réalités institutionnelles.
+            < /p >
+            < div class="pt-2 flex flex-wrap gap-4" >
+                < a href="#laboratoire" class="px-5 py-3 rounded-lg text-xs font-semibold uppercase tracking-wider bg-sage text-white hover:bg-charcoal transition-all" >
+                    Explorer les cas d'étude
+                < /a >
+                < a href="#approche" class="px-5 py-3 rounded-lg text-xs font-semibold uppercase tracking-wider border border-borderGray text-charcoal hover:bg-white transition-all" >
+                    Consulter la démarche
+                < /a >
+            < /div >
+        < /div >
 
-    <main class="max-w-5xl mx-auto px-6 relative z-10">
-        
-        <!-- HERO SECTION : Minimalisme Cinématique -->
-        <section class="py-24 md:py-32 grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-            
-            <!-- Gauche : Contenu Texte Texturé -->
-            <div class="md:col-span-7 space-y-6">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-xs font-medium text-indigo-400">
-                    <span class="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse"></span>
-                    Disponible pour mandats stratégiques
-                </div>
-                <h1 class="text-4xl md:text-6xl font-black tracking-tighter text-zinc-100 leading-none">
-                    L'ingénierie numérique <br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400">
-                        menée avec discernement.
-                    </span>
-                </h1>
-                <p class="text-zinc-400 text-lg leading-relaxed font-light max-w-xl">
-                    Conseiller technopédagogique à l’Université de Montréal. J’allie une haute maîtrise technique à une posture techno-critique pour concevoir des transitions d’apprentissage durables, sobres et ancrées dans le réel.
-                </p>
-                <div class="pt-4 flex flex-wrap gap-4">
-                    <a href="#realisations" class="px-6 py-3 rounded-xl text-sm font-semibold bg-zinc-100 text-zinc-950 hover:bg-zinc-200 transition-all shadow-sm shadow-indigo-500/10">
-                        Consulter les projets
-                    </a>
-                    <a href="#approche" class="px-6 py-3 rounded-xl text-sm font-semibold bg-zinc-900 text-zinc-300 border border-zinc-800 hover:border-zinc-700 hover:text-zinc-100 transition-all">
-                        Mon manifeste
-                    </a>
-                </div>
-            </div>
+        < div class="lg:col-span-5 w-full" >
+            < div class="bg-white border border-borderGray rounded-2xl p-8 shadow-sm space-y-6 max-w-sm mx-auto lg:max-w-none" >
+                < div class="space-y-2" >
+                    < p class="text-xs font-mono text-rust uppercase tracking-wider" >// Ancrage Institutionnel< /p >
+                    < h2 class="font-serif text-2xl font-medium text-charcoal" >Université de Montréal< /h2 >
+                    < p class="text-xs text-mutedGray font-light" >Centre de pédagogie universitaire (CPU) &amp;mdash; Depuis 2020< /p >
+                < /div >
+                < div class="border-t border-borderGray pt-4" >
+                    < p class="text-xs text-mutedGray leading-relaxed font-light" >
+                        Soutien stratégique à l’hybridation des programmes, ingénierie de cours complexes et maillage entre exigences académiques et outils émergents.
+                    < /p >
+                < /div >
+            < /div >
+        < /div >
+    < /section >
 
-            <!-- Droite : Bloc Photo Stylisé Cadre d'Art -->
-            <div class="md:col-span-5">
-                <div class="relative group mx-auto max-w-[320px] md:max-w-none">
-                    <!-- Halo de survol derrière la photo -->
-                    <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-500 opacity-20 blur-xl group-hover:opacity-40 transition duration-500"></div>
-                    
-                    <div class="relative overflow-hidden rounded-2xl bg-zinc-900 border border-zinc-800 aspect-[4/5] shadow-2xl">
-                        <img src="photo.jpg" alt="Fabien Brinjean" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-                        <div class="absolute inset-0 flex flex-col items-center justify-center p-6 text-center text-zinc-600 bg-zinc-900">
-                            <svg class="w-8 h-8 mb-2 text-zinc-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                            <span class="text-xs font-mono uppercase tracking-widest text-zinc-500">photo.jpg manquante</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    < section id="approche" class="py-16 border-t border-borderGray" >
+        < div class="max-w-2xl mb-12" >
+            < h2 class="font-serif text-3xl font-medium text-charcoal mb-2" >Principes directeurs< /h2 >
+            < p class="text-xs font-medium uppercase tracking-wider text-mutedGray" >Une méthodologie rigoureuse face aux ruptures technologiques< /p >
+        < /div >
 
-        <!-- MANIFESTE : La Grille Asymétrique Bento -->
-        <section id="approche" class="py-20 border-t border-zinc-900">
-            <div class="max-w-2xl mb-12">
-                <h2 class="text-xs font-bold tracking-widest uppercase text-indigo-400 mb-2">Philosophie</h2>
-                <p class="text-2xl font-bold tracking-tight text-zinc-100">Trois ancrages pour structurer l'innovation.</p>
-            </div>
+        < div class="grid grid-cols-1 md:grid-cols-3 gap-8" >
+            < div class="space-y-4" >
+                < div class="text-xs font-mono text-rust" >01 / EXPERTISE TECHNIQUE< /div >
+                < h3 class="text-base font-semibold text-charcoal font-sans" >Production multimédia intégrée< /h3 >
+                < p class="text-sm text-mutedGray font-light leading-relaxed" >
+                    Maîtrise directe des écosystèmes audio et vidéo (MOOC, baladodiffusions, modélisation). Cette agilité technique me permet de dialoguer d'égal à égal avec les infrastructures et de concrétiser des prototypes via le < span class="font-medium text-charcoal" >vibe coding< /span >.
+                < /p >
+            < /div >
 
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
-                <!-- Bloc 1 : Large (L'Expertise) -->
-                <div class="md:col-span-7 bg-cardBg border border-zinc-900 rounded-2xl p-8 hover:border-zinc-800 transition-all duration-300 relative group overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-500/5 rounded-full blur-2xl group-hover:bg-indigo-500/10 transition-all"></div>
-                    <span class="text-xs font-mono text-zinc-600">01 / TECHNIQUE & POSTURE</span>
-                    <h3 class="text-xl font-bold text-zinc-100 mt-4 mb-3">Expertise technologique & discernement</h3>
-                    <p class="text-sm text-zinc-400 leading-relaxed font-light">
-                        Je dispose d'une aisance technique avancée : production multimédia, développement agile en <span class="text-zinc-200 font-medium">vibe coding</span>, ingénierie IA et gestion de plateformes institutionnelles. Pourtant, je refuse le solutionnisme masqué. Je ne pousse pas l'innovation pour sa nouveauté, mais pour sa valeur ajoutée brute, en prônant un usage sobre du numérique afin de préserver les facultés cognitives fondamentales (attention, lecture, analyse).
-                    </p>
-                </div>
+            < div class="space-y-4" >
+                < div class="text-xs font-mono text-rust" >02 / POSTURE CRITIQUE< /div >
+                < h3 class="text-base font-semibold text-charcoal font-sans" >Sobriété et discernement< /h3 >
+                < p class="text-sm text-mutedGray font-light leading-relaxed" >
+                    Refus du solutionnisme technologique systématique. Chaque outil introduit est rigoureusement évalué sous l'angle de sa valeur ajoutée cognitive, de sa pérennité pédagogique et du respect des capacités attentionnelles des étudiants.
+                < /p >
+            < /div >
 
-                <!-- Bloc 2 : Court (L'Accompagnement) -->
-                <div class="md:col-span-5 bg-cardBg border border-zinc-900 rounded-2xl p-8 hover:border-zinc-800 transition-all duration-300 flex flex-col justify-between">
-                    <div>
-                        <span class="text-xs font-mono text-zinc-600">02 / HUMAIN</span>
-                        <h3 class="text-xl font-bold text-zinc-100 mt-4 mb-3">Accompagnement pédagogique</h3>
-                    </div>
-                    <p class="text-sm text-zinc-400 leading-relaxed font-light">
-                        Ma boussole est l'écoute active. Des professeurs réfractaires aux décanats contraints par des enjeux d'accréditation, je co-conçois des trajectoires de transition réalistes (comodal, hybride) adaptées au rythme de vos équipes.
-                    </p>
-                </div>
+            < div class="space-y-4" >
+                < div class="text-xs font-mono text-rust" >03 / COLLABORATION< /div >
+                < h3 class="text-base font-semibold text-charcoal font-sans" >Accompagnement sur mesure< /h3 >
+                < p class="text-sm text-mutedGray font-light leading-relaxed" >
+                    Prise en compte des réalités de terrain et des compétences initiales des équipes enseignantes. Co-conception de trajectoires d'évaluation sécurisées, d'architectures comodales et d'ateliers d'intégration de l'IA.
+                < /p >
+            < /div >
+        < /div >
+    < /section >
 
-                <!-- Bloc 3 : Pleine largeur (Intégrité) -->
-                <div class="md:col-span-12 bg-cardBg border border-zinc-900 rounded-2xl p-8 hover:border-zinc-800 transition-all duration-300 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-                    <div class="md:col-span-1">
-                        <span class="text-xs font-mono text-zinc-600">03 / CO-CONCEPTION</span>
-                        <h3 class="text-xl font-bold text-zinc-100 mt-2">Évaluation & Intégrité</h3>
-                    </div>
-                    <div class="md:col-span-2">
-                        <p class="text-sm text-zinc-400 leading-relaxed font-light">
-                            En synergie avec les experts de contenu, je sécurise et optimise les architectures d'évaluation. Qu'il s'agisse du déploiement d'écosystèmes étanches (Safe Exam Browser) ou de la modélisation mathématique de l'équité en équipe (facteur de pondération individuel), je matérialise des solutions d'impact.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
+    < section id="laboratoire" class="py-16 border-t border-borderGray" >
+        < div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4" >
+            < div >
+                < h2 class="font-serif text-3xl font-medium text-charcoal mb-2" >Le Laboratoire< /h2 >
+                < p class="text-xs font-medium uppercase tracking-wider text-mutedGray" >Sélection d'interventions de pointe< /p >
+            < /div >
+        < /div >
 
-        <!-- PORTFOLIO : Cartes Typographiques Épurées -->
-        <section id="realisations" class="py-20 border-t border-zinc-900">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
-                <div>
-                    <h2 class="text-xs font-bold tracking-widest uppercase text-indigo-400 mb-2">Portfolio</h2>
-                    <p class="text-3xl font-bold tracking-tight text-zinc-100">Projets phares (2025 - 2026)</p>
-                </div>
-                <div class="text-sm text-zinc-500 font-mono">/ Sélection de mandats d'ingénierie</div>
-            </div>
+        < div class="grid grid-cols-1 md:grid-cols-2 gap-8" >
+            < div class="bg-white border border-borderGray rounded-xl p-8 hover:shadow-md transition-shadow flex flex-col justify-between" >
+                < div class="space-y-4" >
+                    < span class="text-[10px] font-mono uppercase tracking-wider bg-studioBg text-sage px-2.5 py-1 rounded border border-borderGray" >Ingénierie de programme< /span >
+                    < h3 class="font-serif text-xl font-medium text-charcoal" >Hybridation massive des parcours d'apprentissage< /h3 >
+                    < p class="text-sm text-mutedGray font-light leading-relaxed" >
+                        Accompagnement d'une faculté dans la transition à distance et comodore de ses cursus. Modélisation de l'architecture des cours, rationalisation des ressources technologiques et formation des cadres pédagogiques.
+                    < /p >
+                < /div >
+                < div class="pt-6 text-xs font-mono text-rust" >Faculté des sciences de l'éducation< /div >
+            < /div >
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                
-                <!-- Projet 1 -->
-                <div class="group cursor-pointer space-y-4">
-                    <div class="aspect-[16/10] w-full rounded-xl bg-zinc-900 border border-zinc-800/60 overflow-hidden relative flex items-center justify-center hover:border-zinc-700 transition-all duration-500">
-                        <!-- Dégradé subtil simulé en attendant une vraie capture d'écran -->
-                        <div class="absolute inset-0 bg-gradient-to-br from-indigo-950/20 to-zinc-900 group-hover:scale-105 transition-transform duration-700"></div>
-                        <span class="text-xs font-mono tracking-widest text-zinc-600 uppercase group-hover:text-zinc-400 transition-colors">Visualisation du Projet FSÉ</span>
-                    </div>
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <h3 class="text-lg font-bold text-zinc-200 group-hover:text-indigo-400 transition-colors">Hybridation Massive des Programmes</h3>
-                            <p class="text-xs text-zinc-500 font-mono mt-0.5">Faculté des sciences de l'éducation (FSÉ)</p>
-                        </div>
-                        <span class="text-xs border border-zinc-800 rounded px-2 py-0.5 font-mono text-zinc-500">Stratégie</span>
-                    </div>
-                </div>
+            < div class="bg-white border border-borderGray rounded-xl p-8 hover:shadow-md transition-shadow flex flex-col justify-between" >
+                < div class="space-y-4" >
+                    < span class="text-[10px] font-mono uppercase tracking-wider bg-studioBg text-sage px-2.5 py-1 rounded border border-borderGray" >Vibe Coding &amp; IA< /span >
+                    < h3 class="font-serif text-xl font-medium text-charcoal" >Application d'autodiagnostic numérique sur mesure< /h3 >
+                    < p class="text-sm text-mutedGray font-light leading-relaxed" >
+                        Développement agile d'un outil d'évaluation de la maturité numérique pour les enseignants. Conception axée sur la légèreté du code, l'indépendance vis-à-vis des tiers et l'accessibilité immédiate.
+                    < /p >
+                < /div >
+                < div class="pt-6 text-xs font-mono text-rust" >Prototype fonctionnel autonome< /div >
+            < /div >
+        < /div >
+    < /section >
 
-                <!-- Projet 2 -->
-                <div class="group cursor-pointer space-y-4">
-                    <div class="aspect-[16/10] w-full rounded-xl bg-zinc-900 border border-zinc-800/60 overflow-hidden relative flex items-center justify-center hover:border-zinc-700 transition-all duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-br from-purple-950/20 to-zinc-900 group-hover:scale-105 transition-transform duration-700"></div>
-                        <span class="text-xs font-mono tracking-widest text-zinc-600 uppercase group-hover:text-zinc-400 transition-colors">Visualisation du Projet FMV</span>
-                    </div>
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <h3 class="text-lg font-bold text-zinc-200 group-hover:text-indigo-400 transition-colors">Infrastructure Comodale Multi-Campus</h3>
-                            <p class="text-xs text-zinc-500 font-mono mt-0.5">Faculté de médecine vétérinaire (FMV)</p>
-                        </div>
-                        <span class="text-xs border border-zinc-800 rounded px-2 py-0.5 font-mono text-zinc-500">Infrastructure</span>
-                    </div>
-                </div>
+< /main >
 
-                <!-- Projet 3 -->
-                <div class="group cursor-pointer space-y-4">
-                    <div class="aspect-[16/10] w-full rounded-xl bg-zinc-900 border border-zinc-800/60 overflow-hidden relative flex items-center justify-center hover:border-zinc-700 transition-all duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-br from-emerald-950/20 to-zinc-900 group-hover:scale-105 transition-transform duration-700"></div>
-                        <span class="text-xs font-mono tracking-widest text-zinc-600 uppercase group-hover:text-zinc-400 transition-colors">Démo App Autodiagnostic</span>
-                    </div>
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <h3 class="text-lg font-bold text-zinc-200 group-hover:text-indigo-400 transition-colors">Outil d'Autodiagnostic Numérique</h3>
-                            <p class="text-xs text-zinc-500 font-mono mt-0.5">Développement sur mesure (Vibe Coding)</p>
-                        </div>
-                        <span class="text-xs border border-zinc-800 rounded px-2 py-0.5 font-mono text-zinc-500">Développement</span>
-                    </div>
-                </div>
-
-                <!-- Projet 4 -->
-                <div class="group cursor-pointer space-y-4">
-                    <div class="aspect-[16/10] w-full rounded-xl bg-zinc-900 border border-zinc-800/60 overflow-hidden relative flex items-center justify-center hover:border-zinc-700 transition-all duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-br from-amber-950/20 to-zinc-900 group-hover:scale-105 transition-transform duration-700"></div>
-                        <span class="text-xs font-mono tracking-widest text-zinc-600 uppercase group-hover:text-zinc-400 transition-colors">Visualisation Ateliers IA</span>
-                    </div>
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <h3 class="text-lg font-bold text-zinc-200 group-hover:text-indigo-400 transition-colors">Scénarisation d'Ateliers IA & Lecture</h3>
-                            <p class="text-xs text-zinc-500 font-mono mt-0.5">Intégration technologique (Perusall)</p>
-                        </div>
-                        <span class="text-xs border border-zinc-800 rounded px-2 py-0.5 font-mono text-zinc-500">Pédagogie</span>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Pied de page -->
-    <footer class="mt-20 border-t border-zinc-950 bg-[#050507] text-zinc-600 text-xs py-12">
-        <div class="max-w-5xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p>&copy; 2026 Fabien Brinjean. Conçu en code agile. Hébergé de façon éco-responsable sur GitHub Pages.</p>
-            <div class="flex space-x-6 font-mono uppercase tracking-wider text-[10px]">
-                <a href="https://github.com/fbrinjean" class="hover:text-zinc-300">GitHub</a>
-                <a href="#" class="hover:text-zinc-300">LinkedIn</a>
-            </div>
-        </div>
-    </footer>
-
-</body>
-</html>
+< footer id="contact" class="mt-16 border-t border-borderGray bg-white py-12" >
+    < div class="max-w-5xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6" >
+        < div class="space-y-1 text-center md:text-left" >
+            < p class="font-serif text-lg font-semibold text-sage" >Fabien Brinjean< /p >
+            < p class="text-xs text-mutedGray font-light" >Conception, code et posture critique &bull; Montréal, QC< /p >
+        < /div >
+        < div class="flex flex-wrap items-center gap-4" >
+            < a href="mailto:fabien.brinjean@hotmail.com" class="px-4 py-2 rounded border border-borderGray text-xs font-medium text-charcoal hover:bg-studioBg transition-colors" >
+                fabien.brinjean@hotmail.com
+            < /a >
+            < a href="[https://linkedin.com](https://linkedin.com)" target="_blank" class="px-4 py-2 rounded bg-sage text-white text-xs font-medium hover:bg-charcoal transition-colors" >
+                LinkedIn &amp;rarr;
+            < /a >
+        < /div >
+    < /div >
+< /footer >
+    < /body >
+< /html >
