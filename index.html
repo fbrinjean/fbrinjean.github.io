@@ -4,41 +4,60 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fabien Brinjean</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <!--
+    Typographies :
+    - Plus Jakarta Sans  → titres, nav, interface  (contemporaine, légèrement technique)
+    - EB Garamond        → tagline hero, notes, footer  (registre réflexif / éditorial)
+  -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=EB+Garamond:ital,wght@0,400;1,400;1,500&display=swap" rel="stylesheet" />
+
   <style>
+    /* ═══════════════════════════════════════
+       RESET & VARIABLES
+    ═══════════════════════════════════════ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:     #F5F5F5;
-      --red:    #A74D4A;
-      --ink:    #121212;
-      --muted:  #6a6a6a;
-      --max-w:  900px;
-      --gutter: 48px;
-    }
-
-    html, body {
-      background: var(--bg);
-      color: var(--ink);
-      font-family: 'Inter', sans-serif;
-      font-size: 15px;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      min-height: 100vh;
+      --bg:          #F5F5F5;
+      --bg-dark:     #121212;
+      --red:         #A74D4A;
+      --red-dark:    #c96f6b;   /* rouge plus lumineux sur fond sombre */
+      --ink:         #121212;
+      --ink-light:   #F0EFED;   /* texte clair sur fond sombre */
+      --muted:       #6a6a6a;
+      --muted-dark:  #9a9a9a;
+      --border:      #D8D6D3;
+      --max-w:       900px;
+      --gutter:      48px;
+      --photo-w:     260px;
+      --photo-gap:   48px;
     }
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 90px;
+      scroll-padding-top: 80px;
     }
 
-    /* ── HEADER ── */
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+
+    /* ═══════════════════════════════════════
+       HEADER
+    ═══════════════════════════════════════ */
     .header-wrap {
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 100;
       background: var(--bg);
       border-bottom: 1px solid var(--ink);
     }
@@ -46,212 +65,340 @@
     header {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
+      align-items: center;
       max-width: var(--max-w);
       margin: 0 auto;
-      padding: 36px var(--gutter) 0;
+      padding: 0 var(--gutter);
+      height: 64px;
     }
 
     .site-name {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 400;
       font-size: 15px;
       color: var(--ink);
       text-decoration: none;
-      cursor: pointer;
+      letter-spacing: 0.01em;
       transition: color .2s;
     }
     .site-name:hover { color: var(--red); }
 
-    nav { display: flex; gap: 32px; }
+    nav { display: flex; gap: 36px; }
 
     nav a {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 400;
-      font-size: 15px;
+      font-size: 14px;
       color: var(--ink);
       text-decoration: none;
-      cursor: pointer;
+      letter-spacing: 0.02em;
       position: relative;
-      padding-bottom: 5px;
-      transition: color .2s, font-weight .2s;
+      padding-bottom: 3px;
+      transition: color .2s;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1.5px;
+      background: var(--red);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .25s ease;
     }
     nav a:hover { color: var(--red); }
-    nav a.active { color: var(--red); font-weight: 500; }
+    nav a:hover::after,
+    nav a.active::after { transform: scaleX(1); }
+    nav a.active { color: var(--red); }
 
-    /* ── HERO
-       The photo column is absolutely positioned so it spans
-       naturally from hero-top through the full-width red rule
-       and into the expertise zone below.
-    ── */
+
+    /* ═══════════════════════════════════════
+       UTILITAIRES
+    ═══════════════════════════════════════ */
+
+    /* Ligne rouge contrainte à la largeur du contenu */
+    .rule-wrap {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+    .red-rule {
+      width: 100%;
+      height: 1.5px;
+      background: var(--red);
+    }
+    /* Variante pour fond sombre */
+    .red-rule-dark {
+      width: 100%;
+      height: 1.5px;
+      background: var(--red-dark);
+    }
+
+
+    /* ═══════════════════════════════════════
+       HERO
+       La photo est en position absolute et
+       traverse la ligne rouge (z-index).
+    ═══════════════════════════════════════ */
+    #accueil { padding-top: 20px; }
+
     .hero-outer {
       position: relative;
       max-width: var(--max-w);
       margin: 0 auto;
+      padding: 0 var(--gutter);
     }
 
-    /* Photo sits absolutely, top-left of hero-outer.
-       Width matches the left column (260px).
-       Height is tall enough to cross the red rule (set via JS or a generous fixed value).
-       We use a fixed generous height so the photo always crosses the line. */
+    /* Photo — absolute, traverse la ligne rouge */
     .hero-photo-col {
       position: absolute;
-      top: 20px;
+      top: 0;
       left: var(--gutter);
-      width: 260px;
-      /* z-index above the red line so it visually crosses it */
+      width: var(--photo-w);
       z-index: 2;
     }
 
     .hero-photo {
       width: 100%;
       display: block;
-      /* grayscale like the prototype */
       filter: grayscale(100%);
-      /* placeholder colour before image loads */
       background: #c0c0c0;
-      /* let the image keep its natural ratio */
     }
 
-    /* Right column: tagline — occupe la hauteur définie par JS
-       (portion de la photo au-dessus de la ligne rouge) et centre
-       son contenu verticalement. */
+    /* Colonne droite : tagline centrée verticalement
+       La hauteur est calculée par JS (portion photo au-dessus de la ligne rouge) */
     .hero-text-col {
-      margin-left: calc(var(--gutter) + 260px + 48px);
-      padding-right: var(--gutter);
+      margin-left: calc(var(--photo-w) + var(--photo-gap));
       display: flex;
       align-items: center;
-      /* hauteur mise à jour par JS une fois la photo chargée */
-      min-height: 280px;
+      min-height: 300px; /* écrasé par JS */
     }
 
     .hero-tagline {
-      font-family: 'Inter', sans-serif;
+      font-family: 'EB Garamond', serif;
       font-style: italic;
-      font-weight: 350;
-      font-size: 16.5px;
-      line-height: 1.45;
+      font-size: 21px;
+      font-weight: 400;
+      line-height: 1.6;
       color: var(--ink);
     }
 
-    /* Full-width red rule — constrained to content width */
-    .rule-wrap {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 var(--gutter);
-    }
-
-    .red-rule {
-      width: 100%;
-      height: 1.5px;
-      background: var(--red);
-    }
-
-    /* Titres en rouge sous la ligne */
-    .hero-titles {
-      margin-left: calc(var(--gutter) + 260px + 48px);
-      padding: 20px var(--gutter) 0 0;
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      font-size: 14px;
-      line-height: 1.8;
-      color: var(--red);
-    }
-
-    /* ── EXPERTISE ── */
-    .expertise-outer {
+    /* Ligne rouge — passe derrière la photo (z-index: 1) */
+    .hero-rule {
       position: relative;
+      z-index: 1;
+    }
+
+    /* Titres en rouge sous la ligne rouge, alignés avec la tagline */
+    .hero-titles {
       max-width: var(--max-w);
       margin: 0 auto;
-      /* left padding matches photo width + gutter so text starts after photo */
-      padding: 36px var(--gutter) 0 calc(var(--gutter) + 260px + 48px);
+      padding: 18px var(--gutter) 0;
+      padding-left: calc(var(--gutter) + var(--photo-w) + var(--photo-gap));
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 300;
+      font-size: 13.5px;
+      line-height: 2;
+      color: var(--red);
+      letter-spacing: 0.02em;
     }
 
-    /* Section label floats to the left — we achieve this with a
-       negative-margin trick so it sits under the photo area */
-    .expertise-grid {
-      display: grid;
-      /* left column: narrows to exactly fit between gutter and photo edge */
-      grid-template-columns: 1fr;
-    }
 
-    /* Zone contenu expertise — pleine largeur */
+    /* ═══════════════════════════════════════
+       SECTION EXPERTISE
+       Le contenu commence sous la photo.
+       Le padding-top est calculé par JS.
+    ═══════════════════════════════════════ */
     .expertise-content {
       max-width: var(--max-w);
       margin: 0 auto;
-      padding: 36px var(--gutter) 0;
-      position: relative;
+      padding: 56px var(--gutter) 100px; /* padding-top écrasé par JS */
     }
 
-    .section-label {
-      font-family: 'EB Garamond', serif;
-      font-style: italic;
-      font-size: 15px;
+    /* Titre de section — petit repère discret */
+    .section-eyebrow {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       color: var(--muted);
+      margin-bottom: 32px;
     }
 
-    .content-col h2 {
-      font-family: 'Inter', sans-serif;
+    .expertise-content h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 600;
-      font-size: 14.5px;
+      font-size: 15px;
       color: var(--ink);
-      margin-bottom: 14px;
-      letter-spacing: .005em;
+      margin-bottom: 16px;
+      letter-spacing: 0.01em;
     }
 
-    .content-col h3 {
-      font-family: 'Inter', sans-serif;
+    .expertise-content h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 600;
-      font-size: 14.5px;
+      font-size: 14px;
       color: var(--ink);
-      margin-top: 36px;
+      margin-top: 40px;
       margin-bottom: 12px;
-      letter-spacing: .005em;
+      letter-spacing: 0.01em;
     }
 
-    .content-col p {
-      font-family: 'Inter', sans-serif;
+    .expertise-content p {
+      font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 300;
       font-size: 14px;
-      line-height: 1.75;
+      line-height: 1.8;
       color: var(--ink);
       margin-bottom: 14px;
+      max-width: 660px; /* ligne de texte confortable */
     }
 
-    .content-col p.note {
+    .expertise-content p.note {
       font-family: 'EB Garamond', serif;
       font-style: italic;
-      font-size: 15px;
+      font-size: 16px;
       line-height: 1.65;
       color: var(--muted);
+      max-width: 620px;
     }
 
-    .content-col ul {
+    .expertise-content ul {
       list-style: none;
       padding: 0;
       margin-bottom: 16px;
     }
 
-    .content-col ul li {
-      font-family: 'Inter', sans-serif;
+    .expertise-content ul li {
+      font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 300;
       font-size: 14px;
-      line-height: 1.75;
-      padding-left: 18px;
+      line-height: 1.8;
+      padding-left: 20px;
       position: relative;
       margin-bottom: 12px;
+      max-width: 660px;
     }
 
-    .content-col ul li::before {
-      content: '•';
+    .expertise-content ul li::before {
+      content: '–';
       position: absolute;
       left: 0;
-      color: var(--ink);
+      color: var(--red);
     }
 
-    /* ── FOOTER ── */
+
+    /* ═══════════════════════════════════════
+       SECTION RÉALISATIONS — fond sombre
+    ═══════════════════════════════════════ */
+    #realisations {
+      background: var(--bg-dark);
+      padding: 80px 0 100px;
+      margin-top: 0;
+    }
+
+    .realisations-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+
+    #realisations .section-eyebrow {
+      color: var(--muted-dark);
+      margin-bottom: 32px;
+    }
+
+    #realisations h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--ink-light);
+      margin-bottom: 40px;
+      letter-spacing: 0.01em;
+    }
+
+    /* Liste de réalisations */
+    .realisations-list {
+      list-style: none;
+      padding: 0;
+      border-top: 1px solid #2a2a2a;
+    }
+
+    .realisations-list li {
+      border-bottom: 1px solid #2a2a2a;
+      padding: 24px 0;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: baseline;
+      cursor: pointer;
+      transition: background .2s;
+    }
+
+    .realisations-list li:hover {
+      padding-left: 8px;
+      transition: padding .2s, background .2s;
+    }
+
+    .real-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 400;
+      font-size: 15px;
+      color: var(--ink-light);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .real-context {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 300;
+      font-size: 13px;
+      color: var(--muted-dark);
+      display: block;
+    }
+
+    .real-link {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 300;
+      font-size: 12px;
+      color: var(--red-dark);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: color .2s;
+    }
+    .real-link:hover { color: var(--ink-light); }
+
+
+    /* ═══════════════════════════════════════
+       SECTION CURRICULUM
+    ═══════════════════════════════════════ */
+    #curriculum {
+      padding: 80px 0 100px;
+    }
+
+    .curriculum-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+
+    #curriculum h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--ink);
+      margin-bottom: 40px;
+      letter-spacing: 0.01em;
+    }
+
+
+    /* ═══════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════ */
     footer {
-      margin-top: 120px;
+      background: var(--bg);
       padding-bottom: 48px;
     }
 
@@ -272,65 +419,84 @@
     }
 
     .footer-copy {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 300;
-      font-size: 13px;
+      font-size: 12px;
       color: var(--muted);
     }
 
-    /* ── RESPONSIVE ── */
+
+    /* ═══════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════ */
     @media (max-width: 680px) {
-      :root { --gutter: 24px; }
+      :root {
+        --gutter: 24px;
+        --photo-w: 200px;
+        --photo-gap: 32px;
+      }
+
+      header { height: 56px; }
 
       .hero-photo-col {
         position: relative;
-        left: auto;
-        width: 65%;
-        max-width: 240px;
-        margin-left: var(--gutter);
+        top: auto; left: auto;
+        width: 55%;
+        max-width: 200px;
+        margin-bottom: 0;
       }
 
       .hero-text-col {
-        margin-left: var(--gutter);
-        padding-right: var(--gutter);
-        padding-bottom: 24px;
+        margin-left: calc(var(--photo-w) + var(--photo-gap));
+        min-height: 180px;
+      }
+
+      .hero-titles {
+        padding-left: var(--gutter);
       }
 
       .expertise-content {
         padding-left: var(--gutter);
+      }
+
+      nav { gap: 20px; }
+
+      .realisations-list li {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- ─── HEADER ─── -->
+  <!-- ═══════════════════════════════════════
+       HEADER
+  ═══════════════════════════════════════ -->
   <div class="header-wrap">
     <header>
-      <span class="site-name">Fabien Brinjean</span>
+      <a class="site-name" href="#accueil">Fabien Brinjean</a>
       <nav>
-        <a href="#accueil">Accueil</a>
-        <a href="#realisations">Réalisations</a>
-        <a href="#curriculum">Curriculum</a>
+        <a href="#accueil"      id="nav-accueil">Accueil</a>
+        <a href="#realisations" id="nav-realisations">Réalisations</a>
+        <a href="#curriculum"   id="nav-curriculum">Curriculum</a>
       </nav>
     </header>
   </div>
 
 
-  <!-- ══════════════════════════════════
-       EXPERTISE
-  ══════════════════════════════════ -->
+  <!-- ═══════════════════════════════════════
+       ACCUEIL — HERO + EXPERTISE
+  ═══════════════════════════════════════ -->
   <section id="accueil">
 
-    <!-- HERO : photo + tagline au-dessus de la ligne rouge -->
+    <!-- Hero : photo + tagline -->
     <div class="hero-outer">
 
       <!--
         PHOTO
-        Remplace src="PHOTO_A_REMPLACER.jpg" par le chemin de ton fichier.
+        Remplacer src="PHOTO_A_REMPLACER.jpg" par le chemin de ton fichier.
         Exemple : src="images/fabien.jpg"
-        La photo est affichée en noir et blanc. Retire "filter:grayscale(100%)"
-        dans le CSS (.hero-photo) si tu préfères la couleur.
+        Retirer filter:grayscale(100%) dans .hero-photo si tu veux la couleur.
       -->
       <div class="hero-photo-col">
         <img
@@ -341,107 +507,102 @@
         />
       </div>
 
-      <!-- Tagline — colonne droite, au-dessus de la ligne rouge -->
+      <!-- Tagline centrée verticalement (hauteur calculée par JS) -->
       <div class="hero-text-col">
         <p class="hero-tagline">
           Face à l'omniprésence de l'IA et à la transition numérique de l'enseignement supérieur, ma mission est de guider les institutions et le corps enseignant vers une adoption technologique réfléchie, préservant des compétences humaines cruciales et ancrée dans la réalité du terrain.
         </p>
       </div>
 
-    </div><!-- /hero-outer -->
-
-    <!-- LIGNE ROUGE — contrainte à la largeur du contenu -->
-    <div class="rule-wrap">
-      <div class="red-rule"></div>
     </div>
 
-    <!-- Titres en rouge sous la ligne -->
+    <!-- Ligne rouge — z-index:1, passe derrière la photo (z-index:2) -->
+    <div class="hero-rule">
+      <div class="rule-wrap">
+        <div class="red-rule"></div>
+      </div>
+    </div>
+
+    <!-- Titres en rouge sous la ligne, alignés colonne droite -->
     <div class="hero-titles">
       <p>Conseiller technopédagogique</p>
       <p>Pédagogue</p>
       <p>Artiste</p>
     </div>
 
-    <!-- EXPERTISE CONTENT -->
-    <div class="expertise-content">
+    <!-- Expertise — padding-top calculé par JS pour démarrer sous la photo -->
+    <div class="expertise-content" id="expertise-content">
 
-      <div class="content-col">
+      <p class="section-eyebrow">Expertise et approche</p>
 
-        <h2>Polyvalence : de la réflexion globale à la réalisation sur le terrain</h2>
-        <ul>
-          <li><strong>Échelle Macro :</strong> Conseil et orientation des facultés lors des transitions vers de nouvelles modalités d'enseignement.</li>
-          <li><strong>Échelle Micro :</strong> Production de formations et de ressources pour soutenir le corps enseignant (gabarits de planification, outils d'autoévaluation et d'autodiagnostic, productions multimédias multiples : scénarisation, montage vidéo, composition musicale).</li>
-        </ul>
+      <h2>Polyvalence : de la réflexion globale à la réalisation sur le terrain</h2>
+      <ul>
+        <li><strong>Échelle Macro :</strong> Conseil et orientation des facultés lors des transitions vers de nouvelles modalités d'enseignement.</li>
+        <li><strong>Échelle Micro :</strong> Production de formations et de ressources pour soutenir le corps enseignant (gabarits de planification, outils d'autoévaluation et d'autodiagnostic, productions multimédias multiples : scénarisation, montage vidéo, composition musicale).</li>
+      </ul>
 
-        <h3>Pédagogie de l'accompagnement</h3>
-        <p>Ma force réside dans ma capacité d'écoute et d'adaptation. Qu'il s'agisse d'un professeur sceptique ou d'un décanat tiraillé par des enjeux modernes, je m'efforce de cibler les besoins et les habiletés de mes interlocuteurs pour concevoir des parcours de transition (hybride, comodal) réalistes et fructueux.</p>
-        <p>L'omniprésence de l'intelligence artificielle exige un accompagnement sur mesure. J'amène le corps enseignant à penser l'IA générative sous l'angle spécifique de leur discipline et de leur pratique enseignante pour que chacun développe son propre positionnement critique.</p>
-        <p class="note">Un travail de veille sous-tend cet accompagnement pour favoriser le transfert des connaissances et anticiper les enjeux d'un domaine en plein bouleversement. <em>(phrase de transition)</em></p>
+      <h3>Pédagogie de l'accompagnement</h3>
+      <p>Ma force réside dans ma capacité d'écoute et d'adaptation. Qu'il s'agisse d'un professeur sceptique ou d'un décanat tiraillé par des enjeux modernes, je m'efforce de cibler les besoins et les habiletés de mes interlocuteurs pour concevoir des parcours de transition (hybride, comodal) réalistes et fructueux.</p>
+      <p>L'omniprésence de l'intelligence artificielle exige un accompagnement sur mesure. J'amène le corps enseignant à penser l'IA générative sous l'angle spécifique de leur discipline et de leur pratique enseignante pour que chacun développe son propre positionnement critique.</p>
+      <p class="note">Un travail de veille sous-tend cet accompagnement pour favoriser le transfert des connaissances et anticiper les enjeux d'un domaine en plein bouleversement.</p>
 
-        <h3>Expertise technologique et discernement</h3>
-        <p>Je dispose d'une aisance et d'une expertise techniques avancées : production multimédia, programmation en <em>vibe coding</em> (assistée par IA), production de ressources pédagogiques multiples, soutien technique pour une plateforme institutionnelle.</p>
-        <p>Pourtant, je refuse le solutionnisme, qui parfois se présente masqué. Je ne pousse pas l'innovation pour sa nouveauté, mais pour sa valeur ajoutée. Je prône un usage sobre et ciblé du numérique, garantissant la préservation des compétences humaines fondamentales, comme la lecture, l'analyse ou la capacité d'attention.</p>
+      <h3>Expertise technologique et discernement</h3>
+      <p>Je dispose d'une aisance et d'une expertise techniques avancées : production multimédia, programmation en <em>vibe coding</em> (assistée par IA), production de ressources pédagogiques multiples, soutien technique pour une plateforme institutionnelle.</p>
+      <p>Pourtant, je refuse le solutionnisme, qui parfois se présente masqué. Je ne pousse pas l'innovation pour sa nouveauté, mais pour sa valeur ajoutée. Je prône un usage sobre et ciblé du numérique, garantissant la préservation des compétences humaines fondamentales, comme la lecture, l'analyse ou la capacité d'attention.</p>
 
-        <h3>Évaluation &amp; intégrité académique</h3>
-        <p>Je collabore avec des experts sectoriels pour répondre aux défis actuels de l'évaluation. Cela se traduit par le soutien au déploiement technique et humain d'outils de sécurisation des examens (Safe Exam Browser), par la conception de modèles d'évaluation pour optimiser l'équité dans les travaux d'équipe et surtout par un accompagnement personnalisé de membres du corps enseignant.</p>
+      <h3>Évaluation &amp; intégrité académique</h3>
+      <p>Je collabore avec des experts sectoriels pour répondre aux défis actuels de l'évaluation. Cela se traduit par le soutien au déploiement technique et humain d'outils de sécurisation des examens (Safe Exam Browser), par la conception de modèles d'évaluation pour optimiser l'équité dans les travaux d'équipe et surtout par un accompagnement personnalisé de membres du corps enseignant.</p>
 
-      </div>
     </div>
 
-    <footer>
-      <div class="rule-wrap">
-        <div class="red-rule"></div>
-      </div>
-      <div class="footer-inner">
-        <span class="footer-name">Fabien Brinjean</span>
-        <span class="footer-copy">&copy; 2025</span>
-      </div>
-    </footer>
-
-  </section><!-- /accueil -->
+  </section>
 
 
-  <!-- ══════════════════════════════════
-       RÉALISATIONS
-  ══════════════════════════════════ -->
+  <!-- ═══════════════════════════════════════
+       RÉALISATIONS — fond sombre
+  ═══════════════════════════════════════ -->
   <section id="realisations">
-    <div class="rule-wrap">
-      <div class="red-rule"></div>
-    </div>
-    <div class="expertise-content">
-      <div class="content-col">
-        <h2>Réalisations</h2>
-        <!--
-          Structure attendue pour chaque item :
-          <li>
-            <strong>Titre de la réalisation</strong>
-            <span class="context">Contexte — institution, année</span>
-            <a href="lien-vers-document.pdf">Consulter le document</a>
-          </li>
-        -->
-        <ul class="realisations-list">
-        </ul>
-      </div>
+    <div class="realisations-inner">
+
+      <p class="section-eyebrow">Réalisations</p>
+      <h2>Ressources et projets développés</h2>
+
+      <!--
+        Structure d'un item :
+        <li>
+          <div>
+            <span class="real-title">Titre de la réalisation</span>
+            <span class="real-context">Institution — Année — Type</span>
+          </div>
+          <a class="real-link" href="document.pdf" target="_blank">Consulter ↗</a>
+        </li>
+      -->
+      <ul class="realisations-list">
+        <!-- Les items seront ajoutés ici -->
+      </ul>
+
     </div>
   </section>
 
 
-  <!-- ══════════════════════════════════
+  <!-- ═══════════════════════════════════════
        CURRICULUM
-  ══════════════════════════════════ -->
+  ═══════════════════════════════════════ -->
   <section id="curriculum">
-    <div class="rule-wrap">
+    <div class="rule-wrap" style="margin-bottom: 0;">
       <div class="red-rule"></div>
     </div>
-    <div class="expertise-content">
-      <div class="content-col">
-        <h2>Curriculum</h2>
-      </div>
+    <div class="curriculum-inner">
+      <p class="section-eyebrow" style="margin-top: 48px;">Curriculum</p>
+      <h2>Parcours</h2>
+      <!-- Contenu à venir -->
     </div>
   </section>
 
 
-  <!-- ─── FOOTER UNIQUE ─── -->
+  <!-- ═══════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════ -->
   <footer>
     <div class="rule-wrap">
       <div class="red-rule"></div>
@@ -453,76 +614,82 @@
   </footer>
 
 
-  <!-- ─── JS layout photo ─── -->
+  <!-- ═══════════════════════════════════════
+       JAVASCRIPT
+  ═══════════════════════════════════════ -->
   <script>
-    /* ── Ajustements dynamiques liés à la photo ── */
+    /* ── 1. Synchronisation photo / layout ──
+       Calcule la hauteur de la colonne tagline et le padding-top
+       du bloc expertise en fonction de la hauteur réelle de la photo.
+    ── */
     function syncPhotoLayout() {
-      const photo       = document.querySelector('.hero-photo');
-      const textCol     = document.querySelector('.hero-text-col');
-      const expertise   = document.querySelector('.expertise-content');
+      const photo     = document.querySelector('.hero-photo');
+      const textCol   = document.querySelector('.hero-text-col');
+      const expertise = document.getElementById('expertise-content');
+      const titles    = document.querySelector('.hero-titles');
 
       if (!photo || !textCol || !expertise) return;
 
       const photoH = photo.offsetHeight;
-      if (photoH === 0) return; // pas encore rendu
+      if (photoH === 0) return;
 
-      // La hauteur de hero-text-col définit où tombe la ligne rouge.
-      // On veut que la ligne rouge coupe la photo au ~2/3 (tiers inférieur).
-      const redLineAt = Math.round(photoH * 0.75);
+      // La ligne rouge coupe la photo à ~65% de sa hauteur
+      const redLineAt = Math.round(photoH * 0.65);
 
-      // 1. Hauteur de la colonne tagline = portion photo au-dessus de la ligne rouge
-      //    Cela positionne correctement la ligne rouge (au tiers inférieur de la photo).
+      // Hauteur de la colonne tagline = portion photo au-dessus de la ligne
       textCol.style.minHeight = redLineAt + 'px';
-      // Centrer le texte sur le milieu de la photo :
-      // Le milieu de la photo est à (20 + photoH/2) depuis le haut de hero-outer.
-      // On ajoute un padding-top pour décaler le centre du flex vers le centre de la photo.
-      const photoMid = 20 + photoH / 2;
-      const colMid = redLineAt / 2;
-      if (photoMid > colMid) {
-        textCol.style.paddingTop = ((photoMid - colMid) * 2) + 'px';
-      }
 
-      // 2. Le contenu expertise doit commencer après la fin de la photo.
-      //    hero-outer est en flux normal avec une hauteur = textCol height.
-      //    La photo dépasse de (photoH - redLineAt) pixels sous la ligne rouge.
-      //    expertise-content a déjà padding-top:36px dans le CSS ;
-      //    on ajoute la portion de photo qui dépasse sous la ligne.
-      const overflow = photoH - redLineAt;
-      expertise.style.paddingTop = (overflow + 36) + 'px';
+      // Centrage vertical de la tagline dans cette zone
+      const photoTop = 0; // hero-photo-col top = 0 dans hero-outer
+      const photoMid = photoTop + photoH / 2;
+      const colMid   = redLineAt / 2;
+      const offset   = photoMid - colMid;
+      textCol.style.paddingTop    = offset > 0 ? offset + 'px' : '0';
+      textCol.style.paddingBottom = '0';
+
+      // Espace sous la ligne rouge occupé par la fin de la photo
+      const photoOverflow = photoH - redLineAt;
+
+      // Hauteur des titres (Conseiller / Pédagogue / Artiste)
+      const titlesH = titles ? titles.offsetHeight : 0;
+
+      // Le bloc expertise commence après la fin de la photo
+      // = débordement photo + hauteur titres + espace respiration
+      const expertisePaddingTop = Math.max(photoOverflow - titlesH + 40, 40);
+      expertise.style.paddingTop = expertisePaddingTop + 'px';
     }
 
-    // Lancer au chargement de la photo et au resize
-    const photo = document.querySelector('.hero-photo');
-    if (photo) {
-      if (photo.complete && photo.naturalHeight !== 0) {
+    const heroPhoto = document.querySelector('.hero-photo');
+    if (heroPhoto) {
+      if (heroPhoto.complete && heroPhoto.naturalHeight !== 0) {
         syncPhotoLayout();
       } else {
-        photo.addEventListener('load', syncPhotoLayout);
-        // Fallback si la photo ne se charge pas (placeholder)
-        photo.addEventListener('error', syncPhotoLayout);
+        heroPhoto.addEventListener('load',  syncPhotoLayout);
+        heroPhoto.addEventListener('error', syncPhotoLayout);
       }
     }
-    // Fallback immédiat pour le placeholder (pas de src valide)
-    syncPhotoLayout();
+    syncPhotoLayout(); // fallback placeholder
     window.addEventListener('resize', syncPhotoLayout);
 
-    /* ── IntersectionObserver — marque le lien nav actif selon la section visible ── */
+
+    /* ── 2. Navigation active au scroll (IntersectionObserver) ── */
     (function () {
-      const navLinks = document.querySelectorAll('nav a');
-      const sectionIds = Array.from(navLinks).map(a => a.getAttribute('href').replace('#', ''));
-      const sectionEls = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+      const links    = document.querySelectorAll('nav a[href^="#"]');
+      const sections = Array.from(links)
+        .map(a => document.querySelector(a.getAttribute('href')))
+        .filter(Boolean);
 
       const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            navLinks.forEach(link => link.classList.remove('active'));
-            const activeLink = document.querySelector('nav a[href="#' + entry.target.id + '"]');
-            if (activeLink) activeLink.classList.add('active');
+            links.forEach(l => l.classList.remove('active'));
+            const active = document.querySelector('nav a[href="#' + entry.target.id + '"]');
+            if (active) active.classList.add('active');
           }
         });
-      }, { rootMargin: '-50% 0px -50% 0px' });
+      }, { rootMargin: '-40% 0px -55% 0px' });
 
-      sectionEls.forEach(sec => observer.observe(sec));
+      sections.forEach(s => observer.observe(s));
     })();
   </script>
 
