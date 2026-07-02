@@ -29,9 +29,18 @@
       min-height: 100vh;
     }
 
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
     /* ── HEADER ── */
     .header-wrap {
-      border-bottom: 1.5px solid var(--red);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--bg);
+      border-bottom: 1px solid var(--ink);
     }
 
     header {
@@ -69,14 +78,6 @@
     }
     nav a:hover { color: var(--red); }
     nav a.active { color: var(--red); font-weight: 500; }
-    nav a.active::after {
-      display: none;
-    }
-
-    /* ── SECTIONS ── */
-    .section { display: none; opacity: 0; transition: opacity .3s ease; }
-    .section.active  { display: block; }
-    .section.visible { opacity: 1; }
 
     /* ── HERO
        The photo column is absolutely positioned so it spans
@@ -133,13 +134,28 @@
       color: var(--ink);
     }
 
-    /* Full-width red rule — sits in normal flow */
+    /* Full-width red rule — constrained to content width */
+    .rule-wrap {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+
     .red-rule {
-      position: relative;
-      z-index: 1;   /* below the photo z-index:2 */
       width: 100%;
-      height: 1.7px; /* Épaisseur de la seconde ligne rouge*/
+      height: 1.5px;
       background: var(--red);
+    }
+
+    /* Titres en rouge sous la ligne */
+    .hero-titles {
+      margin-left: calc(var(--gutter) + 260px + 48px);
+      padding: 20px var(--gutter) 0 0;
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--red);
     }
 
     /* ── EXPERTISE ── */
@@ -159,23 +175,12 @@
       grid-template-columns: 1fr;
     }
 
-    /* We reintroduce the two-column layout for the content zone.
-       padding-top est mis à jour par JS pour démarrer sous la photo. */
-    .expertise-with-label {
+    /* Zone contenu expertise — pleine largeur */
+    .expertise-content {
       max-width: var(--max-w);
       margin: 0 auto;
       padding: 36px var(--gutter) 0;
-      display: grid;
-      grid-template-columns: 260px 1fr;
-      gap: 0 48px;
       position: relative;
-    }
-
-    .label-col {
-      /* sits under the photo — no top content needed until photo ends */
-      display: flex;
-      flex-direction: column;
-      padding-top: 4px;
     }
 
     .section-label {
@@ -244,20 +249,6 @@
       color: var(--ink);
     }
 
-    /* ── PAGES VIDES ── */
-    .empty-page {
-      max-width: var(--max-w);
-      margin: 80px auto;
-      padding: 0 var(--gutter);
-    }
-    .empty-title {
-      font-family: 'EB Garamond', serif;
-      font-style: italic;
-      font-size: 36px;
-      font-weight: 400;
-      color: var(--muted);
-    }
-
     /* ── FOOTER ── */
     footer {
       margin-top: 120px;
@@ -305,11 +296,9 @@
         padding-bottom: 24px;
       }
 
-      .expertise-with-label {
-        grid-template-columns: 1fr;
+      .expertise-content {
+        padding-left: var(--gutter);
       }
-
-      .label-col { display: none; }
     }
   </style>
 </head>
@@ -318,11 +307,11 @@
   <!-- ─── HEADER ─── -->
   <div class="header-wrap">
     <header>
-      <span class="site-name" onclick="showSection('expertise')">Fabien Brinjean</span>
+      <span class="site-name">Fabien Brinjean</span>
       <nav>
-        <a class="active" id="nav-expertise"    onclick="showSection('expertise')">Expertise</a>
-        <a              id="nav-realisations" onclick="showSection('realisations')">Réalisations</a>
-        <a              id="nav-curriculum"   onclick="showSection('curriculum')">Curriculum</a>
+        <a href="#accueil">Accueil</a>
+        <a href="#realisations">Réalisations</a>
+        <a href="#curriculum">Curriculum</a>
       </nav>
     </header>
   </div>
@@ -331,7 +320,7 @@
   <!-- ══════════════════════════════════
        EXPERTISE
   ══════════════════════════════════ -->
-  <div class="section active" id="section-expertise">
+  <section id="accueil">
 
     <!-- HERO : photo + tagline au-dessus de la ligne rouge -->
     <div class="hero-outer">
@@ -361,15 +350,20 @@
 
     </div><!-- /hero-outer -->
 
-    <!-- LIGNE ROUGE — pleine largeur, passe derrière la photo (z-index) -->
-    <div class="red-rule"></div>
+    <!-- LIGNE ROUGE — contrainte à la largeur du contenu -->
+    <div class="rule-wrap">
+      <div class="red-rule"></div>
+    </div>
 
-    <!-- EXPERTISE CONTENT — grille deux colonnes -->
-    <div class="expertise-with-label">
+    <!-- Titres en rouge sous la ligne -->
+    <div class="hero-titles">
+      <p>Conseiller technopédagogique</p>
+      <p>Pédagogue</p>
+      <p>Artiste</p>
+    </div>
 
-      <div class="label-col">
-        <p class="section-label">Expertise et approche</p>
-      </div>
+    <!-- EXPERTISE CONTENT -->
+    <div class="expertise-content">
 
       <div class="content-col">
 
@@ -395,103 +389,77 @@
     </div>
 
     <footer>
-      <div class="red-rule"></div>
+      <div class="rule-wrap">
+        <div class="red-rule"></div>
+      </div>
       <div class="footer-inner">
         <span class="footer-name">Fabien Brinjean</span>
         <span class="footer-copy">&copy; 2025</span>
       </div>
     </footer>
 
-  </div><!-- /section-expertise -->
+  </section><!-- /accueil -->
 
 
   <!-- ══════════════════════════════════
        RÉALISATIONS
   ══════════════════════════════════ -->
-  <div class="section" id="section-realisations">
-    <div class="red-rule"></div>
-    <div class="empty-page">
-      <p class="empty-title">Réalisations</p>
-    </div>
-    <footer>
+  <section id="realisations">
+    <div class="rule-wrap">
       <div class="red-rule"></div>
-      <div class="footer-inner">
-        <span class="footer-name">Fabien Brinjean</span>
-        <span class="footer-copy">&copy; 2025</span>
+    </div>
+    <div class="expertise-content">
+      <div class="content-col">
+        <h2>Réalisations</h2>
+        <!--
+          Structure attendue pour chaque item :
+          <li>
+            <strong>Titre de la réalisation</strong>
+            <span class="context">Contexte — institution, année</span>
+            <a href="lien-vers-document.pdf">Consulter le document</a>
+          </li>
+        -->
+        <ul class="realisations-list">
+        </ul>
       </div>
-    </footer>
-  </div>
+    </div>
+  </section>
 
 
   <!-- ══════════════════════════════════
        CURRICULUM
   ══════════════════════════════════ -->
-  <div class="section" id="section-curriculum">
-    <div class="red-rule"></div>
-    <div class="empty-page">
-      <p class="empty-title">Curriculum</p>
-    </div>
-    <footer>
+  <section id="curriculum">
+    <div class="rule-wrap">
       <div class="red-rule"></div>
-      <div class="footer-inner">
-        <span class="footer-name">Fabien Brinjean</span>
-        <span class="footer-copy">&copy; 2025</span>
+    </div>
+    <div class="expertise-content">
+      <div class="content-col">
+        <h2>Curriculum</h2>
       </div>
-    </footer>
-  </div>
+    </div>
+  </section>
 
 
-  <!-- ─── JS navigation ─── -->
+  <!-- ─── FOOTER UNIQUE ─── -->
+  <footer>
+    <div class="rule-wrap">
+      <div class="red-rule"></div>
+    </div>
+    <div class="footer-inner">
+      <span class="footer-name">Fabien Brinjean</span>
+      <span class="footer-copy">&copy; 2025</span>
+    </div>
+  </footer>
+
+
+  <!-- ─── JS layout photo ─── -->
   <script>
-    const sections = ['expertise', 'realisations', 'curriculum'];
-
-    function showSection(id) {
-      sections.forEach(s => {
-        const sec  = document.getElementById('section-' + s);
-        const link = document.getElementById('nav-' + s);
-        if (s === id) {
-          sec.classList.add('active');
-          link.classList.add('active');
-          requestAnimationFrame(() =>
-            requestAnimationFrame(() => sec.classList.add('visible'))
-          );
-        } else {
-          sec.classList.remove('active', 'visible');
-          link.classList.remove('active');
-        }
-      });
-      history.replaceState(null, '', '#' + id);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    (function () {
-      const hash = window.location.hash.replace('#', '');
-      if (sections.includes(hash)) {
-        showSection(hash);
-      } else {
-        requestAnimationFrame(() =>
-          requestAnimationFrame(() =>
-            document.getElementById('section-expertise').classList.add('visible')
-          )
-        );
-      }
-    })();
-
-    /* ── Ajustements dynamiques liés à la photo ──
-       La photo est positionnée en absolute et traverse la ligne rouge.
-       On a besoin de deux mesures :
-         1. photoHeight  → le padding-top de .expertise-with-label
-                           pour que le contenu commence sous la photo
-         2. redLineOffset → la hauteur de .hero-text-col
-                            pour centrer la tagline dans la portion
-                            de la photo au-dessus de la ligne rouge.
-       La ligne rouge = bas de .hero-outer dans le flux normal,
-       soit la hauteur de .hero-text-col.
-    ── */
+    /* ── Ajustements dynamiques liés à la photo ── */
     function syncPhotoLayout() {
       const photo       = document.querySelector('.hero-photo');
       const textCol     = document.querySelector('.hero-text-col');
-      const expertise   = document.querySelector('.expertise-with-label');
+      const expertise   = document.querySelector('.expertise-content');
 
       if (!photo || !textCol || !expertise) return;
 
@@ -517,7 +485,7 @@
       // 2. Le contenu expertise doit commencer après la fin de la photo.
       //    hero-outer est en flux normal avec une hauteur = textCol height.
       //    La photo dépasse de (photoH - redLineAt) pixels sous la ligne rouge.
-      //    expertise-with-label a déjà padding-top:36px dans le CSS ;
+      //    expertise-content a déjà padding-top:36px dans le CSS ;
       //    on ajoute la portion de photo qui dépasse sous la ligne.
       const overflow = photoH - redLineAt;
       expertise.style.paddingTop = (overflow + 36) + 'px';
@@ -537,6 +505,25 @@
     // Fallback immédiat pour le placeholder (pas de src valide)
     syncPhotoLayout();
     window.addEventListener('resize', syncPhotoLayout);
+
+    /* ── IntersectionObserver — marque le lien nav actif selon la section visible ── */
+    (function () {
+      const navLinks = document.querySelectorAll('nav a');
+      const sectionIds = Array.from(navLinks).map(a => a.getAttribute('href').replace('#', ''));
+      const sectionEls = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            navLinks.forEach(link => link.classList.remove('active'));
+            const activeLink = document.querySelector('nav a[href="#' + entry.target.id + '"]');
+            if (activeLink) activeLink.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-50% 0px -50% 0px' });
+
+      sectionEls.forEach(sec => observer.observe(sec));
+    })();
   </script>
 
 </body>
