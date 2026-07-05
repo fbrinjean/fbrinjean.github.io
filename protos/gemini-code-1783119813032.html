@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Professionnel | Grille Stratégique</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-serif { font-family: 'Merriweather', serif; }
+    </style>
+</head>
+<body class="bg-[#0B0F17] text-[#F3F4F6] transition-colors duration-300 dark:bg-[#0B0F17] dark:text-[#F3F4F6] light:bg-[#FAFAFA] light:text-[#171717]">
+
+    <header class="max-w-6xl mx-auto px-4 pt-6 flex justify-between items-center">
+        <span class="text-xs font-mono uppercase tracking-widest text-[#CDA15E] light:text-[#A3732C]">Architecture Bento</span>
+        <button id="theme-toggle" class="px-3 py-1.5 rounded border border-white/10 light:border-black/10 hover:bg-white/5 light:hover:bg-black/5 transition-all text-xs font-mono">
+            <span id="theme-text">Mode Clair</span>
+        </button>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <section class="md:col-span-2 bg-[#111723] light:bg-[#FFFFFF] border border-white/5 light:border-black/5 p-8 rounded-xl flex flex-col justify-center space-y-4">
+            <div class="text-[10px] font-mono uppercase tracking-widest text-[#CDA15E] light:text-[#A3732C]">Positionnement</div>
+            <h1 class="font-serif text-xl md:text-2xl lg:text-3xl font-light leading-relaxed text-white light:text-[#171717]">
+                Face à l’omniprésence de l’IA et à la transition numérique de l’enseignement supérieur, ma mission est de guider les institutions et le corps enseignant vers une <span class="italic font-normal text-[#CDA15E] light:text-[#A3732C]">adoption réfléchie</span> des technologies.
+            </h1>
+            <p class="text-sm text-[#F3F4F6]/70 light:text-[#171717]/70 font-light max-w-2xl">
+                Une démarche visant à adapter les méthodes d'enseignement pour répondre aux enjeux modernes, tout en préservant strictement les compétences cognitives humaines essentielles.
+            </p>
+        </section>
+
+        <section class="bg-[#111723] light:bg-[#FFFFFF] border border-white/5 light:border-black/5 p-6 rounded-xl flex flex-col items-center justify-center text-center space-y-4">
+            <div class="w-24 h-24 rounded-full bg-[#1B2333] light:bg-[#EAEAEA] border border-white/10 light:border-black/10 flex items-center justify-center text-[10px] font-mono text-[#F3F4F6]/40 light:text-[#171717]/40 uppercase tracking-widest overflow-hidden">
+                [ Photo ]
+            </div>
+            <div>
+                <h2 class="font-serif text-lg font-medium text-white light:text-[#171717]">Conseiller Stratégique</h2>
+                <p class="text-xs font-mono text-[#CDA15E] light:text-[#A3732C] mt-1">Technopédagogie Universitaire</p>
+            </div>
+        </section>
+
+        <section class="bg-[#111723] light:bg-[#FFFFFF] border border-white/5 light:border-black/5 p-6 rounded-xl space-y-6">
+            <div class="text-[10px] font-mono uppercase tracking-widest text-[#CDA15E] light:text-[#A3732C]">Piliers d'Intervention</div>
+            
+            <div class="space-y-4 text-xs font-light">
+                <div class="space-y-1">
+                    <h4 class="font-semibold text-white light:text-[#171717]">Accompagnement critique</h4>
+                    <p class="text-[#F3F4F6]/70 light:text-[#171717]/70">Co-construction d'un positionnement raisonné face à l'IA avec le corps enseignant.</p>
+                </div>
+                <div class="space-y-1 pt-2 border-t border-white/5 light:border-black/5">
+                    <h4 class="font-semibold text-white light:text-[#171717]">Discernement technique</h4>
+                    <p class="text-[#F3F4F6]/70 light:text-[#171717]/70">Opposition ferme au solutionnisme technologique par une maîtrise des outils sobres.</p>
+                </div>
+                <div class="space-y-1 pt-2 border-t border-white/5 light:border-black/5">
+                    <h4 class="font-semibold text-white light:text-[#171717]">Intégrité académique</h4>
+                    <p class="text-[#F3F4F6]/70 light:text-[#171717]/70">Refonte des évaluations et sécurisation des examens face aux angles morts de l'IA.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="md:col-span-2 bg-[#111723] light:bg-[#FFFFFF] border border-white/5 light:border-black/5 p-8 rounded-xl flex flex-col justify-between space-y-6">
+            <div class="space-y-2">
+                <div class="text-[10px] font-mono uppercase tracking-widest text-[#CDA15E] light:text-[#A3732C]">Réalisation Principale</div>
+                <h3 class="font-serif text-xl font-light text-white light:text-[#171717]">Hybridation globale des programmes</h3>
+                <p class="text-xs italic text-[#F3F4F6]/50 light:text-[#171717]/50">Faculté des Sciences de l'Éducation — Collaboration Décanat</p>
+            </div>
+
+            <p class="text-sm text-[#F3F4F6]/80 light:text-[#171717]/80 font-light leading-relaxed">
+                Encadrement de la transition numérique institutionnelle. Alignement des compétences et production de ressources stratégiques pour soutenir la transformation de la faculté.
+            </p>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-white/5 light:border-black/5">
+                <div class="p-3 bg-[#1B2333] light:bg-[#F0F0F0] rounded text-center">
+                    <div class="text-lg font-serif font-bold text-[#CDA15E] light:text-[#A3732C]">40+</div>
+                    <div class="text-[9px] font-mono uppercase tracking-wider text-[#F3F4F6]/50 light:text-[#171717]/50">Profs (Coll.)</div>
+                </div>
+                <div class="p-3 bg-[#1B2333] light:bg-[#F0F0F0] rounded text-center">
+                    <div class="text-lg font-serif font-bold text-[#CDA15E] light:text-[#A3732C]">15+</div>
+                    <div class="text-[9px] font-mono uppercase tracking-wider text-[#F3F4F6]/50 light:text-[#171717]/50">Suivis Indiv.</div>
+                </div>
+                <div class="col-span-2 p-3 bg-[#1B2333] light:bg-[#F0F0F0] rounded flex flex-col justify-center text-left pl-4">
+                    <div class="text-[10px] font-mono font-semibold text-white light:text-[#171717]">Livrables clés :</div>
+                    <div class="text-[9px] font-mono text-[#F3F4F6]/60 light:text-[#171717]/60">Gabarits, Code IA, Wooclap, Perusall</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="md:col-span-2 bg-[#111723] light:bg-[#FFFFFF] border border-white/5 light:border-black/5 p-8 rounded-xl space-y-6">
+            <div class="text-[10px] font-mono uppercase tracking-widest text-[#CDA15E] light:text-[#A3732C]">Trajectoire</div>
+            
+            <div class="space-y-6 text-sm font-light">
+                <div class="flex justify-between items-start gap-4">
+                    <div class="space-y-1">
+                        <h4 class="font-serif font-medium text-white light:text-[#171717]">Conseiller technopédagogique</h4>
+                        <p class="text-xs text-[#F3F4F6]/50 light:text-[#171717]/50">Centre de Pédagogie Universitaire — Transformation des dispositifs</p>
+                    </div>
+                    <span class="text-xs font-mono text-[#CDA15E] light:text-[#A3732C] whitespace-nowrap">2020 — Pr.</span>
+                </div>
+                
+                <div class="flex justify-between items-start gap-4 pt-4 border-t border-white/5 light:border-black/5">
+                    <div class="space-y-1">
+                        <h4 class="font-serif font-medium text-white light:text-[#171717]">Fondations de la pratique pédagogique</h4>
+                        <p class="text-xs text-[#F3F4F6]/50 light:text-[#171717]/50">Enseignement de la musique — Structure narrative & Différenciation</p>
+                    </div>
+                    <span class="text-xs font-mono text-[#F3F4F6]/40 light:text-[#171717]/40 whitespace-nowrap">2005 — 2018</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-[#111723] light:bg-[#FFFFFF] border border-white/5 light:border-black/5 p-6 rounded-xl space-y-4">
+            <div class="text-[10px] font-mono uppercase tracking-widest text-[#CDA15E] light:text-[#A3732C]">Autres Initiatives</div>
+            <div class="space-y-3 text-xs font-light text-[#F3F4F6]/80 light:text-[#171717]/80">
+                <p><strong>Médecine Vétérinaire :</strong> Organisation et validation du comodal multi-campus face aux critères d'accréditation.</p>
+                <p class="pt-2 border-t border-white/5 light:border-black/5"><strong>RMPQ :</strong> Structuration de l'argumentaire scientifique délimitant la FAD pour les apprentissages complexes.</p>
+                <p class="pt-2 border-t border-white/5 light:border-black/5"><strong>Auto-formations :</strong> Diagnostic comodal en HTML et valorisation de la lecture face à l'IA.</p>
+            </div>
+        </section>
+
+        <section class="md:col-span-3 bg-[#111723] light:bg-[#FFFFFF] border border-white/5 light:border-black/5 p-6 rounded-xl">
+            <div class="text-[10px] font-mono uppercase tracking-widest text-[#CDA15E] light:text-[#A3732C] mb-4">Cursus Académique</div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-xs font-light text-[#F3F4F6]/70 light:text-[#171717]/70">
+                <div>
+                    <strong class="font-medium text-white light:text-[#171717]">Maîtrise Sciences de l’Éducation</strong>
+                    <p class="text-[10px] font-mono text-[#F3F4F6]/40 light:text-[#171717]/40 mt-1">2021 • Université de Montréal</p>
+                </div>
+                <div>
+                    <strong class="font-medium text-white light:text-[#171717]">Diplôme d'État d'Enseignement Musical</strong>
+                    <p class="text-[10px] font-mono text-[#F3F4F6]/40 light:text-[#171717]/40 mt-1">2013 • Cefedem Rhône-Alpes</p>
+                </div>
+                <div>
+                    <strong class="font-medium text-white light:text-[#171717]">Licence en Musique</strong>
+                    <p class="text-[10px] font-mono text-[#F3F4F6]/40 light:text-[#171717]/40 mt-1">2005 • Université Lyon II</p>
+                </div>
+                <div>
+                    <strong class="font-medium text-white light:text-
