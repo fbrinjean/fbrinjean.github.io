@@ -1,697 +1,1050 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fabien Brinjean</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Conseiller technopédagogique — Conseil stratégique &amp; Technopédagogie</title>
+<meta name="description" content="Guider les institutions et le corps enseignant vers une adoption réfléchie des technologies et une adaptation des méthodes d'enseignement de l'enseignement supérieur." />
+<meta name="color-scheme" content="dark light" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <!--
-    Typographies :
-    - Plus Jakarta Sans  → titres, nav, interface  (contemporaine, légèrement technique)
-    - EB Garamond        → tagline hero, notes, footer  (registre réflexif / éditorial)
-  -->
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=EB+Garamond:ital,wght@0,400;1,400;1,500&display=swap" rel="stylesheet" />
+<!--
+  ============================================================================
+  FICHIER UNIQUE — tout est ici : structure (HTML), style (CSS) et
+  interactivité (JavaScript). Aucun autre fichier n'est nécessaire à côté.
+  Seules ressources externes : les polices Google Fonts (nécessitent internet
+  pour être téléchargées ; le site reste 100% fonctionnel sans elles, avec
+  des polices de remplacement du système).
+  ============================================================================
+-->
 
-  <style>
-    /* ═══════════════════════════════════════
-       RESET & VARIABLES
-    ═══════════════════════════════════════ */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-    :root {
-      --bg:          #F5F5F5;
-      --bg-dark:     #121212;
-      --red:         #A74D4A;
-      --red-dark:    #c96f6b;   /* rouge plus lumineux sur fond sombre */
-      --ink:         #121212;
-      --ink-light:   #F0EFED;   /* texte clair sur fond sombre */
-      --muted:       #6a6a6a;
-      --muted-dark:  #9a9a9a;
-      --border:      #D8D6D3;
-      --max-w:       900px;
-      --gutter:      48px;
-      --photo-w:     260px;
-      --photo-gap:   48px;
+<script>
+  // Applique le thème AVANT le premier rendu pour éviter un flash visuel.
+  // Par défaut : mode sombre (comportement identique au site d'origine).
+  (function () {
+    try {
+      var stored = localStorage.getItem('theme');
+      var theme = stored || 'dark';
+      document.documentElement.classList.toggle('dark', theme === 'dark');
+    } catch (e) {
+      document.documentElement.classList.add('dark');
     }
+  })();
+</script>
 
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 80px;
-    }
+<style>
+  /* ==========================================================================
+     1. VARIABLES DE THÈME (couleurs, rayons)
+     Ces valeurs viennent directement de la palette d'origine du projet.
+     ========================================================================== */
 
-    body {
-      background: var(--bg);
-      color: var(--ink);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 15px;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
+  :root {
+    color-scheme: light;
+    --background: #fdfbf7;
+    --foreground: #1b2e24;
+    --card: #ffffff;
+    --card-foreground: #1b2e24;
+    --primary: #96702a;
+    --primary-foreground: #fdfbf7;
+    --secondary: #f0ede4;
+    --muted: #f0ede4;
+    --muted-foreground: #5b6b60;
+    --accent: #efe9db;
+    --destructive: oklch(0.577 0.245 27.325);
+    --border: rgba(27, 46, 36, 0.12);
+    --input: rgba(27, 46, 36, 0.15);
+    --ring: #96702a;
+    --radius: 0.5rem;
 
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Inter', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
 
-    /* ═══════════════════════════════════════
-       HEADER
-    ═══════════════════════════════════════ */
-    .header-wrap {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--bg);
-      border-bottom: 1px solid var(--ink);
-    }
+  html.dark {
+    color-scheme: dark;
+    --background: #0e121c;
+    --foreground: #e2e8f0;
+    --card: #151a28;
+    --card-foreground: #e2e8f0;
+    --primary: #d4af37;
+    --primary-foreground: #0e121c;
+    --secondary: #1b2233;
+    --muted: #1b2233;
+    --muted-foreground: #94a3b8;
+    --accent: #1b2233;
+    --destructive: oklch(0.704 0.191 22.216);
+    --border: rgba(226, 232, 240, 0.1);
+    --input: rgba(226, 232, 240, 0.15);
+    --ring: #d4af37;
+  }
 
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 var(--gutter);
-      height: 64px;
-    }
+  /* ==========================================================================
+     2. RÉINITIALISATION & BASE
+     ========================================================================== */
 
-    .site-name {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 400;
-      font-size: 15px;
-      color: var(--ink);
-      text-decoration: none;
-      letter-spacing: 0.01em;
-      transition: color .2s;
-    }
-    .site-name:hover { color: var(--red); }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  h1, h2, h3, h4, p, dl, dd, dt, ul, figure { margin: 0; }
+  ul { list-style: none; padding: 0; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; padding: 0; }
+  img, svg { display: block; max-width: 100%; }
+  strong { font-weight: 600; }
+  em { font-style: italic; }
 
-    nav { display: flex; gap: 36px; }
+  .container {
+    max-width: 64rem; /* équivalent max-w-5xl */
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
 
-    nav a {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 400;
-      font-size: 14px;
-      color: var(--ink);
-      text-decoration: none;
-      letter-spacing: 0.02em;
-      position: relative;
-      padding-bottom: 3px;
-      transition: color .2s;
-    }
-    nav a::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 1.5px;
-      background: var(--red);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform .25s ease;
-    }
-    nav a:hover { color: var(--red); }
-    nav a:hover::after,
-    nav a.active::after { transform: scaleX(1); }
-    nav a.active { color: var(--red); }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    color: var(--muted-foreground);
+  }
 
+  .diamond {
+    flex-shrink: 0;
+    width: 0.375rem;
+    height: 0.375rem;
+    margin-top: 0.5rem;
+    background: var(--primary);
+    transform: rotate(45deg);
+  }
 
-    /* ═══════════════════════════════════════
-       UTILITAIRES
-    ═══════════════════════════════════════ */
+  .dash {
+    flex-shrink: 0;
+    width: 0.75rem;
+    height: 1px;
+    margin-top: 0.5rem;
+    background: color-mix(in srgb, var(--primary) 60%, transparent);
+  }
 
-    /* Ligne rouge contrainte à la largeur du contenu */
-    .rule-wrap {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 var(--gutter);
-    }
-    .red-rule {
-      width: 100%;
-      height: 1.5px;
-      background: var(--red);
-    }
-    /* Variante pour fond sombre */
-    .red-rule-dark {
-      width: 100%;
-      height: 1.5px;
-      background: var(--red-dark);
-    }
+  /* ==========================================================================
+     3. EN-TÊTE
+     ========================================================================== */
 
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom: 1px solid var(--border);
+    background: color-mix(in srgb, var(--background) 80%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .site-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4rem;
+  }
+  .brand {
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .main-nav { display: flex; align-items: center; gap: 1.5rem; }
+  .nav-links {
+    display: none;
+    align-items: center;
+    gap: 1.75rem;
+  }
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--muted-foreground);
+    transition: color 0.15s ease;
+  }
+  .nav-links a:hover { color: var(--primary); }
 
-    /* ═══════════════════════════════════════
-       HERO
-       La photo est en position absolute et
-       traverse la ligne rouge (z-index).
-    ═══════════════════════════════════════ */
-    #accueil { padding-top: 20px; }
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 9999px;
+    border: 1px solid var(--border);
+    color: var(--muted-foreground);
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+  .theme-toggle:hover { border-color: var(--primary); color: var(--primary); }
+  .theme-toggle svg { width: 1.1rem; height: 1.1rem; }
+  .theme-toggle .icon-moon { display: none; }
+  html:not(.dark) .theme-toggle .icon-sun { display: none; }
+  html:not(.dark) .theme-toggle .icon-moon { display: block; }
 
-    .hero-outer {
-      position: relative;
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 var(--gutter);
-    }
+  /* ==========================================================================
+     4. HÉRO
+     ========================================================================== */
 
-    /* Photo — absolute, traverse la ligne rouge */
-    .hero-photo-col {
-      position: absolute;
-      top: 0;
-      left: var(--gutter);
-      width: var(--photo-w);
-      z-index: 2;
-    }
+  .hero {
+    padding: 5rem 0 4rem;
+  }
+  .hero-grid {
+    display: grid;
+    gap: 3rem;
+  }
+  .hero-eyebrow { margin-bottom: 2rem; }
+  .hero h1 {
+    max-width: 48rem;
+    text-wrap: balance;
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    line-height: 1.35;
+    font-weight: 500;
+    color: var(--foreground);
+  }
+  .hero-lede {
+    margin-top: 2rem;
+    max-width: 42rem;
+    text-wrap: pretty;
+    font-size: 1.125rem;
+    line-height: 1.625;
+    color: var(--muted-foreground);
+  }
+  .hero-lede strong { color: var(--foreground); font-weight: 600; }
+  .hero-quote {
+    margin-top: 2.5rem;
+    padding-left: 1.25rem;
+    border-left: 2px solid var(--primary);
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-style: italic;
+    line-height: 1.625;
+    color: color-mix(in srgb, var(--foreground) 90%, transparent);
+  }
+  .hero-actions {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    background: var(--primary);
+    color: var(--primary-foreground);
+    padding: 0.625rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: opacity 0.15s ease;
+  }
+  .btn-primary:hover { opacity: 0.9; }
+  .link-quiet {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--muted-foreground);
+    transition: color 0.15s ease;
+  }
+  .link-quiet:hover { color: var(--primary); }
+  .hero-photo {
+    display: none;
+    flex-shrink: 0;
+    aspect-ratio: 3 / 4;
+    width: 11rem;
+    border-radius: 0.5rem;
+    border: 1px dashed var(--border);
+    background: color-mix(in srgb, var(--muted) 40%, transparent);
+  }
 
-    .hero-photo {
-      width: 100%;
-      display: block;
-      filter: grayscale(100%);
-      background: #c0c0c0;
-    }
+  /* Surlignage éditorial (identique à .editorial-highlight de l'original) */
+  mark.highlight {
+    background: linear-gradient(
+      to bottom,
+      transparent 72%,
+      color-mix(in srgb, var(--primary) 30%, transparent) 72%,
+      color-mix(in srgb, var(--primary) 30%, transparent) 94%,
+      transparent 94%
+    );
+    padding: 0 0.05em;
+    color: inherit;
+  }
 
-    /* Colonne droite : tagline centrée verticalement
-       La hauteur est calculée par JS (portion photo au-dessus de la ligne rouge) */
-    .hero-text-col {
-      margin-left: calc(var(--photo-w) + var(--photo-gap));
-      display: flex;
-      align-items: center;
-      min-height: 300px; /* écrasé par JS */
-    }
+  /* ==========================================================================
+     5. EN-TÊTE DE SECTION (numéro + eyebrow + titre)
+     ========================================================================== */
 
-    .hero-tagline {
-      font-family: 'EB Garamond', serif;
-      font-style: italic;
-      font-size: 21px;
-      font-weight: 400;
-      line-height: 1.6;
-      color: var(--ink);
-    }
+  .section-heading {
+    margin-bottom: 3.5rem;
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.5rem;
+  }
+  .section-heading .index {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--primary);
+  }
+  .section-heading .eyebrow { margin-bottom: 0.5rem; }
+  .section-heading h2 {
+    text-wrap: balance;
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--foreground);
+  }
 
-    /* Ligne rouge — passe derrière la photo (z-index: 1) */
-    .hero-rule {
-      position: relative;
-      z-index: 1;
-    }
+  section { padding: 5rem 0; }
+  .section-tinted { border-top: 1px solid var(--border); background: color-mix(in srgb, var(--muted) 30%, transparent); }
 
-    /* Titres en rouge sous la ligne rouge, alignés avec la tagline */
-    .hero-titles {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 18px var(--gutter) 0;
-      padding-left: calc(var(--gutter) + var(--photo-w) + var(--photo-gap));
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 300;
-      font-size: 13.5px;
-      line-height: 2;
-      color: var(--red);
-      letter-spacing: 0.02em;
-    }
+  /* ==========================================================================
+     6. EXPERTISE (section 01)
+     ========================================================================== */
 
+  .expertise-grid {
+    display: grid;
+    gap: 3.5rem;
+  }
+  .pillar .num {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--primary);
+  }
+  .pillar h3 {
+    margin-top: 0.75rem;
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--foreground);
+  }
+  .pillar p {
+    margin-top: 1rem;
+    line-height: 1.625;
+    color: var(--muted-foreground);
+  }
+  .pillar p strong { color: var(--foreground); }
 
-    /* ═══════════════════════════════════════
-       SECTION EXPERTISE
-       Le contenu commence sous la photo.
-       Le padding-top est calculé par JS.
-    ═══════════════════════════════════════ */
-    .expertise-content {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 56px var(--gutter) 100px; /* padding-top écrasé par JS */
-    }
+  .expandable { margin-top: 1.5rem; border-top: 1px solid var(--border); padding-top: 1.25rem; }
+  .expandable-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--primary);
+    transition: color 0.15s ease;
+  }
+  .expandable-toggle:hover { color: var(--foreground); }
+  .expandable-toggle:hover .expandable-icon { border-color: var(--foreground); }
+  .expandable-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 9999px;
+    border: 1px solid color-mix(in srgb, var(--primary) 50%, transparent);
+    transition: border-color 0.15s ease;
+  }
+  .expandable-icon svg { width: 0.75rem; height: 0.75rem; }
+  .expandable-icon .icon-minus { display: none; }
+  .expandable[data-open="true"] .icon-plus { display: none; }
+  .expandable[data-open="true"] .icon-minus { display: block; }
+  .expandable-content {
+    display: none;
+    margin-top: 1.25rem;
+    border-left: 2px solid color-mix(in srgb, var(--primary) 30%, transparent);
+    padding-left: 1.25rem;
+  }
+  .expandable[data-open="true"] .expandable-content { display: block; }
+  .expandable-content p {
+    font-size: 0.95rem;
+    line-height: 1.625;
+    color: var(--muted-foreground);
+  }
+  .expandable-content p + p { margin-top: 1rem; }
+  .expandable-content strong { font-weight: 600; color: var(--foreground); }
 
-    /* Titre de section — petit repère discret */
-    .section-eyebrow {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 400;
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 32px;
-    }
+  /* ==========================================================================
+     7. RÉALISATIONS (section 02)
+     ========================================================================== */
 
-    .expertise-content h2 {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 600;
-      font-size: 15px;
-      color: var(--ink);
-      margin-bottom: 16px;
-      letter-spacing: 0.01em;
-    }
+  .masterwork {
+    border-radius: 0.7rem;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--card-foreground);
+    padding: 2rem;
+  }
+  .masterwork h3 {
+    margin-top: 1rem;
+    max-width: 42rem;
+    text-wrap: balance;
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.3;
+  }
+  .masterwork > p {
+    margin-top: 1.25rem;
+    max-width: 42rem;
+    line-height: 1.625;
+    color: var(--muted-foreground);
+  }
+  .masterwork > p strong { color: var(--card-foreground); }
 
-    .expertise-content h3 {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 600;
-      font-size: 14px;
-      color: var(--ink);
-      margin-top: 40px;
-      margin-bottom: 12px;
-      letter-spacing: 0.01em;
-    }
+  .badges { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; }
+  .badge {
+    border-radius: 0.5rem;
+    border: 1px solid color-mix(in srgb, var(--primary) 30%, transparent);
+    background: color-mix(in srgb, var(--primary) 5%, transparent);
+    padding: 0.75rem 1.25rem;
+  }
+  .badge .num {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary);
+  }
+  .badge .label { display: block; margin-top: 0.25rem; font-size: 0.75rem; color: var(--muted-foreground); }
 
-    .expertise-content p {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 300;
-      font-size: 14px;
-      line-height: 1.8;
-      color: var(--ink);
-      margin-bottom: 14px;
-      max-width: 660px; /* ligne de texte confortable */
-    }
+  .deliverables { margin-top: 2.5rem; border-top: 1px solid var(--border); padding-top: 2rem; }
+  .deliverables > .eyebrow { margin-bottom: 1.5rem; }
+  .deliverables ul { display: flex; flex-direction: column; gap: 1.25rem; }
+  .deliverable-item { display: flex; gap: 0.75rem; }
+  .deliverable-item .label { font-weight: 500; color: var(--card-foreground); }
+  .deliverable-item .detail { font-weight: 400; color: var(--muted-foreground); }
+  .deliverable-sub { margin-top: 0.75rem; padding-left: 0.25rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .deliverable-sub li { display: flex; gap: 0.75rem; font-size: 0.875rem; color: var(--muted-foreground); }
 
-    .expertise-content p.note {
-      font-family: 'EB Garamond', serif;
-      font-style: italic;
-      font-size: 16px;
-      line-height: 1.65;
-      color: var(--muted);
-      max-width: 620px;
-    }
+  .other-engagements {
+    margin-top: 2rem;
+    display: grid;
+    gap: 1.5rem;
+  }
+  .engagement-card {
+    border-radius: 0.7rem;
+    border: 1px solid var(--border);
+    background: var(--card);
+    padding: 2rem;
+  }
+  .engagement-card svg { width: 1.25rem; height: 1.25rem; color: var(--primary); }
+  .engagement-card h4 {
+    margin-top: 1rem;
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--card-foreground);
+  }
+  .engagement-card p {
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.625;
+    color: var(--muted-foreground);
+  }
 
-    .expertise-content ul {
-      list-style: none;
-      padding: 0;
-      margin-bottom: 16px;
-    }
+  .initiatives { margin-top: 4rem; }
+  .initiatives > .eyebrow { margin-bottom: 1.5rem; }
+  .initiatives ul { display: flex; flex-direction: column; gap: 1rem; }
+  .initiatives li {
+    display: flex;
+    gap: 1rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1rem;
+  }
+  .initiatives p { line-height: 1.625; color: var(--muted-foreground); }
 
-    .expertise-content ul li {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 300;
-      font-size: 14px;
-      line-height: 1.8;
-      padding-left: 20px;
-      position: relative;
-      margin-bottom: 12px;
-      max-width: 660px;
-    }
+  /* ==========================================================================
+     8. PARCOURS (section 03)
+     ========================================================================== */
 
-    .expertise-content ul li::before {
-      content: '–';
-      position: absolute;
-      left: 0;
-      color: var(--red);
-    }
+  .timeline {
+    position: relative;
+    border-left: 1px solid var(--border);
+    padding-left: 2rem;
+  }
+  .timeline-item { position: relative; padding-bottom: 4rem; }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .timeline-dot {
+    position: absolute;
+    left: calc(-2rem - 5px);
+    top: 0.375rem;
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 9999px;
+    background: var(--primary);
+    box-shadow: 0 0 0 4px var(--background);
+  }
+  .timeline-dot.is-muted { background: var(--muted-foreground); }
+  .timeline-item .date {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    color: var(--primary);
+  }
+  .timeline-item .date.is-muted { color: var(--muted-foreground); }
+  .timeline-item h3 {
+    margin-top: 0.75rem;
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--foreground);
+  }
+  .timeline-item .org { margin-top: 0.25rem; font-size: 0.875rem; color: var(--muted-foreground); }
+  .timeline-item .body { margin-top: 1rem; max-width: 42rem; line-height: 1.625; color: var(--muted-foreground); }
 
+  .guitar-details {
+    margin-top: 2rem;
+    display: grid;
+    gap: 1.5rem;
+  }
+  .guitar-details dt { font-weight: 500; color: var(--foreground); }
+  .guitar-details dd { margin-top: 0.5rem; font-size: 0.875rem; line-height: 1.625; color: var(--muted-foreground); }
 
-    /* ═══════════════════════════════════════
-       SECTION RÉALISATIONS — fond sombre
-    ═══════════════════════════════════════ */
-    #realisations {
-      background: var(--bg-dark);
-      padding: 80px 0 100px;
-      margin-top: 0;
-    }
+  /* ==========================================================================
+     9. FORMATION (section 04)
+     ========================================================================== */
 
-    .realisations-inner {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 var(--gutter);
-    }
+  .formation-heading { margin-bottom: 2.5rem; display: flex; align-items: baseline; gap: 1rem; }
+  .formation-heading .index {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--primary);
+  }
+  .formation-heading h2 {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--foreground);
+  }
 
-    #realisations .section-eyebrow {
-      color: var(--muted-dark);
-      margin-bottom: 32px;
-    }
+  .terminal {
+    overflow: hidden;
+    border-radius: 0.7rem;
+    border: 1px solid var(--border);
+    background: var(--card);
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+  .terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    background: color-mix(in srgb, var(--muted) 50%, transparent);
+    padding: 0.75rem 1rem;
+  }
+  .terminal-dot { width: 0.75rem; height: 0.75rem; border-radius: 9999px; }
+  .terminal-dot.red { background: color-mix(in srgb, var(--destructive) 70%, transparent); }
+  .terminal-dot.gold { background: color-mix(in srgb, var(--primary) 70%, transparent); }
+  .terminal-dot.gray { background: color-mix(in srgb, var(--muted-foreground) 40%, transparent); }
+  .terminal-path { margin-left: 0.75rem; font-size: 0.75rem; color: var(--muted-foreground); }
+  .terminal-body { display: flex; flex-direction: column; gap: 1.5rem; padding: 1.5rem; }
+  .diploma-line1 { display: flex; align-items: flex-start; gap: 0.5rem; }
+  .diploma-line1 .prompt { color: var(--primary); user-select: none; }
+  .diploma-line1 .title { color: var(--card-foreground); }
+  .diploma-line2 { margin-top: 0.25rem; padding-left: 1rem; font-size: 0.75rem; color: var(--muted-foreground); }
+  .diploma-line2 .arrow { color: var(--primary); }
 
-    #realisations h2 {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 600;
-      font-size: 15px;
-      color: var(--ink-light);
-      margin-bottom: 40px;
-      letter-spacing: 0.01em;
-    }
+  /* ==========================================================================
+     10. PIED DE PAGE / CONTACT
+     ========================================================================== */
 
-    /* Liste de réalisations */
-    .realisations-list {
-      list-style: none;
-      padding: 0;
-      border-top: 1px solid #2a2a2a;
-    }
+  .contact-footer { border-top: 1px solid var(--border); }
+  .contact-top {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+  .contact-text { max-width: 36rem; }
+  .contact-text h2 {
+    margin-top: 1rem;
+    text-wrap: balance;
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--foreground);
+  }
+  .contact-text p { margin-top: 1rem; line-height: 1.625; color: var(--muted-foreground); }
+  .btn-contact {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    border-radius: 9999px;
+    background: var(--primary);
+    color: var(--primary-foreground);
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: opacity 0.15s ease;
+  }
+  .btn-contact:hover { opacity: 0.9; }
+  .btn-contact svg { width: 1rem; height: 1rem; }
+  .contact-bottom {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-top: 1px solid var(--border);
+    padding-top: 2rem;
+    font-size: 0.75rem;
+    color: var(--muted-foreground);
+  }
+  .contact-bottom .copyright { font-family: var(--font-mono); }
 
-    .realisations-list li {
-      border-bottom: 1px solid #2a2a2a;
-      padding: 24px 0;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 16px;
-      align-items: baseline;
-      cursor: pointer;
-      transition: background .2s;
-    }
+  /* ==========================================================================
+     11. RESPONSIVE — points de rupture identiques à l'original (sm/md/lg)
+     ========================================================================== */
 
-    .realisations-list li:hover {
-      padding-left: 8px;
-      transition: padding .2s, background .2s;
-    }
+  @media (min-width: 640px) {
+    .hero h1 { font-size: 1.875rem; }
+  }
 
-    .real-title {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 400;
-      font-size: 15px;
-      color: var(--ink-light);
-      display: block;
-      margin-bottom: 4px;
-    }
+  @media (min-width: 768px) {
+    .nav-links { display: flex; }
+    .hero { padding: 7rem 0 6rem; }
+    .hero-grid { grid-template-columns: 1fr auto; align-items: start; }
+    .hero h1 { font-size: 2.4rem; line-height: 1.32; }
+    .hero-photo { display: block; }
+    section { padding: 7rem 0; }
+    .section-heading h2 { font-size: 1.875rem; }
+    .masterwork { padding: 3rem; }
+    .masterwork h3 { font-size: 1.75rem; line-height: 1.375; }
+    .other-engagements { grid-template-columns: repeat(2, 1fr); }
+    .timeline { padding-left: 2.5rem; }
+    .timeline-dot { left: calc(-2.5rem - 5px); }
+    .guitar-details { grid-template-columns: repeat(3, 1fr); }
+    .formation-heading h2 { font-size: 1.875rem; }
+    .terminal-body { padding: 2rem; }
+    .contact-top { flex-direction: row; align-items: center; justify-content: space-between; }
+    .contact-bottom { flex-direction: row; align-items: center; justify-content: space-between; }
+  }
 
-    .real-context {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 300;
-      font-size: 13px;
-      color: var(--muted-dark);
-      display: block;
-    }
-
-    .real-link {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 300;
-      font-size: 12px;
-      color: var(--red-dark);
-      letter-spacing: 0.05em;
-      text-decoration: none;
-      white-space: nowrap;
-      transition: color .2s;
-    }
-    .real-link:hover { color: var(--ink-light); }
-
-
-    /* ═══════════════════════════════════════
-       SECTION CURRICULUM
-    ═══════════════════════════════════════ */
-    #curriculum {
-      padding: 80px 0 100px;
-    }
-
-    .curriculum-inner {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 var(--gutter);
-    }
-
-    #curriculum h2 {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 600;
-      font-size: 15px;
-      color: var(--ink);
-      margin-bottom: 40px;
-      letter-spacing: 0.01em;
-    }
-
-
-    /* ═══════════════════════════════════════
-       FOOTER
-    ═══════════════════════════════════════ */
-    footer {
-      background: var(--bg);
-      padding-bottom: 48px;
-    }
-
-    .footer-inner {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 28px var(--gutter) 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-    }
-
-    .footer-name {
-      font-family: 'EB Garamond', serif;
-      font-style: italic;
-      font-size: 15px;
-      color: var(--muted);
-    }
-
-    .footer-copy {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 300;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-
-    /* ═══════════════════════════════════════
-       RESPONSIVE
-    ═══════════════════════════════════════ */
-    @media (max-width: 680px) {
-      :root {
-        --gutter: 24px;
-        --photo-w: 200px;
-        --photo-gap: 32px;
-      }
-
-      header { height: 56px; }
-
-      .hero-photo-col {
-        position: relative;
-        top: auto; left: auto;
-        width: 55%;
-        max-width: 200px;
-        margin-bottom: 0;
-      }
-
-      .hero-text-col {
-        margin-left: calc(var(--photo-w) + var(--photo-gap));
-        min-height: 180px;
-      }
-
-      .hero-titles {
-        padding-left: var(--gutter);
-      }
-
-      .expertise-content {
-        padding-left: var(--gutter);
-      }
-
-      nav { gap: 20px; }
-
-      .realisations-list li {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+  @media (min-width: 1024px) {
+    .expertise-grid { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+  }
+</style>
 </head>
 <body>
 
-  <!-- ═══════════════════════════════════════
-       HEADER
-  ═══════════════════════════════════════ -->
-  <div class="header-wrap">
-    <header>
-      <a class="site-name" href="#accueil">Fabien Brinjean</a>
-      <nav>
-        <a href="#accueil"      id="nav-accueil">Accueil</a>
-        <a href="#realisations" id="nav-realisations">Réalisations</a>
-        <a href="#curriculum"   id="nav-curriculum">Curriculum</a>
-      </nav>
-    </header>
+<!-- ============================== EN-TÊTE ============================== -->
+<header class="site-header">
+  <div class="container">
+    <a href="#top" class="brand">Conseil technopédagogique</a>
+    <nav class="main-nav">
+      <ul class="nav-links">
+        <li><a href="#philosophie">Philosophie</a></li>
+        <li><a href="#realisations">Réalisations</a></li>
+        <li><a href="#parcours">Parcours</a></li>
+      </ul>
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Changer de thème">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </button>
+    </nav>
   </div>
+</header>
 
+<main>
 
-  <!-- ═══════════════════════════════════════
-       ACCUEIL — HERO + EXPERTISE
-  ═══════════════════════════════════════ -->
-  <section id="accueil">
+  <!-- ============================== HÉRO ============================== -->
+  <section id="top" class="hero">
+    <div class="container">
+      <p class="eyebrow hero-eyebrow" style="color: var(--primary); letter-spacing: 0.28em;">Conseiller technopédagogique</p>
 
-    <!-- Hero : photo + tagline -->
-    <div class="hero-outer">
+      <div class="hero-grid">
+        <div>
+          <h1>
+            Face à l'omniprésence de l'IA et à la transition numérique de l'enseignement supérieur, ma mission est de guider les institutions et le corps enseignant vers une adoption réfléchie des technologies et une adaptation des méthodes d'enseignement, pour à la fois
+            <mark class="highlight">répondre aux enjeux modernes et préserver les compétences cognitives essentielles</mark>.
+          </h1>
 
-      <!--
-        PHOTO
-        Remplacer src="PHOTO_A_REMPLACER.jpg" par le chemin de ton fichier.
-        Exemple : src="images/fabien.jpg"
-        Retirer filter:grayscale(100%) dans .hero-photo si tu veux la couleur.
-      -->
-      <div class="hero-photo-col">
-        <img
-          class="hero-photo"
-          src="PHOTO_A_REMPLACER.jpg"
-          alt="Fabien Brinjean"
-          onerror="this.style.minHeight='380px'; this.removeAttribute('src');"
-        />
-      </div>
+          <p class="hero-lede">
+            Un constant travail de veille et d'autoformation sous-tend des <strong>actions polyvalentes</strong> allant de décisions stratégiques au développement de ressources pédagogiques et porté par des accompagnements individualisés auprès du corps enseignant.
+          </p>
 
-      <!-- Tagline centrée verticalement (hauteur calculée par JS) -->
-      <div class="hero-text-col">
-        <p class="hero-tagline">
-          Face à l'omniprésence de l'IA et à la transition numérique de l'enseignement supérieur, ma mission est de guider les institutions et le corps enseignant vers une adoption technologique réfléchie, préservant des compétences humaines cruciales et ancrée dans la réalité du terrain.
-        </p>
-      </div>
+          <p class="hero-quote">
+            Conseil stratégique &amp; Technopédagogie — Pour un usage sobre et ciblé du numérique.
+          </p>
 
-    </div>
-
-    <!-- Ligne rouge — z-index:1, passe derrière la photo (z-index:2) -->
-    <div class="hero-rule">
-      <div class="rule-wrap">
-        <div class="red-rule"></div>
-      </div>
-    </div>
-
-    <!-- Titres en rouge sous la ligne, alignés colonne droite -->
-    <div class="hero-titles">
-      <p>Conseiller technopédagogique</p>
-      <p>Pédagogue</p>
-      <p>Artiste</p>
-    </div>
-
-    <!-- Expertise — padding-top calculé par JS pour démarrer sous la photo -->
-    <div class="expertise-content" id="expertise-content">
-
-      <p class="section-eyebrow">Expertise et approche</p>
-
-      <h2>Polyvalence : de la réflexion globale à la réalisation sur le terrain</h2>
-      <ul>
-        <li><strong>Échelle Macro :</strong> Conseil et orientation des facultés lors des transitions vers de nouvelles modalités d'enseignement.</li>
-        <li><strong>Échelle Micro :</strong> Production de formations et de ressources pour soutenir le corps enseignant (gabarits de planification, outils d'autoévaluation et d'autodiagnostic, productions multimédias multiples : scénarisation, montage vidéo, composition musicale).</li>
-      </ul>
-
-      <h3>Pédagogie de l'accompagnement</h3>
-      <p>Ma force réside dans ma capacité d'écoute et d'adaptation. Qu'il s'agisse d'un professeur sceptique ou d'un décanat tiraillé par des enjeux modernes, je m'efforce de cibler les besoins et les habiletés de mes interlocuteurs pour concevoir des parcours de transition (hybride, comodal) réalistes et fructueux.</p>
-      <p>L'omniprésence de l'intelligence artificielle exige un accompagnement sur mesure. J'amène le corps enseignant à penser l'IA générative sous l'angle spécifique de leur discipline et de leur pratique enseignante pour que chacun développe son propre positionnement critique.</p>
-      <p class="note">Un travail de veille sous-tend cet accompagnement pour favoriser le transfert des connaissances et anticiper les enjeux d'un domaine en plein bouleversement.</p>
-
-      <h3>Expertise technologique et discernement</h3>
-      <p>Je dispose d'une aisance et d'une expertise techniques avancées : production multimédia, programmation en <em>vibe coding</em> (assistée par IA), production de ressources pédagogiques multiples, soutien technique pour une plateforme institutionnelle.</p>
-      <p>Pourtant, je refuse le solutionnisme, qui parfois se présente masqué. Je ne pousse pas l'innovation pour sa nouveauté, mais pour sa valeur ajoutée. Je prône un usage sobre et ciblé du numérique, garantissant la préservation des compétences humaines fondamentales, comme la lecture, l'analyse ou la capacité d'attention.</p>
-
-      <h3>Évaluation &amp; intégrité académique</h3>
-      <p>Je collabore avec des experts sectoriels pour répondre aux défis actuels de l'évaluation. Cela se traduit par le soutien au déploiement technique et humain d'outils de sécurisation des examens (Safe Exam Browser), par la conception de modèles d'évaluation pour optimiser l'équité dans les travaux d'équipe et surtout par un accompagnement personnalisé de membres du corps enseignant.</p>
-
-    </div>
-
-  </section>
-
-
-  <!-- ═══════════════════════════════════════
-       RÉALISATIONS — fond sombre
-  ═══════════════════════════════════════ -->
-  <section id="realisations">
-    <div class="realisations-inner">
-
-      <p class="section-eyebrow">Réalisations</p>
-      <h2>Ressources et projets développés</h2>
-
-      <!--
-        Structure d'un item :
-        <li>
-          <div>
-            <span class="real-title">Titre de la réalisation</span>
-            <span class="real-context">Institution — Année — Type</span>
+          <div class="hero-actions">
+            <a href="#contact" class="btn-primary">Me contacter</a>
+            <a href="#philosophie" class="link-quiet">Découvrir l'approche</a>
           </div>
-          <a class="real-link" href="document.pdf" target="_blank">Consulter ↗</a>
-        </li>
-      -->
-      <ul class="realisations-list">
-        <!-- Les items seront ajoutés ici -->
-      </ul>
+        </div>
 
+        <!-- Espace réservé pour une future photo de profil -->
+        <div aria-hidden="true" class="hero-photo"></div>
+      </div>
     </div>
   </section>
 
+  <!-- ============================== EXPERTISE (01) ============================== -->
+  <section id="philosophie">
+    <div class="container">
+      <div class="section-heading">
+        <span class="index">01</span>
+        <div>
+          <p class="eyebrow">Expertise et approche</p>
+          <h2>Piliers d'intervention</h2>
+        </div>
+      </div>
 
-  <!-- ═══════════════════════════════════════
-       CURRICULUM
-  ═══════════════════════════════════════ -->
-  <section id="curriculum">
-    <div class="rule-wrap" style="margin-bottom: 0;">
-      <div class="red-rule"></div>
-    </div>
-    <div class="curriculum-inner">
-      <p class="section-eyebrow" style="margin-top: 48px;">Curriculum</p>
-      <h2>Parcours</h2>
-      <!-- Contenu à venir -->
+      <div class="expertise-grid">
+
+        <!-- Pilier 1 -->
+        <article class="pillar">
+          <span class="num">01</span>
+          <h3>Pédagogie de l'accompagnement</h3>
+          <p>
+            Qu'il s'agisse d'un professeur sceptique ou d'un décanat se heurtant aux enjeux modernes, je m'efforce de <strong>cibler les besoins et les habiletés</strong> de mes interlocuteurs pour produire des ajustements réalistes et fructueux.
+          </p>
+
+          <div class="expandable" data-open="false">
+            <button type="button" class="expandable-toggle">
+              <span class="expandable-icon">
+                <svg class="icon-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                <svg class="icon-minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>
+              </span>
+              <span class="expandable-label">Approfondir</span>
+            </button>
+            <div class="expandable-content">
+              <p>Enseigner à l'Université est complexe : temps et énergie sont accaparées par de multiples tâches - charge d'enseignement, veille, demande de budgets, recherche, etc. - dans un milieu compétitif qui exige l'excellence.</p>
+              <p>À propos de la pédagogie, tous n'ont pas la même aisance, le même recul, la même faculté d'identifier leurs angles morts. Ceci est tout aussi vrai au regard du virage numérique qu'a vécu l'enseignement supérieur et qui parfois démultiplie les enjeux.</p>
+              <p><mark class="highlight">Tous aussi n'ont pas la même prédisposition à accepter une aide extérieure</mark>. Cette aide extérieure n'est reçue que si un rapport de confiance s'est bâti. Celle-ci se construira par la légitimité de l'analyse pédagogique et des recommandations mais aussi par une qualité d'écoute et d'adaptation du conseiller.</p>
+              <p>C'est pourquoi <mark class="highlight">il est nécessaire de s'adapter à chaque personne</mark> : bien comprendre sa requête, acquiescer du temps et des efforts qu'elle est prête à fournir, afin de proposer des ajustements, mineurs ou majeurs selon le contexte, mais toujours réalistes.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Pilier 2 -->
+        <article class="pillar">
+          <span class="num">02</span>
+          <h3>Expertise technologique <em>et</em> discernement</h3>
+          <p>
+            Je dispose d'une <strong>expertise techniques avancées</strong> : production multimédia (vidéos, infographies, musique) et de ressources pédagogiques multiples, programmation assistée par IA, soutien technique pour une plateforme institutionnelle.
+          </p>
+          <p>
+            Je m'oppose pourtant au solutionnisme qui, parfois, avance masqué, et je soutiens l'intégration d'outils technologiques seulement pour leur valeur ajoutée. <strong>Un usage sobre et ciblé du numérique</strong>, qui garantit la préservation de compétences humaines fondamentales, telles la lecture, l'analyse ou la capacité d'attention.
+          </p>
+          <p>
+            J'amène le corps enseignant à penser l'<strong>IA générative</strong> sous l'angle spécifique de leur discipline et de leur pratique enseignante pour que chacun développe son propre <strong>positionnement</strong> critique et, éventuellement, une intégration raisonnée.
+          </p>
+
+          <div class="expandable" data-open="false">
+            <button type="button" class="expandable-toggle">
+              <span class="expandable-icon">
+                <svg class="icon-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                <svg class="icon-minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>
+              </span>
+              <span class="expandable-label">Approfondir</span>
+            </button>
+            <div class="expandable-content">
+              <p>Tout objet technologique nous renforce quelque part et nous affaiblit ailleurs. Il convient alors d'être prudent et mesuré à une époque d'effervescence technologique où il peut être tellement tentant de déléguer à la dernière innovation le soin de nous apporter une solution.</p>
+              <p>Je suis capable d'accompagner un enseignant dans la production d'une vidéo - de la scénarisation jusqu'à l'intégration dans l'environnement numérique d'apprentissage, en passant par le tournage et même, qui sait ?, par la composition de sa musique. Je peux développer un outil complètement original pour répondre à un besoin didactique particulier (génération d'étude de cas + environnement pour le visualiser avec quiz intégré, outil de présentation de l'enseignement comodal avec autodiagnostic et recommandations personnalisées). Je peux collaborer avec des auteurs de jeux pour créer des jeux de cartes et ludifier un cours qui a généralement mauvaise presse chez les étudiants.</p>
+              <p><mark class="highlight"><strong>Mais</strong> de telles réalisations, aussi brillantes soient-elles, ne sont aucunement des prérequis pour le succès d'une collaboration avec un enseignant.</mark> D'une part car ce ne sont pas forcément les attentes de notre collaborateur, mais d'autre part car la solution à ses enjeux est peut-être ailleurs, sous une forme plus pragmatique et accessible.</p>
+              <p>Une activité de lecture bien planifiée sera peut-être plus pertinente - et moins coûteuse en temps et en énergie - qu'une vidéo, tout en accompagnant les étudiants à développer leur compétence de lecture de textes disciplinaires.</p>
+              <p>L'identification de mécanismes vertueux pour encadrer une activité collaborative sera bien plus pertinente que l'ajout d'un outil numérique censé favoriser les interactions, en responsabilisant les acteurs et en rendant plus équitable l'évaluation de ces travaux.</p>
+              <p><mark class="highlight">Certains outils technologiques sont puissants et doivent être utilisés à bon escient. Mais ils ne sont pas la clef de la préservation de développements cognitifs essentiels (lecture, synthèse, communication) ni de la qualité du lien entre l'enseignant et sa classe</mark>. Éléments prédominants pour garantir un apprentissage de qualité.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Pilier 3 -->
+        <article class="pillar">
+          <span class="num">03</span>
+          <h3>Évaluation &amp; intégrité académique</h3>
+          <p>
+            J'accompagne plusieurs personnes dans la refonte de leurs pratiques d'évaluation face à l'intelligence artificielle. Le public et les habitudes changent, et ce bond technologique provoque d'autres défis qui rendent cruciales des réflexions profondes sur l'évaluation. Je participe ainsi aux efforts d'intégration d'outils de sécurisation des examens, mais j'outille aussi pédagogiquement le corps enseignant qui prend conscience des nouveaux angles morts.
+          </p>
+
+          <div class="expandable" data-open="false">
+            <button type="button" class="expandable-toggle">
+              <span class="expandable-icon">
+                <svg class="icon-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                <svg class="icon-minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>
+              </span>
+              <span class="expandable-label">Approfondir</span>
+            </button>
+            <div class="expandable-content">
+              <p>Nous faisons face encore aujourd'hui aux conséquences de la crise du COVID. La situation d'urgence a permis l'émergence d'autres approches d'enseignement qui ont créé alors d'autres attentes du public étudiant. Un contexte et des attentes changeantes qui imposent d'adapter minimalement ses méthodes d'enseignement et d'évaluation. La démocratisation de l'intelligence artificielle générative n'a fait qu'accentuer les enjeux, rendant certaines approches non plus seulement démodées mais désormais obsolètes.</p>
+              <p>Il est ainsi nécessaire de considérer des solutions technologiques de sécurisation mais aussi un retour possible, dans certain cas, à un retour des approches analogiques ou semblables (papier-crayon ou ordinateur verrouillé en salle de classe sous surveillance).</p>
+              <p><mark class="highlight">Il faut oser scruter et arpenter ce territoire sans carte qui s'impose à nous, sans pour autant s'interdire des mesures de bon sens qui, à ce jour et dans certaines circonstances, sont seules capables de préserver l'intégrité des examens et la valeur des diplômes.</mark></p>
+            </div>
+          </div>
+        </article>
+
+      </div>
     </div>
   </section>
 
+  <!-- ============================== RÉALISATIONS (02) ============================== -->
+  <section id="realisations" class="section-tinted">
+    <div class="container">
+      <div class="section-heading">
+        <span class="index">02</span>
+        <div>
+          <p class="eyebrow">Réalisations récentes</p>
+          <h2>Conseil stratégique</h2>
+        </div>
+      </div>
 
-  <!-- ═══════════════════════════════════════
-       FOOTER
-  ═══════════════════════════════════════ -->
-  <footer>
-    <div class="rule-wrap">
-      <div class="red-rule"></div>
+      <!-- Chef-d'œuvre : Hybridation de programmes -->
+      <article class="masterwork">
+        <p class="eyebrow" style="color: var(--primary);">Le chef-d'œuvre</p>
+        <h3>Hybridation de programmes</h3>
+        <p>
+          Une <strong>quarantaine de professeurs accompagnés</strong> collectivement, plus d'une <strong>quinzaine individuellement</strong>, en partenariat étroit avec le <strong>décanat</strong> de la faculté des Sciences de l'Éducation.
+        </p>
+
+        <div class="badges">
+          <div class="badge">
+            <span class="num">40+</span>
+            <span class="label">Professeurs accompagnés collectivement</span>
+          </div>
+          <div class="badge">
+            <span class="num">15+</span>
+            <span class="label">Accompagnements individuels sur mesure</span>
+          </div>
+        </div>
+
+        <div class="deliverables">
+          <p class="eyebrow">Livrables clés</p>
+          <ul>
+            <li class="deliverable-item">
+              <span class="diamond"></span>
+              <div>
+                <p><span class="label">Formations</span> <span class="detail">(en présentiel et sous forme de vidéo)</span></p>
+              </div>
+            </li>
+            <li class="deliverable-item">
+              <span class="diamond"></span>
+              <div>
+                <p><span class="label">Productions de ressources pour encadrer la transition</span></p>
+                <ul class="deliverable-sub">
+                  <li><span class="dash"></span>Gabarits de planification</li>
+                  <li><span class="dash"></span>Activités et ressources originales par programmation avec IA</li>
+                  <li><span class="dash"></span>Encadrement des travaux collaboratifs (charte d'équipe, outils d'autoévaluation)</li>
+                  <li><span class="dash"></span>Outils d'évaluation des séances en ligne</li>
+                  <li><span class="dash"></span>Documentation sur des outils technologiques : Wooclap, Perusall</li>
+                </ul>
+              </div>
+            </li>
+            <li class="deliverable-item">
+              <span class="diamond"></span>
+              <div>
+                <p><span class="label">Accompagnements individualisés</span></p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Autres engagements stratégiques -->
+      <div class="other-engagements">
+        <article class="engagement-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+          <h4>Validation du comodal</h4>
+          <p>Appui à la Faculté de Médecine Vétérinaire sur l'organisation de l'enseignement comodal multi-campus afin de répondre aux exigences réglementaires et aux critères d'accréditation en palliant le nombre limité d'experts enseignants.</p>
+        </article>
+        <article class="engagement-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+          <h4>Rationalisation de l'enseignement à distance</h4>
+          <p>Conseil auprès d'un organisme externe (RMPQ) pour structurer l'argumentaire scientifique et pédagogique encadrant les limites de la formation à distance pour les apprentissages pratiques complexes en massothérapie.</p>
+        </article>
+      </div>
+
+      <!-- Initiatives propres -->
+      <div class="initiatives">
+        <p class="eyebrow">Initiatives propres</p>
+        <ul>
+          <li>
+            <span class="diamond"></span>
+            <p>Conception d'une formation autoportante en HTML sur l'enseignement comodal incluant un outil diagnostic pour mieux appréhender une transition vers cette modalité.</p>
+          </li>
+          <li>
+            <span class="diamond"></span>
+            <p>Expérimentation du facteur de pondération individuel</p>
+          </li>
+          <li>
+            <span class="diamond"></span>
+            <p>Conception et animation de parcours de formation sur l'IA générative (ChatGPT) ou sur la revalorisation des activités de lecture universitaire pour contrer les défis modernes liés à la lecture.</p>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="footer-inner">
-      <span class="footer-name">Fabien Brinjean</span>
-      <span class="footer-copy">&copy; 2025</span>
+  </section>
+
+  <!-- ============================== PARCOURS (03) ============================== -->
+  <section id="parcours">
+    <div class="container">
+      <div class="section-heading">
+        <span class="index">03</span>
+        <div>
+          <p class="eyebrow">Curriculum</p>
+          <h2>Le parcours</h2>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <!-- Conseiller technopédagogique -->
+        <div class="timeline-item">
+          <span class="timeline-dot"></span>
+          <p class="date">Depuis 2020</p>
+          <h3>Conseiller technopédagogique</h3>
+          <p class="org">Centre de Pédagogie Universitaire</p>
+          <p class="body">Au sein du Centre de Pédagogie Universitaire, j'accompagne les facultés et le corps enseignant dans la transformation de leurs dispositifs de formation et l'intégration raisonnée du numérique.</p>
+        </div>
+
+        <!-- Professeur de guitare -->
+        <div class="timeline-item">
+          <span class="timeline-dot is-muted"></span>
+          <p class="date is-muted">2005 — 2018</p>
+          <h3>Professeur de guitare</h3>
+          <p class="body">Enseignement individuel et collectif de la musique auprès de publics hétérogènes. Ce parcours d'une douzaine d'années constitue le socle de mon expertise en pédagogie et en création de contenus.</p>
+
+          <dl class="guitar-details">
+            <div>
+              <dt>Conception pédagogique</dt>
+              <dd>Élaboration de programmes de formation et de grilles d'évaluation adaptées aux différents cycles d'apprentissage.</dd>
+            </div>
+            <div>
+              <dt>Pédagogie différenciée</dt>
+              <dd>Ajustement constant des méthodes d'enseignement selon les profils, le rythme et les habiletés des apprenants.</dd>
+            </div>
+            <div>
+              <dt>Compétences créatives</dt>
+              <dd>Développement d'une expertise en arrangement, composition et structure narrative, aujourd'hui mise au service de la production de ressources technopédagogiques (vidéos, audio).</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
     </div>
-  </footer>
+  </section>
 
+  <!-- ============================== FORMATION (04) ============================== -->
+  <section class="section-tinted">
+    <div class="container">
+      <div class="formation-heading">
+        <span class="index">04</span>
+        <h2>Formation</h2>
+      </div>
 
-  <!-- ═══════════════════════════════════════
-       JAVASCRIPT
-  ═══════════════════════════════════════ -->
-  <script>
-    /* ── 1. Synchronisation photo / layout ──
-       Calcule la hauteur de la colonne tagline et le padding-top
-       du bloc expertise en fonction de la hauteur réelle de la photo.
-    ── */
-    function syncPhotoLayout() {
-      const photo     = document.querySelector('.hero-photo');
-      const textCol   = document.querySelector('.hero-text-col');
-      const expertise = document.getElementById('expertise-content');
-      const titles    = document.querySelector('.hero-titles');
+      <div class="terminal">
+        <div class="terminal-bar">
+          <span class="terminal-dot red"></span>
+          <span class="terminal-dot gold"></span>
+          <span class="terminal-dot gray"></span>
+          <span class="terminal-path">~/formation</span>
+        </div>
+        <div class="terminal-body">
+          <div>
+            <div class="diploma-line1"><span class="prompt">$</span><span class="title">Maîtrise en Sciences de l'Éducation</span></div>
+            <div class="diploma-line2"><span class="arrow">→</span> 2021 • Université de Montréal (Québec, Canada)</div>
+          </div>
+          <div>
+            <div class="diploma-line1"><span class="prompt">$</span><span class="title">Diplôme d'État d'enseignement de la musique en musiques actuelles</span></div>
+            <div class="diploma-line2"><span class="arrow">→</span> 2013 • Cefedem Rhône-Alpes (France)</div>
+          </div>
+          <div>
+            <div class="diploma-line1"><span class="prompt">$</span><span class="title">Licence en musique</span></div>
+            <div class="diploma-line2"><span class="arrow">→</span> 2005 • Université Lyon II (France)</div>
+          </div>
+          <div>
+            <div class="diploma-line1"><span class="prompt">$</span><span class="title">Diplôme d'Études Musicales en Jazz</span></div>
+            <div class="diploma-line2"><span class="arrow">→</span> 2003 • Conservatoire de Lyon (France)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      if (!photo || !textCol || !expertise) return;
+</main>
 
-      const photoH = photo.offsetHeight;
-      if (photoH === 0) return;
+<!-- ============================== PIED DE PAGE / CONTACT ============================== -->
+<footer id="contact" class="contact-footer">
+  <div class="container">
+    <div class="contact-top">
+      <div class="contact-text">
+        <p class="eyebrow" style="color: var(--primary);">Collaborer</p>
+        <h2>Pour un usage sobre et ciblé du numérique.</h2>
+        <p>Conseil stratégique, accompagnement individualisé ou conception de ressources technopédagogiques : échangeons sur vos enjeux.</p>
+      </div>
 
-      // La ligne rouge coupe la photo à ~65% de sa hauteur
-      const redLineAt = Math.round(photoH * 0.65);
+      <a href="mailto:" class="btn-contact">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+        Me contacter
+      </a>
+    </div>
 
-      // Hauteur de la colonne tagline = portion photo au-dessus de la ligne
-      textCol.style.minHeight = redLineAt + 'px';
+    <div class="contact-bottom">
+      <p>Conseiller technopédagogique — Enseignement supérieur</p>
+      <p class="copyright">© <span id="current-year"></span> — Conseil stratégique &amp; Technopédagogie</p>
+    </div>
+  </div>
+</footer>
 
-      // Centrage vertical de la tagline dans cette zone
-      const photoTop = 0; // hero-photo-col top = 0 dans hero-outer
-      const photoMid = photoTop + photoH / 2;
-      const colMid   = redLineAt / 2;
-      const offset   = photoMid - colMid;
-      textCol.style.paddingTop    = offset > 0 ? offset + 'px' : '0';
-      textCol.style.paddingBottom = '0';
+<script>
+  // --------------------------------------------------------------------------
+  // Bascule thème clair / sombre (remplace ThemeToggle.tsx)
+  // --------------------------------------------------------------------------
+  var themeToggleBtn = document.getElementById('theme-toggle');
+  themeToggleBtn.addEventListener('click', function () {
+    var isDark = document.documentElement.classList.contains('dark');
+    var next = !isDark;
+    document.documentElement.classList.toggle('dark', next);
+    try {
+      localStorage.setItem('theme', next ? 'dark' : 'light');
+    } catch (e) {}
+  });
 
-      // Espace sous la ligne rouge occupé par la fin de la photo
-      const photoOverflow = photoH - redLineAt;
+  // --------------------------------------------------------------------------
+  // Sections « Approfondir / Réduire » (remplace Expandable.tsx)
+  // --------------------------------------------------------------------------
+  document.querySelectorAll('.expandable').forEach(function (block) {
+    var toggle = block.querySelector('.expandable-toggle');
+    var label = block.querySelector('.expandable-label');
+    toggle.addEventListener('click', function () {
+      var isOpen = block.getAttribute('data-open') === 'true';
+      var next = !isOpen;
+      block.setAttribute('data-open', String(next));
+      toggle.setAttribute('aria-expanded', String(next));
+      label.textContent = next ? 'Réduire' : 'Approfondir';
+    });
+  });
 
-      // Hauteur des titres (Conseiller / Pédagogue / Artiste)
-      const titlesH = titles ? titles.offsetHeight : 0;
-
-      // Le bloc expertise commence après la fin de la photo
-      // = débordement photo + hauteur titres + espace respiration
-      const expertisePaddingTop = Math.max(photoOverflow - titlesH + 40, 40);
-      expertise.style.paddingTop = expertisePaddingTop + 'px';
-    }
-
-    const heroPhoto = document.querySelector('.hero-photo');
-    if (heroPhoto) {
-      if (heroPhoto.complete && heroPhoto.naturalHeight !== 0) {
-        syncPhotoLayout();
-      } else {
-        heroPhoto.addEventListener('load',  syncPhotoLayout);
-        heroPhoto.addEventListener('error', syncPhotoLayout);
-      }
-    }
-    syncPhotoLayout(); // fallback placeholder
-    window.addEventListener('resize', syncPhotoLayout);
-
-
-    /* ── 2. Navigation active au scroll (IntersectionObserver) ── */
-    (function () {
-      const links    = document.querySelectorAll('nav a[href^="#"]');
-      const sections = Array.from(links)
-        .map(a => document.querySelector(a.getAttribute('href')))
-        .filter(Boolean);
-
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            links.forEach(l => l.classList.remove('active'));
-            const active = document.querySelector('nav a[href="#' + entry.target.id + '"]');
-            if (active) active.classList.add('active');
-          }
-        });
-      }, { rootMargin: '-40% 0px -55% 0px' });
-
-      sections.forEach(s => observer.observe(s));
-    })();
-  </script>
+  // --------------------------------------------------------------------------
+  // Année courante dans le pied de page
+  // --------------------------------------------------------------------------
+  document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
 
 </body>
 </html>
