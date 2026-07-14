@@ -1,0 +1,104 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
+  --font-mono: var(--font-mono), ui-monospace, monospace;
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+}
+
+/* Light mode — soft warm cream paper + deep forest green + dark gold accent */
+:root {
+  color-scheme: light;
+  --background: #fdfbf7;
+  --foreground: #1b2e24;
+  --card: #ffffff;
+  --card-foreground: #1b2e24;
+  --popover: #ffffff;
+  --popover-foreground: #1b2e24;
+  --primary: #96702a;
+  --primary-foreground: #fdfbf7;
+  --secondary: #f0ede4;
+  --secondary-foreground: #1b2e24;
+  --muted: #f0ede4;
+  --muted-foreground: #5b6b60;
+  --accent: #efe9db;
+  --accent-foreground: #1b2e24;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: rgba(27, 46, 36, 0.12);
+  --input: rgba(27, 46, 36, 0.15);
+  --ring: #96702a;
+  --radius: 0.5rem;
+}
+
+/* Dark mode (default) — deep intellectual charcoal-navy + linen white + muted gold */
+.dark {
+  color-scheme: dark;
+  --background: #0e121c;
+  --foreground: #e2e8f0;
+  --card: #151a28;
+  --card-foreground: #e2e8f0;
+  --popover: #151a28;
+  --popover-foreground: #e2e8f0;
+  --primary: #d4af37;
+  --primary-foreground: #0e121c;
+  --secondary: #1b2233;
+  --secondary-foreground: #e2e8f0;
+  --muted: #1b2233;
+  --muted-foreground: #94a3b8;
+  --accent: #1b2233;
+  --accent-foreground: #e2e8f0;
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: rgba(226, 232, 240, 0.1);
+  --input: rgba(226, 232, 240, 0.15);
+  --ring: #d4af37;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Elegant highlight for ==...== emphasized passages */
+.editorial-highlight {
+  background: linear-gradient(
+    to bottom,
+    transparent 72%,
+    color-mix(in srgb, var(--primary) 30%, transparent) 72%,
+    color-mix(in srgb, var(--primary) 30%, transparent) 94%,
+    transparent 94%
+  );
+  padding: 0 0.05em;
+  color: inherit;
+}
