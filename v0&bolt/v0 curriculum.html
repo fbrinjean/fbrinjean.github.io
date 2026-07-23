@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[Votre nom] — Conseiller pédagogique universitaire</title>
+<meta name="description" content="Conseil pédagogique, technopédagogie et intégration raisonnée du numérique et de l’IA dans l’enseignement supérieur.">
+<meta name="theme-color" content="#f5f1e8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='37' fill='%231b2724'/%3E%3Cg transform='translate(90,90) scale(0.95) translate(-90,-90)' fill='%23f5f1e8'%3E%3Cpath d='M101.141 53H136.632C151.023 53 162.689 64.6662 162.689 79.0573V112.904H148.112V79.0573C148.112 78.7105 148.098 78.3662 148.072 78.0251L112.581 112.898C112.701 112.902 112.821 112.904 112.941 112.904H148.112V126.672H112.941C98.5504 126.672 86.5638 114.891 86.5638 100.5V66.7434H101.141V100.5C101.141 101.15 101.191 101.792 101.289 102.422L137.56 66.7816C137.255 66.7563 136.945 66.7434 136.632 66.7434H101.141V53Z'/%3E%3Cpath d='M65.2926 124.136L14 66.7372H34.6355L64.7495 100.436V66.7372H80.1365V118.47C80.1365 126.278 70.4953 129.958 65.2926 124.136Z'/%3E%3C/g%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300..700;1,300..700&family=Lora:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+  /* ===== Variables (reprises de globals.css) ===== */
+  :root {
+    color-scheme: light;
+    --background: #f5f1e8;
+    --foreground: #1b2724;
+    --card: #ebe5d9;
+    --primary: #b4472c;
+    --primary-foreground: #fffaf0;
+    --muted: #ded8cc;
+    --muted-foreground: #59635f;
+    --border: #c7c0b4;
+
+    --font-sans: 'Source Sans 3', sans-serif;
+    --font-serif: 'Lora', serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+
+    --container-max: 80rem;
+  }
+
+  /* ===== Reset minimal ===== */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4, p, ul { margin: 0; }
+  ul { padding: 0; list-style: none; }
+  a { color: inherit; }
+  strong { font-weight: 650; }
+  em { font-style: italic; }
+  mark {
+    background: color-mix(in srgb, var(--primary) 17%, transparent);
+    color: inherit;
+    padding-inline: .12em;
+  }
+  summary::-webkit-details-marker { display: none; }
+  ::selection { background: var(--primary); color: var(--primary-foreground); }
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition-duration: .01ms !important; }
+  }
+
+  /* ===== Conteneur générique ===== */
+  .container {
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .container { padding-inline: 2.5rem; }
+  }
+
+  /* ===== Listes riches (dans les "Plus") ===== */
+  .prose-list ul { display: flex; flex-direction: column; gap: .5rem; padding-left: 1.25rem; list-style: square; }
+  .prose-list ul ul { margin-top: .5rem; list-style: circle; }
+  .prose-list li { display: list-item; }
+
+  /* ===== En-tête ===== */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-bottom: 1px solid var(--border);
+    background: rgba(245, 241, 232, .95);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+  .site-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 1rem;
+  }
+  .logo {
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    font-weight: 600;
+    letter-spacing: -.01em;
+    text-decoration: none;
+  }
+  .main-nav {
+    display: none;
+    align-items: center;
+    gap: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: .15em;
+  }
+  @media (min-width: 768px) { .main-nav { display: flex; } }
+  .main-nav a { text-decoration: none; }
+  .main-nav a:hover { color: var(--primary); }
+  .btn-outline {
+    border: 1px solid var(--foreground);
+    padding: .5rem 1rem;
+    font-family: var(--font-mono);
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    text-decoration: none;
+    transition: background-color .15s ease, color .15s ease;
+    white-space: nowrap;
+  }
+  .btn-outline:hover { background: var(--foreground); color: var(--background); }
+
+  /* ===== Hero ===== */
+  .hero { padding: 4rem 0 6rem; }
+  @media (min-width: 768px) { .hero { padding: 6rem 0 8rem; } }
+  .hero-grid { display: grid; gap: 3rem; }
+  @media (min-width: 1024px) { .hero-grid { grid-template-columns: 1fr 18rem; align-items: end; } }
+  .hero-main { display: flex; flex-direction: column; gap: 2rem; }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: .15em;
+    color: var(--primary);
+  }
+  .hero-title {
+    max-width: 60rem;
+    font-family: var(--font-serif);
+    font-size: 3rem;
+    line-height: .98;
+    letter-spacing: -.02em;
+  }
+  @media (min-width: 768px) { .hero-title { font-size: 4.5rem; } }
+  @media (min-width: 1024px) { .hero-title { font-size: 6rem; } }
+  .hero-lead { max-width: 48rem; font-size: 1.25rem; line-height: 1.6; }
+  @media (min-width: 768px) { .hero-lead { font-size: 1.5rem; } }
+  .hero-sub { max-width: 42rem; line-height: 1.6; color: var(--muted-foreground); }
+  .hero-side { display: flex; flex-direction: column; gap: 1rem; }
+  .hero-photo {
+    aspect-ratio: 4 / 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    background: var(--muted);
+    font-family: var(--font-mono);
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: .15em;
+    color: var(--muted-foreground);
+    text-align: center;
+    padding: 1rem;
+  }
+  .hero-location {
+    border-left: 2px solid var(--primary);
+    padding-left: .75rem;
+    font-family: var(--font-mono);
+    font-size: .75rem;
+    line-height: 1.6;
+    color: var(--muted-foreground);
+  }
+
+  /* ===== Titres de section ===== */
+  .section-title {
+    margin-bottom: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .section-title { flex-direction: row; align-items: flex-end; justify-content: space-between; }
+  }
+  .section-title h2 {
+    font-family: var(--font-serif);
+    font-size: 2.25rem;
+    line-height: 1;
+    letter-spacing: -.02em;
+  }
+  @media (min-width: 768px) { .section-title h2 { font-size: 3rem; } }
+  .section-title .eyebrow-index {
+    font-family: var(--font-mono);
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: .15em;
+    color: var(--muted-foreground);
+    white-space: nowrap;
+  }
+
+  /* ===== Expertise ===== */
+  .expertise { background: var(--card); padding: 6rem 0; }
+  @media (min-width: 768px) { .expertise { padding: 8rem 0; } }
+  .expertise-grid { display: grid; gap: 3.5rem; }
+  @media (min-width: 1024px) { .expertise-grid { grid-template-columns: repeat(3, 1fr); } }
+  .expertise-card {
+    display: flex;
+    flex-direction: column;
+    border-top: 2px solid var(--foreground);
+    padding-top: 1.25rem;
+  }
+  .expertise-card .card-head {
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .expertise-card h3 {
+    max-width: 20rem;
+    font-family: var(--font-serif);
+    font-size: 1.875rem;
+    line-height: 1.2;
+  }
+  .expertise-card .num { font-family: var(--font-mono); font-size: .75rem; color: var(--muted-foreground); }
+  .expertise-card .body { display: flex; flex: 1; flex-direction: column; gap: 1rem; line-height: 1.6; }
+
+  .plus { margin-top: 1.5rem; border-top: 1px solid var(--border); padding-top: 1.25rem; }
+  .plus summary {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: .75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .15em;
+    color: var(--primary);
+  }
+  .plus summary::marker { content: ''; }
+  .plus .icon { font-size: 1.125rem; font-weight: 400; transition: transform .2s ease; }
+  .plus[open] .icon { transform: rotate(45deg); }
+  .plus .content {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--muted-foreground);
+  }
+
+  /* ===== Réalisations ===== */
+  .realisations { padding: 6rem 0; }
+  @media (min-width: 768px) { .realisations { padding: 8rem 0; } }
+  .subhead {
+    margin-bottom: 2rem;
+    font-family: var(--font-mono);
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: .15em;
+    color: var(--primary);
+  }
+  .projects-grid {
+    display: grid;
+    gap: 1px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--border);
+  }
+  @media (min-width: 1024px) { .projects-grid { grid-template-columns: repeat(3, 1fr); } }
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background: var(--background);
+    padding: 1.75rem;
+  }
+  @media (min-width: 768px) { .project-card { padding: 2.25rem; } }
+  .project-card .idx { font-family: var(--font-mono); font-size: .75rem; color: var(--muted-foreground); }
+  .project-card h4 { font-family: var(--font-serif); font-size: 1.875rem; line-height: 1.2; }
+  .project-card p { line-height: 1.6; color: var(--muted-foreground); }
+  .project-card .prose-list { font-size: .875rem; line-height: 1.6; color: var(--muted-foreground); }
+
+  .initiatives {
+    margin-top: 4rem;
+    display: grid;
+    gap: 2rem;
+    border-top: 1px solid var(--border);
+    padding-top: 2rem;
+  }
+  @media (min-width: 1024px) { .initiatives { grid-template-columns: .5fr 1.5fr; } }
+  .initiatives h3 {
+    font-family: var(--font-mono);
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: .15em;
+    color: var(--primary);
+  }
+  .initiatives ul { display: flex; flex-direction: column; gap: 1.25rem; font-size: 1.125rem; line-height: 1.6; }
+
+  /* ===== Curriculum (section sombre) ===== */
+  .curriculum { background: var(--foreground); color: var(--background); padding: 6rem 0; }
+  @media (min-width: 768px) { .curriculum { padding: 8rem 0; } }
+  .curriculum .section-title { border-bottom-color: rgba(245, 241, 232, .2); margin-bottom: 3rem; }
+  .curriculum .section-title h2 { color: var(--background); }
+  .curriculum .section-title .eyebrow-index { color: rgba(245, 241, 232, .6); }
+
+  .curriculum-grid { display: grid; gap: 4rem; }
+  @media (min-width: 1024px) { .curriculum-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  .timeline { display: flex; flex-direction: column; gap: 2.5rem; }
+  .timeline .period { margin-bottom: .75rem; font-family: var(--font-mono); font-size: .75rem; color: rgba(255, 250, 240, .6); }
+  .timeline h3 { font-family: var(--font-serif); font-size: 1.875rem; color: var(--background); }
+  .timeline .desc { margin-top: 1rem; line-height: 1.6; color: rgba(245, 241, 232, .7); }
+  .timeline .sub-list {
+    margin-top: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+    font-size: .875rem;
+    line-height: 1.6;
+    color: rgba(245, 241, 232, .7);
+  }
+  .timeline .sub-list strong { color: var(--background); }
+  .timeline .accent { border-left: 1px solid var(--primary); padding-left: 1.25rem; }
+  .timeline .accent h3 { font-size: 1.5rem; }
+  .timeline .accent .role { margin-top: .5rem; font-weight: 650; }
+  .timeline .accent .desc { margin-top: .5rem; }
+
+  .formation-label {
+    margin-bottom: 1.25rem;
+    font-family: var(--font-mono);
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: .15em;
+    color: rgba(255, 250, 240, .6);
+  }
+  .terminal {
+    overflow: hidden;
+    border: 1px solid rgba(245, 241, 232, .2);
+    background: rgba(245, 241, 232, .05);
+    font-family: var(--font-mono);
+    font-size: .875rem;
+  }
+  .terminal-bar { display: flex; gap: .5rem; border-bottom: 1px solid rgba(245, 241, 232, .2); padding: .75rem 1.25rem; }
+  .terminal-dot { width: .5rem; height: .5rem; border-radius: 50%; background: var(--primary); }
+  .terminal-dot.two { background: rgba(245, 241, 232, .4); }
+  .terminal-dot.three { background: rgba(245, 241, 232, .2); }
+  .terminal-body { display: flex; flex-direction: column; gap: 2rem; padding: 1.5rem; }
+  @media (min-width: 768px) { .terminal-body { padding: 2rem; } }
+  .terminal-prompt, .terminal-result { color: rgba(255, 250, 240, .6); }
+  .degree { display: grid; gap: .5rem; }
+  @media (min-width: 768px) { .degree { grid-template-columns: 3rem 1fr; } }
+  .degree .year { color: rgba(255, 250, 240, .6); }
+  .degree h4 { font-family: var(--font-sans); font-size: 1.125rem; font-weight: 600; }
+  .degree .place { margin-top: .25rem; color: rgba(245, 241, 232, .6); }
+
+  /* ===== Contact ===== */
+  .contact { background: var(--primary); color: var(--primary-foreground); padding: 5rem 0; }
+  .contact .container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+  @media (min-width: 1024px) {
+    .contact .container { flex-direction: row; align-items: flex-end; justify-content: space-between; }
+  }
+  .contact-text { display: flex; max-width: 48rem; flex-direction: column; gap: 1.25rem; }
+  .contact-eyebrow { font-family: var(--font-mono); font-size: .75rem; text-transform: uppercase; letter-spacing: .15em; }
+  .contact h2 { font-family: var(--font-serif); font-size: 3rem; line-height: 1; letter-spacing: -.02em; }
+  @media (min-width: 768px) { .contact h2 { font-size: 4.5rem; } }
+  .contact-link {
+    width: -moz-fit-content;
+    width: fit-content;
+    border: 1px solid var(--primary-foreground);
+    padding: 1rem 1.5rem;
+    font-family: var(--font-mono);
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    text-decoration: none;
+    transition: background-color .15s ease, color .15s ease;
+  }
+  .contact-link:hover { background: var(--primary-foreground); color: var(--primary); }
+</style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="#accueil" class="logo">[Votre nom]</a>
+      <nav class="main-nav" aria-label="Navigation principale">
+        <a href="#expertise">Expertise</a>
+        <a href="#realisations">Réalisations</a>
+        <a href="#parcours">Parcours</a>
+      </nav>
+      <a href="#contact" class="btn-outline">Échanger</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== Hero ===== -->
+    <section id="accueil" class="hero">
+      <div class="container hero-grid">
+        <div class="hero-main">
+          <p class="eyebrow">Conseil pédagogique universitaire · Technopédagogie</p>
+          <h1 class="hero-title text-balance">Transformer l’enseignement avec discernement.</h1>
+          <p class="hero-lead text-pretty">Face à l’omniprésence de l’IA et à la transition numérique de l’enseignement supérieur, ma mission est de guider les institutions et le corps enseignant vers une adoption réfléchie des technologies et une adaptation des méthodes d’enseignement, pour à la fois <strong>répondre aux enjeux modernes et préserver les compétences cognitives essentielles</strong>.</p>
+          <p class="hero-sub">Un constant travail de veille et d’autoformation sous-tend des <strong style="color:var(--foreground)">actions polyvalentes</strong> allant de décisions stratégiques au développement de ressources pédagogiques et porté par des accompagnements individualisés auprès du corps enseignant.</p>
+        </div>
+        <div class="hero-side">
+          <div class="hero-photo">[Votre photo]</div>
+          <p class="hero-location">Montréal, Québec<br>Disponible pour collaborer</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Expertise ===== -->
+    <section id="expertise" class="expertise">
+      <div class="container">
+        <div class="section-title">
+          <h2>Expertise et approche</h2>
+          <p class="eyebrow-index">01 / Approche</p>
+        </div>
+
+        <div class="expertise-grid">
+
+          <article class="expertise-card">
+            <div class="card-head">
+              <h3 class="text-balance">Pédagogie de l’accompagnement</h3>
+              <span class="num">01</span>
+            </div>
+            <div class="body text-pretty">
+              <p>Qu’il s’agisse d’un professeur sceptique ou d’un décanat se heurtant aux enjeux modernes, je m’efforce de <strong>cibler les besoins et les habiletés</strong> de mes interlocuteurs pour produire des ajustements réalistes et fructueux.</p>
+            </div>
+            <details class="plus">
+              <summary>Plus <span class="icon" aria-hidden="true">+</span></summary>
+              <div class="content text-pretty">
+                <p>Enseigner à l’Université est complexe : temps et énergie sont accaparées par de multiples tâches - charge d’enseignement, veille, demande de budgets, recherche, etc. - dans un milieu compétitif qui exige l’excellence.</p>
+                <p>À propos de la pédagogie, tous n’ont pas la même aisance, le même recul, la même faculté d’identifier leurs angles morts. Ceci est tout aussi vrai au regard du virage numérique qu’a vécu l’enseignement supérieur et qui parfois démultiplie les enjeux.</p>
+                <p><mark>Tous aussi n’ont pas la même prédisposition à accepter une aide extérieure</mark>. Cette aide extérieure n’est reçue que si un rapport de confiance s’est bâti. Celle-ci se construira par la légitimité de l’analyse pédagogique et des recommandations mais aussi par une qualité d’écoute et d’adaptation du conseiller.</p>
+                <p>C’est pourquoi <mark>il est nécessaire de s’adapter à chaque personne</mark> : bien comprendre sa requête, acquiescer du temps et des efforts qu’elle est prête à fournir, afin de proposer des ajustements, mineurs ou majeurs selon le contexte, mais toujours réalistes.</p>
+              </div>
+            </details>
+          </article>
+
+          <article class="expertise-card">
+            <div class="card-head">
+              <h3 class="text-balance">Expertise technologique <em>et</em> discernement</h3>
+              <span class="num">02</span>
+            </div>
+            <div class="body text-pretty">
+              <p>Je dispose d’une <strong>expertise techniques avancées</strong> : production multimédia (vidéos, infographies, musique) et de ressources pédagogiques multiples, programmation assistée par IA, soutien technique pour une plateforme institutionnelle.</p>
+              <p>Je m’oppose pourtant au solutionnisme qui, parfois, avance masqué, et je soutiens l’intégration d’outils technologiques seulement pour leur valeur ajoutée. <strong>Un usage sobre et ciblé du numérique</strong>, qui garantit la préservation de compétences humaines fondamentales, telles la lecture, l’analyse ou la capacité d’attention.</p>
+              <p>J’amène le corps enseignant à penser l’<strong>IA générative</strong> sous l’angle spécifique de leur discipline et de leur pratique enseignante pour que chacun développe son propre <strong>positionnement</strong> critique et, éventuellement, une intégration raisonnée.</p>
+            </div>
+            <details class="plus">
+              <summary>Plus <span class="icon" aria-hidden="true">+</span></summary>
+              <div class="content text-pretty">
+                <p>Tout objet technologique nous renforce quelque part et nous affaiblit ailleurs. Il convient alors d’être prudent et mesuré à une époque d’effervescence technologique où il peut être tellement tentant de déléguer à la dernière innovation le soin de nous apporter une solution.</p>
+                <p>Je suis capable d’accompagner un enseignant dans la production d’une vidéo - de la scénarisation jusqu’à l’intégration dans l’environnement numérique d’apprentissage, en passant par le tournage et même, qui sait ?, par la composition de sa musique. Je peux développer un outil complètement original pour répondre à un besoin didactique particulier (génération d’étude de cas + environnement pour le visualiser avec quiz intégré, outil de présentation de l’enseignement comodal avec autodiagnostic et recommandations personnalisées). Je peux collaborer avec des auteurs de jeux pour créer des jeux de cartes et ludifier un cours qui a généralement mauvaise presse chez les étudiants.</p>
+                <p><mark><strong>Mais</strong> de telles réalisations, aussi brillantes soient-elles, ne sont aucunement des prérequis pour le succès d’une collaboration avec un enseignant.</mark> D’une part car ce ne sont pas forcément les attentes de notre collaborateur, mais d’autre part car la solution à ses enjeux est peut-être ailleurs, sous une forme plus pragmatique et accessible.</p>
+                <p>Une activité de lecture bien planifiée sera peut-être plus pertinente - et moins coûteuse en temps et en énergie - qu’une vidéo, tout en accompagnant les étudiants à développer leur compétence de lecture de textes disciplinaires.</p>
+                <p>L’identification de mécanismes vertueux pour encadrer une activité collaborative sera bien plus pertinente que l’ajout d’un outil numérique censé favoriser les interactions, en responsabilisant les acteurs et en rendant plus équitable l’évaluation de ces travaux.</p>
+                <p><mark>Certains outils technologiques sont puissants et doivent être utilisés à bon escient. Mais ils ne sont pas la clef de la préservation de développements cognitifs essentiels (lecture, synthèse, communication) ni de la qualité du lien entre l’enseignant et sa classe</mark>. Éléments prédominants pour garantir un apprentissage de qualité.</p>
+              </div>
+            </details>
+          </article>
+
+          <article class="expertise-card">
+            <div class="card-head">
+              <h3 class="text-balance">Évaluation &amp; intégrité académique</h3>
+              <span class="num">03</span>
+            </div>
+            <div class="body text-pretty">
+              <p>J’accompagne plusieurs personnes dans la refonte de leurs pratiques d’évaluation face à l’intelligence artificielle. Le public et les habitudes changent, et ce bond technologique provoque d’autres défis qui rendent cruciales des réflexions profondes sur l’évaluation. Je participe ainsi aux efforts d’intégration d’outils de sécurisation des examens, mais j’outille aussi pédagogiquement le corps enseignant qui prend conscience des nouveaux angles morts.</p>
+            </div>
+            <details class="plus">
+              <summary>Plus <span class="icon" aria-hidden="true">+</span></summary>
+              <div class="content text-pretty">
+                <p>Nous faisons face encore aujourd’hui aux conséquences de la crise du COVID. La situation d’urgence a permis l’émergence d’autres approches d’enseignement qui ont créé alors d’autres attentes du public étudiant. Un contexte et des attentes changeantes qui imposent d’adapter minimalement ses méthodes d’enseignement et d’évaluation. La démocratisation de l’intelligence artificielle générative n’a fait qu’accentuer les enjeux, rendant certaines approches non plus seulement démodées mais désormais obsolètes.</p>
+                <p>Il est ainsi nécessaire de considérer des solutions technologiques de sécurisation mais aussi un retour possible, dans certain cas, à un retour des approches analogiques ou semblables (papier-crayon ou ordinateur verrouillé en salle de classe sous surveillance).</p>
+                <p><mark>Il faut oser scruter et arpenter ce territoire sans carte qui s’impose à nous, sans pour autant s’interdire des mesures de bon sens qui, à ce jour et dans certaines circonstances, sont seules capables de préserver l’intégrité des examens et la valeur des diplômes.</mark></p>
+              </div>
+            </details>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Réalisations ===== -->
+    <section id="realisations" class="realisations">
+      <div class="container">
+        <div class="section-title">
+          <h2>Réalisations récentes</h2>
+          <p class="eyebrow-index">02 / Impact</p>
+        </div>
+
+        <h3 class="subhead">Conseil stratégique</h3>
+        <div class="projects-grid">
+
+          <article class="project-card">
+            <span class="idx">01</span>
+            <h4>Hybridation de programmes</h4>
+            <p>Une <strong>quarantaine de professeurs accompagnés</strong> collectivement, plus d’une <strong>quinzaine individuellement</strong>, en partenariat étroit avec le <strong>décanat</strong> de la faculté des Sciences de l’Éducation.</p>
+            <div class="prose-list">
+              <ul>
+                <li>Formations (en présentiel et sous forme de vidéo)</li>
+                <li>Productions de ressources pour encadrer la transition
+                  <ul>
+                    <li>Gabarits de planification</li>
+                    <li>Activités et ressources originales par programmation avec IA</li>
+                    <li>Encadrement des travaux collaboratifs (charte d’équipe, outils d’autoévaluation)</li>
+                    <li>Outils d’évaluation des séances en ligne</li>
+                    <li>Documentation sur des outils technologiques : Wooclap, Perusall</li>
+                  </ul>
+                </li>
+                <li>Accompagnements individualisés</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <span class="idx">02</span>
+            <h4>Validation du comodal</h4>
+            <p>Appui à la Faculté de Médecine Vétérinaire sur l’organisation de l’enseignement comodal multi-campus afin de répondre aux exigences réglementaires et aux critères d’accréditation en palliant le nombre limité d’experts enseignants.</p>
+          </article>
+
+          <article class="project-card">
+            <span class="idx">03</span>
+            <h4>Rationalisation de l’enseignement à distance</h4>
+            <p>Conseil auprès d’un organisme externe (RMPQ) pour structurer l’argumentaire scientifique et pédagogique encadrant les limites de la formation à distance pour les apprentissages pratiques complexes en massothérapie.</p>
+          </article>
+
+        </div>
+
+        <div class="initiatives">
+          <h3>Initiatives propres</h3>
+          <ul>
+            <li>Conception d’une <strong>formation autoportante en HTML sur l’enseignement comodal</strong> incluant un outil diagnostic pour mieux appréhender une transition vers cette modalité.</li>
+            <li>Expérimentation du facteur de pondération individuel</li>
+            <li>Conception et animation de parcours de formation sur l’IA générative (ChatGPT) ou sur la revalorisation des activités de lecture universitaire pour contrer les défis modernes liés à la lecture.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Curriculum ===== -->
+    <section id="parcours" class="curriculum">
+      <div class="container">
+        <div class="section-title">
+          <h2>Curriculum</h2>
+          <p class="eyebrow-index">03 / Parcours</p>
+        </div>
+
+        <div class="curriculum-grid">
+
+          <div class="timeline">
+            <article>
+              <p class="period">2020 — aujourd’hui</p>
+              <h3>Conseiller technopédagogique (2020)</h3>
+              <p class="desc">Au sein du Centre de Pédagogie Universitaire, j’accompagne les facultés et le corps enseignant dans la transformation de leurs dispositifs de formation et l’intégration raisonnée du numérique.</p>
+            </article>
+
+            <article>
+              <p class="period">2005 — 2018</p>
+              <h3>Professeur de guitare (2005-2018)</h3>
+              <p class="desc">Enseignement individuel et collectif de la musique auprès de publics hétérogènes. Ce parcours d’une douzaine d’années constitue le socle de mon expertise en pédagogie et en création de contenus.</p>
+              <ul class="sub-list">
+                <li><strong>Conception pédagogique :</strong> Élaboration de programmes de formation et de grilles d’évaluation adaptées aux différents cycles d’apprentissage.</li>
+                <li><strong>Pédagogie différenciée :</strong> Ajustement constant des méthodes d’enseignement selon les profils, le rythme et les habiletés des apprenants.</li>
+                <li><strong>Compétences créatives :</strong> Développement d’une expertise en arrangement, composition et structure narrative, aujourd’hui mise au service de la production de ressources technopédagogiques (vidéos, audio).</li>
+              </ul>
+            </article>
+
+            <article class="accent">
+              <h3>Éducateur jeunes enfants (2013)</h3>
+              <p class="role">SREPE inc.</p>
+              <p class="desc">Éducateur remplaçant dans plusieurs CPE de Montréal et sa région.</p>
+            </article>
+          </div>
+
+          <div>
+            <p class="formation-label">Formation · CLI</p>
+            <div class="terminal">
+              <div class="terminal-bar" aria-hidden="true">
+                <span class="terminal-dot"></span>
+                <span class="terminal-dot two"></span>
+                <span class="terminal-dot three"></span>
+              </div>
+              <div class="terminal-body">
+                <p class="terminal-prompt">$ parcours --formation</p>
+
+                <div class="degree">
+                  <span class="year">2021</span>
+                  <div>
+                    <h4>Maîtrise en Sciences de l’Éducation</h4>
+                    <p class="place">2021 • Université de Montréal (Québec, Canada)</p>
+                  </div>
+                </div>
+
+                <div class="degree">
+                  <span class="year">2013</span>
+                  <div>
+                    <h4>Diplôme d’État d’enseignement de la musique en musiques actuelles</h4>
+                    <p class="place">2013 • Cefedem Rhône-Alpes (France)</p>
+                  </div>
+                </div>
+
+                <div class="degree">
+                  <span class="year">2005</span>
+                  <div>
+                    <h4>Licence en musique</h4>
+                    <p class="place">2005 • Université Lyon II (France)</p>
+                  </div>
+                </div>
+
+                <div class="degree">
+                  <span class="year">2003</span>
+                  <div>
+                    <h4>Diplôme d’Études Musicales en Jazz</h4>
+                    <p class="place">2003 • Conservatoire de Lyon (France)</p>
+                  </div>
+                </div>
+
+                <p class="terminal-result">✓ 4 diplômes trouvés</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Contact ===== -->
+  <footer id="contact" class="contact">
+    <div class="container">
+      <div class="contact-text">
+        <p class="contact-eyebrow">Pour poursuivre la conversation</p>
+        <h2 class="text-balance">Parlons pédagogie, avant de parler outils.</h2>
+      </div>
+      <a href="mailto:votre-courriel@exemple.ca" class="contact-link">[Votre courriel]</a>
+    </div>
+  </footer>
+
+</body>
+</html>
