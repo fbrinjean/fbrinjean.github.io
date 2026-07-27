@@ -5,19 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Conseiller Technopédagogique — Portail Professionnel</title>
 
-<!-- Anti-flash : applique le thème stocké AVANT le premier rendu -->
-<script>
-  (function () {
-    try {
-      var stored = localStorage.getItem("portfolio-theme");
-      var theme = stored === "light" || stored === "dark" ? stored : "light";
-      document.documentElement.classList.add(theme);
-    } catch (e) {
-      document.documentElement.classList.add("light");
-    }
-  })();
-</script>
-
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
@@ -27,20 +14,17 @@
 
 <style>
   /* ============================================================
-     VARIABLES DE THÈME
-     Clair : :root   |  Sombre : .dark (thème par défaut)
+     VARIABLES — thème unique clair (v0 curriculum.html)
      ============================================================ */
   :root {
-    --radius: 0.5rem;
-
     --background: #f5f1e8;
     --foreground: #1b2724;
 
     --card: #ebe5d9;
     --card-foreground: #1b2724;
 
-    --primary: #1b2724;
-    --primary-foreground: #f5f1e8;
+    --primary: #b4472c;
+    --primary-foreground: #fffaf0;
 
     --muted: #ded8cc;
     --muted-foreground: #59635f;
@@ -48,38 +32,11 @@
     --accent: #e4dfd5;
 
     --border: #c7c0b4;
-    --input: #c7c0b4;
-    --ring: #1b2724;
-
-    --gold: #9a6b1f;
-    --gold-foreground: #f5f1e8;
+    --ring: #b4472c;
 
     --font-sans: 'Source Sans 3', system-ui, sans-serif;
     --font-serif: 'Lora', Georgia, 'Times New Roman', serif;
     --font-mono: 'IBM Plex Mono', 'Fira Code', monospace;
-  }
-
-  html.dark {
-    --background: #161e1b;
-    --foreground: #ece8de;
-
-    --card: #1d2824;
-    --card-foreground: #ece8de;
-
-    --primary: #ece8de;
-    --primary-foreground: #161e1b;
-
-    --muted: #252f2b;
-    --muted-foreground: #8a9490;
-
-    --accent: #202c28;
-
-    --border: #2e3d38;
-    --input: #252f2b;
-    --ring: #c8a84b;
-
-    --gold: #c8a84b;
-    --gold-foreground: #161e1b;
   }
 
   /* ============================================================
@@ -137,7 +94,7 @@
     flex-shrink: 0;
     vertical-align: middle;
   }
-  .icon-3\.5 { width: 0.875rem; height: 0.875rem; }
+  .icon-sm { width: 0.875rem; height: 0.875rem; }
   .icon-4   { width: 1rem;      height: 1rem; }
   .icon-5   { width: 1.25rem;   height: 1.25rem; }
 
@@ -156,9 +113,9 @@
   .eyebrow {
     font-family: var(--font-mono);
     font-size: 0.75rem;
-    letter-spacing: 0.25em;
     text-transform: uppercase;
-    color: var(--gold);
+    letter-spacing: 0.15em;
+    color: var(--primary);
   }
 
   .hr {
@@ -178,15 +135,6 @@
     );
     padding: 0 0.05em;
     color: inherit;
-  }
-  html.dark mark.highlight {
-    background: linear-gradient(
-      to bottom,
-      transparent 70%,
-      rgba(200, 168, 75, 0.25) 70%,
-      rgba(200, 168, 75, 0.25) 93%,
-      transparent 93%
-    );
   }
 
   /* ── Apparition au défilement (repris de v0-bolt claude.html) ── */
@@ -212,16 +160,16 @@
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border);
   }
-  html.dark .site-header {
-    background: rgba(22, 30, 27, 0.95);
-  }
   .site-header .container {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    justify-content: space-between;
     gap: 2rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
+  }
+  .site-header .btn-outline {
+    justify-self: end;
   }
   .scroll-progress {
     position: absolute;
@@ -229,15 +177,17 @@
     bottom: -1px;
     height: 2px;
     width: 0%;
-    background: var(--gold);
+    background: var(--primary);
     transition: width 0.1s linear;
   }
   .brand {
     font-family: var(--font-serif);
-    font-size: 1rem;
+    font-size: 1.125rem;
     font-weight: 600;
-    letter-spacing: -0.025em;
+    letter-spacing: -0.01em;
     white-space: nowrap;
+    text-decoration: none;
+    color: var(--foreground);
   }
   .main-nav {
     display: none;
@@ -253,27 +203,26 @@
     transition: color 0.2s ease;
   }
   .main-nav a:hover {
-    color: var(--gold);
+    color: var(--primary);
   }
   .main-nav a.is-active {
-    color: var(--gold);
+    color: var(--primary);
   }
-  .theme-toggle {
-    flex-shrink: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.25rem;
-    height: 2.25rem;
-    border-radius: 0.375rem;
-    background: transparent;
-    border: none;
-    color: var(--muted-foreground);
-    transition: color 0.2s ease, background-color 0.2s ease;
-  }
-  .theme-toggle:hover {
+  .btn-outline {
+    border: 1px solid var(--foreground);
+    padding: 0.5rem 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-decoration: none;
     color: var(--foreground);
-    background: var(--accent);
+    white-space: nowrap;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  .btn-outline:hover {
+    background: var(--foreground);
+    color: var(--background);
   }
 
   @media (min-width: 768px) {
@@ -283,28 +232,6 @@
   /* ============================================================
      BOUTONS / BADGES
      ============================================================ */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    height: 2rem;
-    padding: 0 0.75rem;
-    border-radius: 0.375rem;
-    font-size: 0.75rem;
-    font-family: var(--font-mono);
-    letter-spacing: 0.05em;
-    font-weight: 500;
-    white-space: nowrap;
-    border: 1px solid rgba(154, 107, 31, 0.5);
-    background: transparent;
-    color: var(--gold);
-    transition: all 0.2s ease;
-  }
-  .btn:hover {
-    background: rgba(154, 107, 31, 0.1);
-    border-color: var(--gold);
-  }
-
   .badge {
     display: inline-flex;
     align-items: center;
@@ -319,9 +246,9 @@
     color: var(--muted-foreground);
   }
   .badge.badge-gold {
-    border-color: rgba(154, 107, 31, 0.4);
-    color: var(--gold);
-    background: rgba(154, 107, 31, 0.08);
+    border-color: rgba(180, 71, 44, 0.35);
+    color: var(--primary);
+    background: rgba(180, 71, 44, 0.07);
   }
 
   .v-divider {
@@ -336,59 +263,109 @@
   }
 
   /* ============================================================
-     HERO
+     HERO — progression typographique (entete.html Option 1 + v0)
      ============================================================ */
   .hero {
     padding-top: 4rem;
-    padding-bottom: 5rem;
+    padding-bottom: 6rem;
   }
   @media (min-width: 768px) {
-    .hero { padding-top: 6rem; padding-bottom: 7rem; }
+    .hero { padding-top: 6rem; padding-bottom: 8rem; }
   }
-  .hero .eyebrow { margin-bottom: 2rem; }
-  .hero h1 {
-    font-family: var(--font-serif);
-    font-weight: 500;
-    font-size: 1.75rem;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-    max-width: 58rem;
-    text-wrap: balance;
-    margin-bottom: 2.5rem;
-  }
-  @media (min-width: 768px) {
-    .hero h1 { font-size: 2.5rem; }
-  }
-  @media (min-width: 1024px) {
-    .hero h1 { font-size: 3.25rem; }
-  }
+
   .hero-grid {
     display: grid;
-    gap: 2.5rem;
-  }
-  @media (min-width: 768px) {
-    .hero-grid { grid-template-columns: 1fr auto; align-items: start; }
-  }
-  .hero-photo {
-    flex-shrink: 0;
-    aspect-ratio: 3 / 4;
-    width: clamp(5.5rem, 26vw, 9rem);
-    margin: 0 auto;
-    border-radius: 0.5rem;
-    border: 1px dashed var(--border);
-    background: var(--muted);
-  }
-  @media (min-width: 768px) {
-    .hero-photo { width: 11rem; margin: 0; }
+    gap: 3rem;
   }
   @media (min-width: 1024px) {
-    .hero-photo { width: 13rem; }
+    .hero-grid { grid-template-columns: 1fr 18rem; align-items: start; }
   }
+
+  .hero-main {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+
+  /* Eyebrow mono */
+  .hero-main .eyebrow { margin-bottom: 0; }
+
+  /* Texte d'introduction — grisé, normal */
+  .hero-intro {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: var(--muted-foreground);
+    max-width: 48rem;
+    text-wrap: pretty;
+  }
+
+  /* Climax — serif avec bordure gauche terracotta */
+  .hero-climax {
+    font-family: var(--font-serif);
+    font-size: clamp(1.75rem, 3.5vw, 3rem);
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    color: var(--foreground);
+    border-left: 3px solid var(--primary);
+    padding-left: 1.5rem;
+    max-width: 52rem;
+    text-wrap: balance;
+  }
+  .hero-climax strong {
+    font-weight: 700;
+    color: var(--primary);
+  }
+
+  /* Sous-texte */
+  .hero-sub {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--muted-foreground);
+    max-width: 44rem;
+    text-wrap: pretty;
+  }
+
+  /* Badges / CV */
   .hero-badges {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 0.75rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  /* Colonne photo — style v0 */
+  .hero-side {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .hero-photo {
+    aspect-ratio: 4 / 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    background: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--muted-foreground);
+    text-align: center;
+    padding: 1rem;
+    width: 100%;
+  }
+
+  .hero-location {
+    border-left: 2px solid var(--primary);
+    padding-left: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    line-height: 1.6;
+    color: var(--muted-foreground);
   }
 
   /* ============================================================
@@ -414,7 +391,7 @@
     font-size: 0.75rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--primary);
     margin-bottom: 0.4rem;
   }
   .expertise-title {
@@ -605,8 +582,8 @@
     font-family: var(--font-serif);
     font-size: 10rem;
     line-height: 1;
-    color: var(--gold);
-    opacity: 0.12;
+    color: var(--primary);
+    opacity: 0.1;
     pointer-events: none;
     user-select: none;
   }
@@ -663,8 +640,8 @@
     margin-bottom: 3.5rem;
   }
   .stat-card {
-    border: 1px solid rgba(154, 107, 31, 0.3);
-    background: rgba(154, 107, 31, 0.05);
+    border: 1px solid rgba(180, 71, 44, 0.25);
+    background: rgba(180, 71, 44, 0.05);
     border-radius: 0.375rem;
     padding: 1rem 1.25rem;
     display: flex;
@@ -675,7 +652,7 @@
     font-family: var(--font-serif);
     font-size: 1.875rem;
     font-weight: 600;
-    color: var(--gold);
+    color: var(--primary);
   }
   .stat-card > span {
     font-family: var(--font-mono);
@@ -704,7 +681,7 @@
     gap: 0.75rem;
   }
   .livrables-list .icon {
-    color: var(--gold);
+    color: var(--primary);
     margin-top: 0.125rem;
   }
   .livrables-list span {
@@ -734,7 +711,7 @@
     font-size: 0.75rem;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    color: rgba(154, 107, 31, 0.7);
+    color: rgba(180, 71, 44, 0.7);
   }
   .engagement h3 {
     font-family: var(--font-serif);
@@ -767,7 +744,7 @@
     width: 0.3rem;
     height: 0.3rem;
     border-radius: 9999px;
-    background: var(--gold);
+    background: var(--primary);
   }
 
   /* ============================================================
@@ -822,7 +799,7 @@
     width: 0.625rem;
     height: 0.625rem;
     border-radius: 9999px;
-    background: var(--gold);
+    background: var(--primary);
     box-shadow: 0 0 0 4px var(--background);
   }
   .timeline-dot.is-muted { background: var(--muted-foreground); }
@@ -831,7 +808,7 @@
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.24em;
-    color: var(--gold);
+    color: var(--primary);
   }
   .timeline-item .date.is-muted { color: var(--muted-foreground); }
   .timeline-item h3 {
@@ -886,17 +863,17 @@
     padding: 0.75rem 1rem;
   }
   .terminal-dot { width: 0.5rem; height: 0.5rem; border-radius: 9999px; }
-  .terminal-dot.one { background: var(--gold); }
+  .terminal-dot.one { background: var(--primary); }
   .terminal-dot.two { background: rgba(27, 39, 36, 0.4); }
   .terminal-dot.three { background: rgba(27, 39, 36, 0.2); }
   .terminal-path { margin-left: 0.75rem; font-size: 0.75rem; color: var(--muted-foreground); }
   .terminal-body { display: flex; flex-direction: column; gap: 1.5rem; padding: 1.5rem; }
   .terminal-prompt, .terminal-result { color: var(--muted-foreground); }
   .diploma-line1 { display: flex; align-items: flex-start; gap: 0.5rem; }
-  .diploma-line1 .prompt { color: var(--gold); user-select: none; }
+  .diploma-line1 .prompt { color: var(--primary); user-select: none; }
   .diploma-line1 .title { color: var(--card-foreground); }
   .diploma-line2 { margin-top: 0.25rem; padding-left: 1rem; font-size: 0.75rem; color: var(--muted-foreground); }
-  .diploma-line2 .arrow { color: var(--gold); }
+  .diploma-line2 .arrow { color: var(--primary); }
 
   @media (min-width: 768px) {
     .terminal-body { padding: 2rem; }
@@ -979,19 +956,15 @@
      ============================================================ -->
 <header class="site-header">
   <div class="container">
-    <span class="brand">Conseiller Technopédagogique</span>
+    <a href="#philosophie" class="brand">Conseiller Technopédagogique</a>
 
-    <nav class="main-nav">
-      <a href="#philosophie">Philosophie</a>
+    <nav class="main-nav" aria-label="Navigation principale">
+      <a href="#expertise">Expertise</a>
       <a href="#realisations">Réalisations</a>
       <a href="#parcours">Parcours</a>
-      <a href="#contact">Contact</a>
     </nav>
 
-    <button class="theme-toggle" id="theme-toggle" aria-label="Basculer le thème" type="button">
-      <svg id="icon-sun" class="icon icon-4" style="display:none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></svg>
-      <svg id="icon-moon" class="icon icon-4" style="display:none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" /></svg>
-    </button>
+    <a href="#contact" class="btn-outline">Échanger</a>
   </div>
   <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
 </header>
@@ -999,20 +972,25 @@
 <main>
 
   <!-- ============================================================
-       HERO / MANIFESTE
+       HERO / MANIFESTE — progression typographique (entete.html Option 1)
        ============================================================ -->
-  <section id="philosophie" class="hero container">
-    <p class="eyebrow">Conseil stratégique &amp; Technopédagogie</p>
+  <section id="philosophie" class="hero">
+    <div class="container hero-grid">
 
-    <div class="hero-grid">
-      <div>
-        <h1>
-          Face à l'omniprésence de l'IA et à la transition numérique de
-          l'enseignement supérieur, ma mission est de guider les institutions et
-          le corps enseignant vers une adoption réfléchie des technologies et une
-          adaptation des méthodes d'enseignement, pour à la fois
-          <strong>répondre aux enjeux modernes et préserver les compétences cognitives essentielles</strong>.
+      <div class="hero-main">
+        <p class="eyebrow">Conseil pédagogique universitaire · Technopédagogie</p>
+
+        <p class="hero-intro">
+          Face à l'omniprésence de l'IA et à la transition numérique de l'enseignement supérieur, j'accompagne les institutions et le corps enseignant dans l'évolution de leurs méthodes et l'adoption réfléchie des technologies&hellip;
+        </p>
+
+        <h1 class="hero-climax">
+          &hellip;pour à la fois <strong>répondre aux enjeux modernes</strong> et <strong>préserver les compétences cognitives essentielles</strong>.
         </h1>
+
+        <p class="hero-sub">
+          Un constant travail de veille et d'autoformation sous-tend des <strong>actions polyvalentes</strong> allant de décisions stratégiques au développement de ressources pédagogiques, porté par des accompagnements individualisés auprès du corps enseignant.
+        </p>
 
         <div class="hero-badges">
           <span class="badge badge-gold">+12 ans d'enseignement</span>
@@ -1028,27 +1006,26 @@
           <span class="v-divider"></span>
 
           <!-- Remplacez /cv.pdf par le chemin ou l'URL de votre CV -->
-          <a href="/cv.pdf" download aria-label="Télécharger le curriculum vitæ">
-            <button class="btn" type="button">
-              <svg class="icon icon-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg>
-              Télécharger le CV
-            </button>
+          <a href="/cv.pdf" download aria-label="Télécharger le curriculum vitæ" class="btn-outline">
+            Télécharger le CV
           </a>
         </div>
       </div>
 
-      <!-- Emplacement réservé pour la photo de profil : élément normal du flux,
-           il défile avec le texte (aucun position sticky/fixed) jusqu'à la
-           section suivante. Remplacez le div par une balise <img> quand la
-           photo sera prête. -->
-      <div class="hero-photo" aria-hidden="true"></div>
+      <!-- Photo + localisation — style v0 curriculum -->
+      <div class="hero-side">
+        <!-- Remplacez le div par <img src="photo.jpg" alt="[Votre nom]"> quand prête -->
+        <div class="hero-photo">[Votre photo]</div>
+        <p class="hero-location">Montréal, Québec<br>Disponible pour collaborer</p>
+      </div>
+
     </div>
   </section>
 
   <!-- ============================================================
        EXPERTISE ET APPROCHE
        ============================================================ -->
-  <section class="section-card">
+  <section id="expertise" class="section-card">
     <div class="container section-pad">
       <div class="expertise-header reveal">
         <p class="expertise-eyebrow">Domaines d'intervention</p>
@@ -1263,7 +1240,7 @@
        ============================================================ -->
   <section id="parcours" class="section-curriculum">
     <div class="container section-pad">
-      <p class="eyebrow" style="color: var(--gold);">Parcours</p>
+      <p class="eyebrow">Parcours</p>
       <h2 class="curriculum-title">Curriculum</h2>
 
       <div class="curriculum-grid">
@@ -1380,50 +1357,6 @@
 </footer>
 
 <script>
-  /* ============================================================
-     THÈME CLAIR / SOMBRE
-     ============================================================ */
-  (function () {
-    var STORAGE_KEY = "portfolio-theme";
-    var root = document.documentElement;
-    var toggle = document.getElementById("theme-toggle");
-    var sunIcon = document.getElementById("icon-sun");
-    var moonIcon = document.getElementById("icon-moon");
-
-    function currentTheme() {
-      return root.classList.contains("dark") ? "dark" : "light";
-    }
-
-    function updateIcon() {
-      var isDark = currentTheme() === "dark";
-      sunIcon.style.display = isDark ? "inline-block" : "none";
-      moonIcon.style.display = isDark ? "none" : "inline-block";
-    }
-
-    function setTheme(theme) {
-      root.classList.remove("light", "dark");
-      root.classList.add(theme);
-      try {
-        localStorage.setItem(STORAGE_KEY, theme);
-      } catch (e) {}
-      updateIcon();
-    }
-
-    toggle.addEventListener("click", function () {
-      setTheme(currentTheme() === "dark" ? "light" : "dark");
-    });
-
-    window.addEventListener("keydown", function (event) {
-      if (event.repeat || event.metaKey || event.ctrlKey || event.altKey) return;
-      var target = event.target;
-      if (target && (target.isContentEditable || /^(input|textarea|select)$/i.test(target.tagName))) return;
-      if (event.key.toLowerCase() !== "d") return;
-      setTheme(currentTheme() === "dark" ? "light" : "dark");
-    });
-
-    updateIcon();
-  })();
-
   /* ============================================================
      FENÊTRES DE LECTURE « APPROFONDIR » (élément natif <dialog>)
      ============================================================ */
