@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Conseiller Technopédagogique — Portail Professionnel</title>
+<title>Fabien Brinjean - Conseiller Technopédagogique</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -332,7 +332,6 @@
     align-items: center;
     gap: 0.75rem;
     padding-top: 0.5rem;
-    border-top: 1px solid var(--border);
   }
 
   /* Colonne photo — style v0 */
@@ -423,9 +422,8 @@
     background: var(--background);
     border: 1px solid var(--border);
     border-radius: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
     min-height: 280px;
     gap: 1rem;
   }
@@ -437,13 +435,13 @@
     bottom: -1rem;
     width: 9.5rem;
     height: 9.5rem;
-    color: var(--gold);
+    color: var(--primary);
     opacity: 0.09;
     pointer-events: none;
     flex-shrink: 0;
   }
 
-  .pilier-content { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 0.8rem; }
+  .pilier-content { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 0.8rem; align-self: start; }
 
   .pilier h3 {
     font-family: var(--font-serif);
@@ -452,8 +450,11 @@
     line-height: 1.3;
     margin-bottom: 0.2rem;
   }
+  @media (min-width: 1024px) {
+    .pilier h3 { min-height: 3.25rem; }
+  }
   .pilier p {
-    font-size: 0.875rem;
+    font-size: 1rem;
     line-height: 1.6;
     color: var(--muted-foreground);
   }
@@ -565,7 +566,6 @@
   .crosscut {
     margin: 3rem 0 0;
     padding-top: 2.5rem;
-    border-top: 1px solid var(--border);
   }
   .quote-pullquote {
     position: relative;
@@ -627,7 +627,7 @@
     .case-study h2 { font-size: 1.875rem; }
   }
   .case-study > .container > p {
-    font-size: 0.875rem;
+    font-size: 1rem;
     line-height: 1.625;
     color: var(--muted-foreground);
     max-width: 36rem;
@@ -685,7 +685,7 @@
     margin-top: 0.125rem;
   }
   .livrables-list span {
-    font-size: 0.875rem;
+    font-size: 1rem;
     line-height: 1.625;
     color: var(--muted-foreground);
   }
@@ -720,7 +720,7 @@
     line-height: 1.375;
   }
   .engagement p {
-    font-size: 0.875rem;
+    font-size: 1rem;
     line-height: 1.625;
     color: var(--muted-foreground);
   }
@@ -956,7 +956,7 @@
      ============================================================ -->
 <header class="site-header">
   <div class="container">
-    <a href="#philosophie" class="brand">Conseiller Technopédagogique</a>
+    <a href="#philosophie" class="brand">Fabien Brinjean</a>
 
     <nav class="main-nav" aria-label="Navigation principale">
       <a href="#expertise">Expertise</a>
@@ -978,8 +978,6 @@
     <div class="container hero-grid">
 
       <div class="hero-main">
-        <p class="eyebrow">Conseil pédagogique universitaire · Technopédagogie</p>
-
         <p class="hero-intro">
           Face à l'omniprésence de l'IA et à la transition numérique de l'enseignement supérieur, j'accompagne les institutions et le corps enseignant dans l'évolution de leurs méthodes et l'adoption réfléchie des technologies&hellip;
         </p>
@@ -988,20 +986,9 @@
           &hellip;pour à la fois <strong>répondre aux enjeux modernes</strong> et <strong>préserver les compétences cognitives essentielles</strong>.
         </h1>
 
-        <p class="hero-sub">
-          Un constant travail de veille et d'autoformation sous-tend des <strong>actions polyvalentes</strong> allant de décisions stratégiques au développement de ressources pédagogiques, porté par des accompagnements individualisés auprès du corps enseignant.
-        </p>
-
         <div class="hero-badges">
           <span class="badge badge-gold">+12 ans d'enseignement</span>
           <span class="badge badge-gold">+6 ans de conseil pédagogique</span>
-
-          <span class="v-divider"></span>
-
-          <span class="badge">Enseignement supérieur</span>
-          <span class="badge">IA générative</span>
-          <span class="badge">Intégrité académique</span>
-          <span class="badge">Hybridation pédagogique</span>
 
           <span class="v-divider"></span>
 
@@ -1016,7 +1003,7 @@
       <div class="hero-side">
         <!-- Remplacez le div par <img src="photo.jpg" alt="[Votre nom]"> quand prête -->
         <div class="hero-photo">[Votre photo]</div>
-        <p class="hero-location">Montréal, Québec<br>Disponible pour collaborer</p>
+        <p class="hero-location">Conseiller pédagogique<br>Pédagogue<br>Artiste</p>
       </div>
 
     </div>
@@ -1028,7 +1015,7 @@
   <section id="expertise" class="section-card">
     <div class="container section-pad">
       <div class="expertise-header reveal">
-        <p class="expertise-eyebrow">Domaines d'intervention</p>
+        <p class="expertise-eyebrow">Exemples d'interventions</p>
         <h2 class="expertise-title">Expertise <em>&amp; approche</em></h2>
       </div>
 
@@ -1135,7 +1122,7 @@
             <span class="lead-text">Nombre d’outils technologiques sont puissants et doivent être utilisés à bon escient.</span>
             <span class="core-text"> Mais ils ne sont pas la clef de la préservation de développements cognitifs essentiels (lecture, synthèse, communication) ni de la qualité du lien entre l’enseignant et sa classe.</span>
           </p>
-          <p class="quote-pullquote-footer">— Posture pédagogique</p>
+
         </div>
       </blockquote>
     </div>
