@@ -533,17 +533,27 @@
   }
   .reading-dialog-close:hover { border-color: var(--gold); color: var(--gold); }
   .reading-dialog-close svg { width: 0.9rem; height: 0.9rem; }
+  .reading-dialog-watermark {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    width: 10rem;
+    height: 10rem;
+    color: var(--primary);
+    opacity: 0.07;
+    pointer-events: none;
+    z-index: 0;
+  }
   .reading-dialog-inner {
     height: 100%;
     overflow-y: auto;
     padding: 5rem 2.25rem 4rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
   }
   .reading-dialog-eyebrow {
     max-width: 32rem;
-    margin: 0 auto;
+    margin: auto auto 0;
     font-family: var(--font-serif);
     font-size: 1.5rem;
     font-weight: 500;
@@ -551,7 +561,7 @@
   }
   .reading-dialog-content {
     max-width: 32rem;
-    margin: 1.5rem auto 0;
+    margin: 1.5rem auto auto;
     display: flex;
     flex-direction: column;
     gap: 1.1rem;
@@ -618,7 +628,7 @@
   /* ============================================================
      ÉTUDE DE CAS
      ============================================================ */
-  .case-study h2 {
+  .case-study h2:not(.expertise-title) {
     font-family: var(--font-serif);
     font-weight: 500;
     font-size: 1.5rem;
@@ -627,7 +637,7 @@
     margin: 1.5rem 0;
   }
   @media (min-width: 768px) {
-    .case-study h2 { font-size: 1.875rem; }
+    .case-study h2:not(.expertise-title) { font-size: 1.875rem; }
   }
   .case-study > .container > p {
     font-size: 1rem;
@@ -675,7 +685,7 @@
   .livrables-list {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.5rem;
     max-width: 42rem;
   }
   .livrables-list li {
@@ -721,6 +731,9 @@
     font-size: 1.125rem;
     font-weight: 500;
     line-height: 1.375;
+  }
+  @media (min-width: 768px) {
+    .engagement h3 { min-height: 3rem; }
   }
   .engagement p {
     font-size: 1rem;
@@ -1041,6 +1054,7 @@
         </article>
 
         <dialog class="reading-dialog" id="dialog-pilier-1">
+          <svg class="reading-dialog-watermark" stroke-width="1.2" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
           <button type="button" class="reading-dialog-close" data-dialog-close aria-label="Fermer">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
           </button>
@@ -1070,6 +1084,7 @@
         </article>
 
         <dialog class="reading-dialog" id="dialog-pilier-2">
+          <svg class="reading-dialog-watermark" stroke-width="1.2" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 20v2"/><path d="M12 2v2"/><path d="M17 20v2"/><path d="M17 2v2"/><path d="M2 12h2"/><path d="M2 17h2"/><path d="M2 7h2"/><path d="M20 12h2"/><path d="M20 17h2"/><path d="M20 7h2"/><path d="M7 20v2"/><path d="M7 2v2"/><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="8" y="8" width="8" height="8" rx="1"/></svg>
           <button type="button" class="reading-dialog-close" data-dialog-close aria-label="Fermer">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
           </button>
@@ -1102,6 +1117,7 @@
         </article>
 
         <dialog class="reading-dialog" id="dialog-pilier-3">
+          <svg class="reading-dialog-watermark" stroke-width="1.2" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
           <button type="button" class="reading-dialog-close" data-dialog-close aria-label="Fermer">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
           </button>
@@ -1123,7 +1139,7 @@
           <span class="quote-pullquote-watermark" aria-hidden="true">“</span>
           <p class="quote-pullquote-body">
             <span class="lead-text">Nombre d’outils technologiques sont puissants et doivent être utilisés à bon escient.</span>
-            <span class="core-text"> Mais ils ne sont pas la clef de la préservation de développements cognitifs essentiels (lecture, synthèse, communication) ni de la qualité du lien entre l’enseignant et sa classe.</span>
+            <span class="core-text"> Mais ils ne sont pas la clef de la préservation des développements cognitifs essentiels (lecture, synthèse, communication) ni de la qualité du lien entre l’enseignant et sa classe.</span>
           </p>
 
         </div>
@@ -1132,14 +1148,15 @@
   </section>
 
   <!-- ============================================================
-       ÉTUDE DE CAS — CHEF-D'ŒUVRE
+       ÉTUDE DE CAS
        ============================================================ -->
   <section id="realisations" class="case-study container section-pad">
-    <p class="eyebrow">Étude de cas — Chef-d'œuvre</p>
+    <p class="expertise-eyebrow">Exemples récents</p>
+    <h2 class="expertise-title">Réalisations <em>&amp; collaborations</em></h2>
 
-    <h2>Transformation Institutionnelle&nbsp;: Hybridation de programmes à la Faculté des Sciences de l'Éducation</h2>
+    <h3 style="margin-top: 2.5rem; font-family: var(--font-serif); font-weight: 500; font-size: 1.5rem; line-height: 1.25; max-width: 42rem;">Hybridation de programme à la Faculté des Sciences de l'Éducation</h3>
 
-    <p>Partenariat étroit avec le décanat pour encadrer la transition numérique sur plusieurs années. Conception et déploiement d'un dispositif complet d'accompagnement du corps enseignant — de la réflexion stratégique initiale jusqu'à la production des ressources et l'évaluation des pratiques.</p>
+    <p style="margin: 2rem 0;">Partenariat étroit avec le décanat pour encadrer la transition numérique sur plusieurs années. Conception et déploiement d'un dispositif complet d'accompagnement du corps enseignant — de la réflexion stratégique initiale jusqu'à la production des ressources et l'évaluation des pratiques.</p>
 
     <div class="stats-row reveal">
       <div class="stat-card">
@@ -1157,7 +1174,7 @@
     </div>
 
     <div class="reveal" style="transition-delay: 120ms;">
-      <p class="livrables-label">Livrables clés</p>
+      <p class="livrables-label">Livrables clefs</p>
       <ul class="livrables-list">
         <li>
           <svg class="icon icon-4" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
@@ -1196,7 +1213,7 @@
        ============================================================ -->
   <section class="section-card">
     <div class="container section-pad">
-      <p class="eyebrow">Autres Initiatives Stratégiques</p>
+      <p class="eyebrow">Autres Initiatives Récentes</p>
 
       <div class="engagements-grid" style="margin-top: 3.5rem;">
         <article class="engagement reveal">
@@ -1230,7 +1247,7 @@
        ============================================================ -->
   <section id="parcours" class="section-curriculum">
     <div class="container section-pad">
-      <p class="eyebrow">Parcours</p>
+      <p class="eyebrow">Parcours professionnel et académique</p>
       <h2 class="curriculum-title">Curriculum</h2>
 
       <div class="curriculum-grid">
