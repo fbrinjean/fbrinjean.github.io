@@ -126,15 +126,13 @@
   }
 
   mark.highlight {
-    background: linear-gradient(
-      to bottom,
-      transparent 70%,
-      rgba(180, 71, 44, 0.18) 70%,
-      rgba(180, 71, 44, 0.18) 93%,
-      transparent 93%
-    );
-    padding: 0 0.05em;
+    background: rgba(180, 71, 44, 0.12);
+    padding: 0.1em 0.25em;
+    margin-left: -0.25em;
+    border-radius: 0.15em;
     color: inherit;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
   }
 
   /* ── Apparition au défilement (repris de v0-bolt claude.html) ── */
@@ -458,7 +456,7 @@
     line-height: 1.6;
     color: var(--muted-foreground);
   }
-  .pilier p strong { color: var(--foreground); }
+  .pilier p strong { color: var(--foreground); font-weight: 500; }
 
   /* ── Bouton « Plus » + fenêtre de lecture (repris de v0) ── */
   .expandable-toggle {
@@ -472,7 +470,7 @@
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.2em;
-    color: var(--gold);
+    color: var(--primary);
     background: none;
     border: none;
     padding: 0;
@@ -487,7 +485,7 @@
     width: 1.25rem;
     height: 1.25rem;
     border-radius: 9999px;
-    border: 1px solid rgba(154, 107, 31, 0.5);
+    border: 1px solid rgba(180, 71, 44, 0.5);
     transition: border-color 0.15s ease;
   }
   .expandable-icon svg { width: 0.75rem; height: 0.75rem; }
@@ -1043,7 +1041,7 @@
           <svg class="pilier-svg-watermark" stroke-width="1.2" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
           <div class="pilier-content">
             <h3>Pédagogie de l'accompagnement</h3>
-            <p>Qu'il s'agisse d'un professeur sceptique ou d'un décanat se heurtant aux défis modernes, je <strong>cible les besoins et les habiletés</strong> de mes interlocuteurs pour bâtir une relation de confiance et proposer des ajustements réalistes et concrets.</p>
+            <p>Qu'il s'agisse d'un professeur sceptique ou d'un décanat se heurtant aux défis modernes, je <strong>cible les besoins et les habiletés</strong> de mes interlocuteurs pour bâtir une <strong>relation de confiance</strong> et proposer des ajustements réalistes et concrets.</p>
           </div>
           <button type="button" class="expandable-toggle" data-dialog-open="dialog-pilier-1">
             <span class="expandable-icon">
@@ -1073,7 +1071,7 @@
           <svg class="pilier-svg-watermark" stroke-width="1.2" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 20v2"/><path d="M12 2v2"/><path d="M17 20v2"/><path d="M17 2v2"/><path d="M2 12h2"/><path d="M2 17h2"/><path d="M2 7h2"/><path d="M20 12h2"/><path d="M20 17h2"/><path d="M20 7h2"/><path d="M7 20v2"/><path d="M7 2v2"/><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="8" y="8" width="8" height="8" rx="1"/></svg>
           <div class="pilier-content">
             <h3>Expertise technologique <em>et</em> discernement</h3>
-            <p>Je combine une expertise technique avancée et une forte posture prudente et critique. Je m'oppose au solutionnisme, qui avance parfois masqué, tout en promouvant un usage sobre et ciblé du numérique, axé sur la préservation des compétences cognitives fondamentales (lecture, analyse, synthèse).</p>
+            <p>Je combine une expertise technique avancée et une forte posture prudente et critique. Je m'oppose au solutionnisme, qui avance parfois masqué, tout en promouvant un <strong>usage sobre et ciblé du numérique</strong>, axé sur la préservation des compétences cognitives fondamentales (lecture, analyse, synthèse).</p>
           </div>
           <button type="button" class="expandable-toggle" data-dialog-open="dialog-pilier-2">
             <span class="expandable-icon">
@@ -1092,9 +1090,9 @@
             <p class="reading-dialog-eyebrow">Expertise technologique et discernement</p>
             <div class="reading-dialog-content">
               <p>Tout objet technologique nous renforce quelque part et nous affaiblit ailleurs. Il convient alors d'être prudent et mesuré à une époque d'effervescence technologique où il peut être tellement tentant de déléguer à la dernière innovation le soin de nous apporter une solution.</p>
-              <p>Dans mon accompagnement, j'invite le corps enseignant à penser l'<strong>IA générative</strong> sous l'angle spécifique des disciplines et des pratiques enseignantes pour que chacun développe son propre <strong>positionnement</strong> critique et, le cas échéant, une intégration raisonnée.</p>
+              <p>Dans mon accompagnement, j'invite le corps enseignant à penser l'<mark class="highlight">IA générative</mark> sous l'angle spécifique des disciplines et des pratiques enseignantes pour <mark class="highlight">que chacun développe son propre positionnement</mark> critique et, le cas échéant, une intégration raisonnée.</p>
               <p>Sur le terrain, ma polyvalence me permet d'intervenir à différentes étapes d'un projet. Je peux accompagner un enseignant dans la production d'une vidéo - de la scénarisation au montage, jusqu'à l'intégration dans l'environnement numérique d'apprentissage et, parfois, la composition de sa musique. Pour répondre à un besoin didactique précis, je suis en mesure de programmer avec IA un outil web sur-mesure (génération d'étude de cas + environnement pour le visualiser avec quiz intégré, outil de présentation de l'enseignement comodal avec autodiagnostic et recommandations personnalisées). J'ai aussi collaboré avec un auteur de jeux pour ludifier des enseignements théoriques traditionnellement plus difficiles d'accès pour les étudiants.</p>
-              <p><mark class="highlight"><strong>Mais</strong> de telles réalisations, aussi brillantes soient-elles, ne sont aucunement des prérequis pour le succès d'une collaboration avec un enseignant.</mark> D'une part, car ce ne sont pas forcément les attentes de notre collaborateur, mais d'autre part, car la solution à ses enjeux est peut-être ailleurs, sous une forme plus pragmatique et accessible.</p>
+              <p><mark class="highlight">Mais de telles réalisations, aussi brillantes soient-elles, ne sont aucunement des prérequis pour le succès d'une collaboration avec un enseignant.</mark> D'une part, car ce ne sont pas forcément les attentes de notre collaborateur, mais d'autre part, car la solution à ses enjeux est peut-être ailleurs, sous une forme plus pragmatique et accessible.</p>
               <p>Une activité de lecture bien planifiée sera peut-être plus pertinente - et moins coûteuse en temps et en énergie - qu'une vidéo, tout en accompagnant les étudiants à développer leur compétence de lecture de textes disciplinaires. L'identification de mécanismes vertueux pour encadrer une activité collaborative sera bien plus pertinente que l'ajout d'une innovation technique superflue.</p>
             </div>
           </div>
@@ -1106,7 +1104,7 @@
           <svg class="pilier-svg-watermark" stroke-width="1.2" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
           <div class="pilier-content">
             <h3>Évaluation &amp; intégrité académique</h3>
-            <p>Face aux bouleversements de l'IA générative et aux mutations des publics étudiants, j'accompagne une révision des modalités d'évaluation. Mon action conjugue sécurisation des examens et adaptation des pratiques pour préserver la fiabilité des épreuves.</p>
+            <p>Face aux bouleversements de l'IA générative et aux mutations des publics étudiants, j'accompagne une révision des modalités d'évaluation. Mon action conjugue sécurisation des examens et adaptation des pratiques pour <strong>préserver la fiabilité des épreuves</strong>.</p>
           </div>
           <button type="button" class="expandable-toggle" data-dialog-open="dialog-pilier-3">
             <span class="expandable-icon">
@@ -1213,7 +1211,8 @@
        ============================================================ -->
   <section class="section-card">
     <div class="container section-pad">
-      <p class="eyebrow">Autres Initiatives Récentes</p>
+      <p class="expertise-eyebrow">Autres projets récents</p>
+      <h2 style="margin-top: 0.75rem; font-family: var(--font-serif); font-weight: 500; font-size: 1.5rem; line-height: 1.25; max-width: 42rem;">Collaborations &amp; projets</h2>
 
       <div class="engagements-grid" style="margin-top: 3.5rem;">
         <article class="engagement reveal">
@@ -1229,13 +1228,9 @@
         </article>
 
         <article class="engagement reveal" style="transition-delay: 180ms;">
-          <p class="institution">Initiatives propres</p>
-          <h3>Ressources &amp; Formations autoportantes</h3>
-          <ul class="mini-list">
-            <li>Conception d'une formation autoportante en HTML sur l'enseignement comodal incluant un outil diagnostic pour mieux appréhender une transition vers cette modalité.</li>
-            <li>Expérimentation du facteur de pondération individuel.</li>
-            <li>Conception et animation de parcours de formation sur l'IA générative (ChatGPT) ou sur la revalorisation des activités de lecture universitaire pour contrer les défis modernes liés à la lecture.</li>
-          </ul>
+          <p class="institution">Innovation</p>
+          <h3>Ressource &amp; formation autoportantes</h3>
+          <p>Conception d'une formation autoportante en HTML sur l'enseignement comodal incluant un outil diagnostic pour mieux appréhender et guider une transition vers cette modalité.</p>
         </article>
       </div>
     </div>
@@ -1284,15 +1279,6 @@
                 <dd>Développement d'une expertise en arrangement, composition et structure narrative, aujourd'hui mise au service de la production de ressources technopédagogiques (vidéos, audio).</dd>
               </div>
             </dl>
-          </div>
-
-          <!-- Éducateur jeunes enfants -->
-          <div class="timeline-item timeline-item--aside reveal" style="transition-delay: 180ms;">
-            <span class="timeline-dot is-muted"></span>
-            <p class="date is-muted">2013</p>
-            <h4>Éducateur jeunes enfants</h4>
-            <p class="org">SREPE inc.</p>
-            <p class="body">Éducateur remplaçant dans plusieurs CPE de Montréal et sa région.</p>
           </div>
         </div>
 
