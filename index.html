@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Fabien Brinjean - Conseiller Technopédagogique</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Ccircle%20cx%3D%2732%27%20cy%3D%2732%27%20r%3D%2732%27%20fill%3D%27%23b4472c%27/%3E%3Ctext%20x%3D%2732%27%20y%3D%2743%27%20font-family%3D%27Georgia%2C%20Times%20New%20Roman%2C%20serif%27%20font-size%3D%2727%27%20font-weight%3D%27700%27%20fill%3D%27%23f5f1e8%27%20text-anchor%3D%27middle%27%3EFB%3C/text%3E%3C/svg%3E" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -108,7 +109,7 @@
   }
   .font-serif { font-family: var(--font-serif); }
   .font-mono  { font-family: var(--font-mono); }
-  .text-gold  { color: var(--gold); }
+  .text-gold  { color: var(--primary); }
 
   .eyebrow {
     font-family: var(--font-mono);
@@ -116,13 +117,6 @@
     text-transform: uppercase;
     letter-spacing: 0.15em;
     color: var(--primary);
-  }
-
-  .hr {
-    height: 1px;
-    background: var(--border);
-    border: none;
-    flex: 1;
   }
 
   mark.highlight {
@@ -529,7 +523,7 @@
     color: var(--muted-foreground);
     transition: border-color 0.15s ease, color 0.15s ease;
   }
-  .reading-dialog-close:hover { border-color: var(--gold); color: var(--gold); }
+  .reading-dialog-close:hover { border-color: var(--primary); color: var(--primary); }
   .reading-dialog-close svg { width: 0.9rem; height: 0.9rem; }
   .reading-dialog-watermark {
     position: absolute;
@@ -620,7 +614,7 @@
     font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 0.2em;
-    color: var(--gold);
+    color: var(--primary);
   }
 
   /* ============================================================
@@ -1132,7 +1126,11 @@
 
       </div>
 
-      <!-- Accroche transversale — Pull-Quote éditoriale (Option 1) -->
+      <!-- Accroche transversale — Pull-Quote éditoriale (Option 1)
+           Retirée à la demande. Pour la remettre, supprimez la ligne
+           de commentaire d'ouverture juste au-dessus du blockquote,
+           ainsi que la ligne de fermeture du commentaire juste après
+           la balise de fermeture du blockquote, plus bas.
       <blockquote class="crosscut reveal">
         <div class="quote-pullquote">
           <span class="quote-pullquote-watermark" aria-hidden="true">“</span>
@@ -1143,6 +1141,7 @@
 
         </div>
       </blockquote>
+      -->
     </div>
   </section>
 
