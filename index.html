@@ -620,17 +620,20 @@
   /* ============================================================
      ÉTUDE DE CAS
      ============================================================ */
-  .case-study h2:not(.expertise-title) {
+  /* Titres de bloc (étude de cas, collaborations)
+     .block-title porte l'apparence commune ; la marge supérieure
+     dépend de ce qui précède le titre. */
+  .block-title {
     font-family: var(--font-serif);
     font-weight: 500;
     font-size: 1.5rem;
     line-height: 1.25;
-    max-width: 42rem;
-    margin: 1.5rem 0;
+    max-width: 52rem;
+    text-wrap: balance;
   }
-  @media (min-width: 768px) {
-    .case-study h2:not(.expertise-title) { font-size: 1.875rem; }
-  }
+  .case-title     { margin-top: 2.5rem; }  /* suit le grand titre de section */
+  .projects-title { margin-top: 0.75rem; } /* suit directement le surtitre */
+
   /* Paragraphes d'introduction de l'étude de cas */
   .case-intro {
     font-size: 1rem;
@@ -696,6 +699,72 @@
     font-size: 1rem;
     line-height: 1.625;
     color: var(--muted-foreground);
+  }
+
+  /* ── Bulles d'information au survol (livrables) ──────────────
+     La bulle s'ouvre sous la ligne, avec un filet terracotta.
+     Pour ajouter une bulle à un livrable : mettre class="tip" sur
+     le <li>, class="tip-trigger" + tabindex="0" + aria-describedby
+     sur le <span> du libellé, puis un <div class="tip-bubble">
+     portant l'id correspondant à la fin du <li>.
+     ------------------------------------------------------------ */
+  .tip { position: relative; }
+  .tip .tip-trigger {
+    cursor: help;
+    border-bottom: 1px dotted rgba(180, 71, 44, 0.45);
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .tip:hover .tip-trigger,
+  .tip:focus-within .tip-trigger {
+    color: var(--foreground);
+    border-bottom-color: var(--primary);
+  }
+
+  .tip-bubble {
+    position: absolute;
+    z-index: 5;
+    top: calc(100% + 0.5rem);
+    left: 1.75rem;
+    width: min(34rem, 86vw);
+    padding: 0.95rem 1.15rem;
+    background: var(--card);
+    color: var(--card-foreground);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--primary);
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 28px rgba(27, 39, 36, 0.16);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-0.35rem);
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+  }
+  .tip:hover .tip-bubble,
+  .tip:focus-within .tip-bubble {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  /* La ligne survolée passe au-dessus des suivantes */
+  .tip:hover,
+  .tip:focus-within { z-index: 10; }
+
+  .tip-bubble strong {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--card-foreground);
+  }
+  .tip-bubble p {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--muted-foreground);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tip-bubble { transition: none; }
   }
 
   /* ============================================================
@@ -1147,7 +1216,7 @@
     <p class="expertise-eyebrow">Exemples récents</p>
     <h2 class="expertise-title">Réalisations <em>&amp; collaborations</em></h2>
 
-    <h3 style="margin-top: 2.5rem; font-family: var(--font-serif); font-weight: 500; font-size: 1.5rem; line-height: 1.25; max-width: 42rem;">Hybridation de programme à la Faculté des Sciences de l'Éducation</h3>
+    <h3 class="block-title case-title">Hybridation de programme à la Faculté des Sciences de l'Éducation</h3>
 
     <p class="case-intro">Partenariat étroit avec le décanat pour amorcer un changement de pratique au sein de la faculté, motivé par des facteurs externes (s'aligner sur les pratiques d'autres universités, répondre aux attentes des étudiants) comme internes (volonté de bénéficier des apports de l'enseignement hybride). Cette collaboration pose les bases d'une transition qui se fera sur plusieurs années.</p>
 
@@ -1171,33 +1240,67 @@
     <div class="reveal" style="transition-delay: 120ms;">
       <p class="livrables-label">Livrables clefs</p>
       <ul class="livrables-list">
-        <li>
+        <li class="tip">
           <svg class="icon icon-4" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
-          <span>Formations (en présentiel et sous forme de vidéo)</span>
+          <span class="tip-trigger" tabindex="0" aria-describedby="tip-formations">Formations (en présentiel et sous forme de vidéo)</span>
+          <div class="tip-bubble" id="tip-formations" role="tooltip">
+            <strong>Formations</strong>
+            <p>Texte à éditer. Une dizaine d'ateliers animés en présentiel, complétés par des capsules vidéo consultables en autonomie. Les thèmes couvrent la planification de séance, l'animation à distance et l'évaluation.</p>
+          </div>
         </li>
-        <li>
+
+        <li class="tip">
           <svg class="icon icon-4" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
-          <span>Gabarits de planification</span>
+          <span class="tip-trigger" tabindex="0" aria-describedby="tip-gabarits">Gabarits de planification</span>
+          <div class="tip-bubble" id="tip-gabarits" role="tooltip">
+            <strong>Gabarits de planification</strong>
+            <p>Texte à éditer. Documents structurants remis aux équipes professorales pour cadrer la répartition des heures, l'alternance présence/distance et l'alignement entre objectifs et évaluations.</p>
+          </div>
         </li>
-        <li>
+
+        <li class="tip">
           <svg class="icon icon-4" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
-          <span>Activités et ressources originales par programmation avec IA</span>
+          <span class="tip-trigger" tabindex="0" aria-describedby="tip-activites">Activités et ressources originales par programmation avec IA</span>
+          <div class="tip-bubble" id="tip-activites" role="tooltip">
+            <strong>Activités et ressources originales</strong>
+            <p>Texte à éditer. Outils web développés sur mesure pour répondre à un besoin didactique précis : générateur d'études de cas avec quiz intégré, environnement de visualisation, autodiagnostic avec recommandations personnalisées.</p>
+          </div>
         </li>
-        <li>
+
+        <li class="tip">
           <svg class="icon icon-4" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
-          <span>Encadrement des travaux collaboratifs (charte d'équipe, outils d'autoévaluation)</span>
+          <span class="tip-trigger" tabindex="0" aria-describedby="tip-collaboratif">Encadrement des travaux collaboratifs (charte d'équipe, outils d'autoévaluation)</span>
+          <div class="tip-bubble" id="tip-collaboratif" role="tooltip">
+            <strong>Encadrement des travaux collaboratifs</strong>
+            <p>Texte à éditer. Mise en place d'une charte d'équipe signée en début de session et d'une grille d'autoévaluation entre pairs, afin de rendre visible l'apport individuel et de rééquilibrer les notes de groupe.</p>
+          </div>
         </li>
-        <li>
+
+        <li class="tip">
           <svg class="icon icon-4" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
-          <span>Outils d'évaluation des séances en ligne</span>
+          <span class="tip-trigger" tabindex="0" aria-describedby="tip-evaluation-seances">Outils d'évaluation des séances en ligne</span>
+          <div class="tip-bubble" id="tip-evaluation-seances" role="tooltip">
+            <strong>Outils d'évaluation des séances en ligne</strong>
+            <p>Texte à éditer. Questionnaires courts administrés en fin de séance pour recueillir la perception des étudiants et ajuster le dispositif en cours de session plutôt qu'après coup.</p>
+          </div>
         </li>
-        <li>
+
+        <li class="tip">
           <svg class="icon icon-4" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
-          <span>Documentation sur des outils technologiques : Wooclap, Perusall</span>
+          <span class="tip-trigger" tabindex="0" aria-describedby="tip-documentation">Documentation sur des outils technologiques&nbsp;: Wooclap, Perusall</span>
+          <div class="tip-bubble" id="tip-documentation" role="tooltip">
+            <strong>Documentation sur des outils technologiques</strong>
+            <p>Texte à éditer. Guides pratiques orientés usage pédagogique plutôt que fonctionnalités : dans quels contextes l'outil apporte réellement quelque chose, et comment l'intégrer sans alourdir la préparation.</p>
+          </div>
         </li>
-        <li>
+
+        <li class="tip">
           <svg class="icon icon-4" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
-          <span>Accompagnements individualisés</span>
+          <span class="tip-trigger" tabindex="0" aria-describedby="tip-individualises">Accompagnements individualisés</span>
+          <div class="tip-bubble" id="tip-individualises" role="tooltip">
+            <strong>Accompagnements individualisés</strong>
+            <p>Texte à éditer. Rencontres de suivi adaptées au rythme et aux priorités de chaque professeur, de la simple question ponctuelle à la refonte complète d'un cours sur plusieurs sessions.</p>
+          </div>
         </li>
       </ul>
     </div>
@@ -1209,7 +1312,7 @@
   <section class="section-card">
     <div class="container section-pad">
       <p class="expertise-eyebrow">Autres projets récents</p>
-      <h2 style="margin-top: 0.75rem; font-family: var(--font-serif); font-weight: 500; font-size: 1.5rem; line-height: 1.25; max-width: 42rem;">Collaborations &amp; projets</h2>
+      <h2 class="block-title projects-title">Collaborations &amp; projets</h2>
 
       <div class="engagements-grid" style="margin-top: 3.5rem;">
         <article class="engagement reveal">
