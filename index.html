@@ -4,6 +4,93 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Fabien Brinjean - Conseiller Technopédagogique</title>
+
+<!-- ============================================================
+     MÉTADONNÉES DE RÉFÉRENCEMENT ET DE PARTAGE
+     Vérifier l'adresse ci-dessous si un domaine personnalisé est
+     mis en place : les URL doivent être absolues, les réseaux
+     sociaux n'interprètent pas les chemins relatifs.
+     ============================================================ -->
+<meta name="description" content="Conseiller technopédagogique en enseignement supérieur. J'accompagne facultés et corps enseignant vers un usage sobre et ciblé du numérique." />
+<meta name="author" content="Fabien Brinjean" />
+<link rel="canonical" href="https://fbrinjean.github.io/" />
+<meta name="theme-color" content="#f5f1e8" />
+
+<!-- Aperçu lors d'un partage (LinkedIn, Facebook, messageries, Slack…) -->
+<meta property="og:type" content="profile" />
+<meta property="og:locale" content="fr_CA" />
+<meta property="og:site_name" content="Fabien Brinjean" />
+<meta property="og:title" content="Fabien Brinjean — Conseiller technopédagogique" />
+<meta property="og:description" content="Accompagnement des facultés et du corps enseignant dans la transformation des dispositifs de formation, l'intégration raisonnée du numérique et la révision des modalités d'évaluation." />
+<meta property="og:url" content="https://fbrinjean.github.io/" />
+<meta property="profile:first_name" content="Fabien" />
+<meta property="profile:last_name" content="Brinjean" />
+
+<!-- VIGNETTE DE PARTAGE — à activer quand l'image existera.
+     Créer une image de 1200 × 630 px (format paysage imposé par les
+     plateformes, ce n'est pas votre photo en 4:5), la déposer à la
+     racine du dépôt, puis décommenter ce bloc et passer twitter:card
+     à « summary_large_image » juste en dessous. Sans image, l'aperçu
+     n'affiche que le titre et la description.
+
+<meta property="og:image" content="https://fbrinjean.github.io/apercu-partage.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Fabien Brinjean, conseiller technopédagogique" />
+-->
+
+<meta name="twitter:card" content="summary" />
+
+<!-- ============================================================
+     DONNÉES STRUCTURÉES (JSON-LD, schema.org)
+     Décrit explicitement la personne aux moteurs de recherche, au
+     lieu de les laisser déduire du texte. Invisible pour le visiteur.
+     À tenir à jour en parallèle du contenu de la page : des données
+     contredisant le texte visible nuisent plus qu'elles n'aident.
+     ============================================================ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Fabien Brinjean",
+  "givenName": "Fabien",
+  "familyName": "Brinjean",
+  "jobTitle": "Conseiller technopédagogique",
+  "email": "mailto:fabien.brinjean@hotmail.com",
+  "url": "https://fbrinjean.github.io/",
+  "description": "Conseiller technopédagogique en enseignement supérieur. Accompagnement des facultés et du corps enseignant dans la transformation des dispositifs de formation, l'intégration raisonnée du numérique et la révision des modalités d'évaluation.",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Centre de pédagogie universitaire",
+    "parentOrganization": {
+      "@type": "CollegeOrUniversity",
+      "name": "Université de Montréal"
+    }
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Montréal",
+    "addressRegion": "Québec",
+    "addressCountry": "CA"
+  },
+  "alumniOf": [
+    { "@type": "CollegeOrUniversity", "name": "Université de Montréal" },
+    { "@type": "EducationalOrganization", "name": "Cefedem Rhône-Alpes" },
+    { "@type": "CollegeOrUniversity", "name": "Université Lyon II" },
+    { "@type": "EducationalOrganization", "name": "Conservatoire de Lyon" }
+  ],
+  "knowsAbout": [
+    "Technopédagogie",
+    "Ingénierie pédagogique",
+    "Enseignement supérieur",
+    "Intelligence artificielle générative en éducation",
+    "Évaluation des apprentissages",
+    "Intégrité académique",
+    "Enseignement comodal",
+    "Formation hybride"
+  ]
+}
+</script>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Ccircle%20cx%3D%2732%27%20cy%3D%2732%27%20r%3D%2732%27%20fill%3D%27%23b4472c%27/%3E%3Ctext%20x%3D%2732%27%20y%3D%2743%27%20font-family%3D%27Georgia%2C%20Times%20New%20Roman%2C%20serif%27%20font-size%3D%2727%27%20font-weight%3D%27700%27%20fill%3D%27%23f5f1e8%27%20text-anchor%3D%27middle%27%3EFB%3C/text%3E%3C/svg%3E" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -112,6 +199,22 @@
   @media (min-width: 768px) {
     .container { padding: 0 2.5rem; }
   }
+  /* Retire l'élément de l'affichage sans le retirer de l'arbre
+     d'accessibilité : il reste lu par les lecteurs d'écran et indexé
+     par les moteurs de recherche. Ne pas remplacer par display:none
+     ni visibility:hidden, qui le masqueraient aussi à ces outils. */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
   .eyebrow {
     font-family: var(--font-mono);
     font-size: 0.75rem;
@@ -289,10 +392,14 @@
     text-wrap: pretty;
   }
 
-  /* Climax — serif avec bordure gauche terracotta */
+  /* Climax — serif avec bordure gauche terracotta
+     font-weight est déclaré explicitement : le gras venait autrefois
+     du style par défaut de la balise <h1>. Depuis que ce texte est un
+     <p>, sans cette ligne il retomberait en graisse normale. */
   .hero-climax {
     font-family: var(--font-serif);
     font-size: clamp(1.75rem, 3.5vw, 3rem);
+    font-weight: 700;
     line-height: 1.18;
     letter-spacing: -0.02em;
     color: var(--foreground);
@@ -984,6 +1091,17 @@
     .contact-text h2 { font-size: 2.75rem; }
   }
   .contact-text p { margin-top: 1rem; line-height: 1.625; color: var(--muted-foreground); }
+  /* Sélecteur descendant volontaire : .contact-text p impose déjà une
+     couleur grisée et l'emporterait sur une classe seule. */
+  .contact-text .contact-email {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--foreground);
+  }
+  .contact-email a {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
   .btn-contact {
     display: inline-flex;
     align-items: center;
@@ -1016,6 +1134,166 @@
     .contact-top { flex-direction: row; align-items: center; justify-content: space-between; }
     .contact-bottom { flex-direction: row; align-items: center; justify-content: space-between; }
   }
+
+  /* ============================================================
+     IMPRESSION
+     Ce bloc doit rester le dernier de la feuille : plusieurs de ses
+     règles annulent des déclarations posées plus haut, y compris dans
+     des media queries, et ne gagnent que par leur position.
+
+     Objectifs : ne pas noyer la page d'encre, retirer ce qui n'a pas
+     de sens sur papier, et surtout déplier les contenus normalement
+     masqués (bulles des livrables, textes des trois fenêtres), sans
+     quoi l'essentiel du propos disparaîtrait à l'impression.
+     ============================================================ */
+  @media print {
+    @page { margin: 1.5cm; }
+
+    body {
+      background: #fff;
+      color: #1b2724;
+      font-size: 11pt;
+    }
+
+    /* Éléments d'interface sans objet sur papier */
+    .site-header,
+    .scroll-progress,
+    .expandable-toggle,
+    .reading-dialog-close,
+    .btn-outline,
+    .btn-contact,
+    .pilier-svg-watermark,
+    .reading-dialog-watermark,
+    .v-divider {
+      display: none !important;
+    }
+
+    /* Le placeholder de photo ne s'imprime pas, mais une vraie image
+       (img.hero-photo) reste imprimée : le sélecteur ne vise que le div. */
+    div.hero-photo { display: none; }
+
+    /* Le titre principal est masqué à l'écran par .sr-only. À
+       l'impression il devient le titre du document, sans quoi la page
+       imprimée ne porterait le nom nulle part, l'en-tête étant retiré. */
+    h1.sr-only {
+      position: static;
+      width: auto;
+      height: auto;
+      margin: 0 0 1rem;
+      clip-path: none;
+      white-space: normal;
+      font-family: var(--font-serif);
+      font-size: 20pt;
+      font-weight: 700;
+    }
+
+    /* Fonds sombres ou colorés ramenés au blanc. On redéfinit les
+       variables plutôt que de multiplier les !important. */
+    .section-card,
+    .section-curriculum,
+    .contact-footer {
+      background: #fff;
+      color: #1b2724;
+      --background: #fff;
+      --foreground: #1b2724;
+      --card: transparent;
+      --card-foreground: #1b2724;
+      --muted: transparent;
+      --muted-foreground: #4a4a4a;
+      --border: #c7c0b4;
+    }
+    .stat-card,
+    .terminal-bar { background: transparent; }
+
+    /* Respirations réduites et grilles dépilées en une colonne */
+    .section-pad { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+    .hero { padding-top: 0; padding-bottom: 1.5rem; }
+    .hero-grid,
+    .curriculum-grid,
+    .engagements-grid,
+    .piliers-grid { display: block; }
+    .pilier,
+    .engagement,
+    .timeline-item { margin-bottom: 1.25rem; }
+    .pilier { min-height: 0; }
+
+    /* Les blocs animés à l'écran partent de opacity:0. Sans cette
+       règle, tout ce qui n'a pas encore défilé sous les yeux du
+       visiteur s'imprimerait en blanc sur blanc. */
+    .reveal {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    /* Bulles des livrables : dépliées sous leur ligne */
+    .livrables-list li { display: block; }
+    .tip .tip-trigger { border-bottom: 0; }
+    .tip-bubble {
+      position: static;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      width: auto;
+      margin: 0.4rem 0 0 1.75rem;
+      box-shadow: none;
+      border-radius: 0;
+    }
+
+    /* Fenêtres de lecture : un <dialog> fermé est masqué par le
+       navigateur. On le rend visible et on annule sa mise en page de
+       modale pour qu'il s'imprime à la suite de sa carte. */
+    .reading-dialog {
+      display: block;
+      position: static;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      width: auto;
+      height: auto;
+      max-height: none;
+      margin: 0 0 1.5rem;
+      padding: 0;
+      background: transparent;
+      border: 0;
+      border-left: 3px solid var(--primary);
+      box-shadow: none;
+    }
+    .reading-dialog-inner {
+      height: auto;
+      overflow: visible;
+      padding: 0 0 0 1.25rem;
+      display: block;
+    }
+    .reading-dialog-eyebrow {
+      max-width: none;
+      margin: 0 0 0.5rem;
+      font-size: 13pt;
+    }
+    .reading-dialog-content {
+      max-width: none;
+      margin: 0;
+      display: block;
+    }
+    .reading-dialog-content p { margin-bottom: 0.6rem; }
+
+    /* Les surlignages jaunes deviennent un simple italique : le fond
+       teinté est coûteux en encre et souvent rendu en gris sale. */
+    mark.highlight {
+      background: transparent;
+      font-style: italic;
+      padding: 0;
+      margin: 0;
+    }
+
+    /* Éviter les coupures de page malvenues */
+    .pilier,
+    .stat-card,
+    .engagement,
+    .timeline-item,
+    .tip-bubble,
+    .reading-dialog { break-inside: avoid; }
+    h1, h2, h3 { break-after: avoid; }
+  }
 </style>
 </head>
 <body>
@@ -1047,13 +1325,19 @@
     <div class="container hero-grid">
 
       <div class="hero-main">
+        <!-- Titre principal de la page, réservé aux lecteurs d'écran et
+             aux moteurs de recherche. La phrase visible ci-dessous est
+             volontairement tronquée pour l'effet typographique : elle ne
+             pouvait donc pas tenir ce rôle. -->
+        <h1 class="sr-only">Fabien Brinjean, conseiller technopédagogique en enseignement supérieur</h1>
+
         <p class="hero-intro">
           Face à l'omniprésence de l'IA et à la transition numérique de l'enseignement supérieur, j'accompagne les institutions et le corps enseignant dans l'évolution de leurs méthodes et l'adoption réfléchie des technologies&hellip;
         </p>
 
-        <h1 class="hero-climax">
+        <p class="hero-climax">
           &hellip;pour à la fois <strong>répondre aux enjeux modernes</strong> et <strong>préserver les compétences cognitives essentielles</strong>.
-        </h1>
+        </p>
 
         <div class="hero-badges">
           <span class="badge badge-gold">+12 ans d'enseignement</span>
@@ -1218,97 +1502,99 @@
   <!-- ============================================================
        ÉTUDE DE CAS
        ============================================================ -->
-  <section id="realisations" class="case-study container section-pad">
-    <p class="expertise-eyebrow">Exemples récents</p>
-    <h2 class="expertise-title">Réalisations <em>&amp; collaborations</em></h2>
+  <section id="realisations" class="case-study">
+    <div class="container section-pad">
+      <p class="expertise-eyebrow">Exemples récents</p>
+      <h2 class="expertise-title">Réalisations <em>&amp; collaborations</em></h2>
 
-    <h3 class="block-title case-title">Hybridation de programme à la Faculté des Sciences de l'Éducation</h3>
+      <h3 class="block-title case-title">Hybridation de programme à la Faculté des Sciences de l'Éducation</h3>
 
-    <p class="case-intro">Partenariat étroit avec le décanat pour amorcer un changement de pratique au sein de la faculté, motivé par des facteurs externes (s'aligner sur les pratiques d'autres universités, répondre aux attentes des étudiants) comme internes (volonté de bénéficier des apports de l'enseignement hybride). Cette collaboration pose les bases d'une transition qui se fera sur plusieurs années.</p>
+      <p class="case-intro">Partenariat étroit avec le décanat pour amorcer un changement de pratique au sein de la faculté, motivé par des facteurs externes (s'aligner sur les pratiques d'autres universités, répondre aux attentes des étudiants) comme internes (volonté de bénéficier des apports de l'enseignement hybride). Cette collaboration pose les bases d'une transition qui se fera sur plusieurs années.</p>
 
-    <p class="case-intro">Conception et déploiement d'un accompagnement complet à plusieurs niveaux : soutien du décanat dans ses prises de décision, formations auprès du corps enseignant, productions de ressources et suivis individuels.</p>
+      <p class="case-intro">Conception et déploiement d'un accompagnement complet à plusieurs niveaux : soutien du décanat dans ses prises de décision, formations auprès du corps enseignant, productions de ressources et suivis individuels.</p>
 
-    <div class="stats-row reveal">
-      <div class="stat-card">
-        <strong><span class="count" data-target="40">0</span>+</strong>
-        <span>Professeurs accompagnés<br />collectivement</span>
+      <div class="stats-row reveal">
+        <div class="stat-card">
+          <strong><span class="count" data-target="40">0</span>+</strong>
+          <span>Professeurs accompagnés<br />collectivement</span>
+        </div>
+        <div class="stat-card">
+          <strong><span class="count" data-target="15">0</span>+</strong>
+          <span>Accompagnements<br />individuels sur mesure</span>
+        </div>
+        <div class="stat-card">
+          <strong><span class="count" data-target="10">0</span>+</strong>
+          <span>Ressources originales<br />produites</span>
+        </div>
       </div>
-      <div class="stat-card">
-        <strong><span class="count" data-target="15">0</span>+</strong>
-        <span>Accompagnements<br />individuels sur mesure</span>
+
+      <div class="reveal" style="transition-delay: 120ms;">
+        <p class="livrables-label">Livrables clefs</p>
+        <ul class="livrables-list">
+          <li class="tip">
+            <svg class="icon icon-4" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
+            <span class="tip-trigger" tabindex="0" aria-describedby="tip-formations">Formations (en présentiel et sous forme de vidéo)</span>
+            <div class="tip-bubble" id="tip-formations" role="tooltip">
+              <strong>Formations</strong>
+              <p>Texte à éditer. Une dizaine d'ateliers animés en présentiel, complétés par des capsules vidéo consultables en autonomie. Les thèmes couvrent la planification de séance, l'animation à distance et l'évaluation.</p>
+            </div>
+          </li>
+
+          <li class="tip">
+            <svg class="icon icon-4" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
+            <span class="tip-trigger" tabindex="0" aria-describedby="tip-gabarits">Gabarits de planification</span>
+            <div class="tip-bubble" id="tip-gabarits" role="tooltip">
+              <strong>Gabarits de planification</strong>
+              <p>Texte à éditer. Documents structurants remis aux équipes professorales pour cadrer la répartition des heures, l'alternance présence/distance et l'alignement entre objectifs et évaluations.</p>
+            </div>
+          </li>
+
+          <li class="tip">
+            <svg class="icon icon-4" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
+            <span class="tip-trigger" tabindex="0" aria-describedby="tip-activites">Activités et ressources originales par programmation avec IA</span>
+            <div class="tip-bubble" id="tip-activites" role="tooltip">
+              <strong>Activités et ressources originales</strong>
+              <p>Texte à éditer. Outils web développés sur mesure pour répondre à un besoin didactique précis : générateur d'études de cas avec quiz intégré, environnement de visualisation, autodiagnostic avec recommandations personnalisées.</p>
+            </div>
+          </li>
+
+          <li class="tip">
+            <svg class="icon icon-4" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
+            <span class="tip-trigger" tabindex="0" aria-describedby="tip-collaboratif">Encadrement des travaux collaboratifs (charte d'équipe, outils d'autoévaluation)</span>
+            <div class="tip-bubble" id="tip-collaboratif" role="tooltip">
+              <strong>Encadrement des travaux collaboratifs</strong>
+              <p>Texte à éditer. Mise en place d'une charte d'équipe signée en début de session et d'une grille d'autoévaluation entre pairs, afin de rendre visible l'apport individuel et de rééquilibrer les notes de groupe.</p>
+            </div>
+          </li>
+
+          <li class="tip">
+            <svg class="icon icon-4" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
+            <span class="tip-trigger" tabindex="0" aria-describedby="tip-evaluation-seances">Outils d'évaluation des séances en ligne</span>
+            <div class="tip-bubble" id="tip-evaluation-seances" role="tooltip">
+              <strong>Outils d'évaluation des séances en ligne</strong>
+              <p>Texte à éditer. Questionnaires courts administrés en fin de séance pour recueillir la perception des étudiants et ajuster le dispositif en cours de session plutôt qu'après coup.</p>
+            </div>
+          </li>
+
+          <li class="tip">
+            <svg class="icon icon-4" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
+            <span class="tip-trigger" tabindex="0" aria-describedby="tip-documentation">Documentation sur des outils technologiques&nbsp;: Wooclap, Perusall</span>
+            <div class="tip-bubble" id="tip-documentation" role="tooltip">
+              <strong>Documentation sur des outils technologiques</strong>
+              <p>Texte à éditer. Guides pratiques orientés usage pédagogique plutôt que fonctionnalités : dans quels contextes l'outil apporte réellement quelque chose, et comment l'intégrer sans alourdir la préparation.</p>
+            </div>
+          </li>
+
+          <li class="tip">
+            <svg class="icon icon-4" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
+            <span class="tip-trigger" tabindex="0" aria-describedby="tip-individualises">Accompagnements individualisés</span>
+            <div class="tip-bubble" id="tip-individualises" role="tooltip">
+              <strong>Accompagnements individualisés</strong>
+              <p>Texte à éditer. Rencontres de suivi adaptées au rythme et aux priorités de chaque professeur, de la simple question ponctuelle à la refonte complète d'un cours sur plusieurs sessions.</p>
+            </div>
+          </li>
+        </ul>
       </div>
-      <div class="stat-card">
-        <strong><span class="count" data-target="10">0</span>+</strong>
-        <span>Ressources originales<br />produites</span>
-      </div>
-    </div>
-
-    <div class="reveal" style="transition-delay: 120ms;">
-      <p class="livrables-label">Livrables clefs</p>
-      <ul class="livrables-list">
-        <li class="tip">
-          <svg class="icon icon-4" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
-          <span class="tip-trigger" tabindex="0" aria-describedby="tip-formations">Formations (en présentiel et sous forme de vidéo)</span>
-          <div class="tip-bubble" id="tip-formations" role="tooltip">
-            <strong>Formations</strong>
-            <p>Texte à éditer. Une dizaine d'ateliers animés en présentiel, complétés par des capsules vidéo consultables en autonomie. Les thèmes couvrent la planification de séance, l'animation à distance et l'évaluation.</p>
-          </div>
-        </li>
-
-        <li class="tip">
-          <svg class="icon icon-4" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
-          <span class="tip-trigger" tabindex="0" aria-describedby="tip-gabarits">Gabarits de planification</span>
-          <div class="tip-bubble" id="tip-gabarits" role="tooltip">
-            <strong>Gabarits de planification</strong>
-            <p>Texte à éditer. Documents structurants remis aux équipes professorales pour cadrer la répartition des heures, l'alternance présence/distance et l'alignement entre objectifs et évaluations.</p>
-          </div>
-        </li>
-
-        <li class="tip">
-          <svg class="icon icon-4" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
-          <span class="tip-trigger" tabindex="0" aria-describedby="tip-activites">Activités et ressources originales par programmation avec IA</span>
-          <div class="tip-bubble" id="tip-activites" role="tooltip">
-            <strong>Activités et ressources originales</strong>
-            <p>Texte à éditer. Outils web développés sur mesure pour répondre à un besoin didactique précis : générateur d'études de cas avec quiz intégré, environnement de visualisation, autodiagnostic avec recommandations personnalisées.</p>
-          </div>
-        </li>
-
-        <li class="tip">
-          <svg class="icon icon-4" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
-          <span class="tip-trigger" tabindex="0" aria-describedby="tip-collaboratif">Encadrement des travaux collaboratifs (charte d'équipe, outils d'autoévaluation)</span>
-          <div class="tip-bubble" id="tip-collaboratif" role="tooltip">
-            <strong>Encadrement des travaux collaboratifs</strong>
-            <p>Texte à éditer. Mise en place d'une charte d'équipe signée en début de session et d'une grille d'autoévaluation entre pairs, afin de rendre visible l'apport individuel et de rééquilibrer les notes de groupe.</p>
-          </div>
-        </li>
-
-        <li class="tip">
-          <svg class="icon icon-4" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
-          <span class="tip-trigger" tabindex="0" aria-describedby="tip-evaluation-seances">Outils d'évaluation des séances en ligne</span>
-          <div class="tip-bubble" id="tip-evaluation-seances" role="tooltip">
-            <strong>Outils d'évaluation des séances en ligne</strong>
-            <p>Texte à éditer. Questionnaires courts administrés en fin de séance pour recueillir la perception des étudiants et ajuster le dispositif en cours de session plutôt qu'après coup.</p>
-          </div>
-        </li>
-
-        <li class="tip">
-          <svg class="icon icon-4" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
-          <span class="tip-trigger" tabindex="0" aria-describedby="tip-documentation">Documentation sur des outils technologiques&nbsp;: Wooclap, Perusall</span>
-          <div class="tip-bubble" id="tip-documentation" role="tooltip">
-            <strong>Documentation sur des outils technologiques</strong>
-            <p>Texte à éditer. Guides pratiques orientés usage pédagogique plutôt que fonctionnalités : dans quels contextes l'outil apporte réellement quelque chose, et comment l'intégrer sans alourdir la préparation.</p>
-          </div>
-        </li>
-
-        <li class="tip">
-          <svg class="icon icon-4" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg>
-          <span class="tip-trigger" tabindex="0" aria-describedby="tip-individualises">Accompagnements individualisés</span>
-          <div class="tip-bubble" id="tip-individualises" role="tooltip">
-            <strong>Accompagnements individualisés</strong>
-            <p>Texte à éditer. Rencontres de suivi adaptées au rythme et aux priorités de chaque professeur, de la simple question ponctuelle à la refonte complète d'un cours sur plusieurs sessions.</p>
-          </div>
-        </li>
-      </ul>
     </div>
   </section>
 
@@ -1427,10 +1713,15 @@
         <p class="eyebrow">Collaborer</p>
         <h2>Pour un usage sobre et ciblé du numérique.</h2>
         <p>Conseil stratégique, accompagnement individualisé ou conception de ressources technopédagogiques&nbsp;: échangeons sur vos enjeux.</p>
+
+        <!-- L'adresse figure aussi en texte visible, et pas seulement
+             dans le bouton : le bouton n'a aucun sens sur papier et est
+             masqué à l'impression. Sans cette ligne, la page imprimée
+             ne porterait aucune coordonnée. -->
+        <p class="contact-email"><a href="mailto:fabien.brinjean@hotmail.com">fabien.brinjean@hotmail.com</a></p>
       </div>
 
-      <!-- Remplacez mailto: par votre adresse courriel -->
-      <a href="mailto:" class="btn-contact">
+      <a href="mailto:fabien.brinjean@hotmail.com" class="btn-contact">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
         Me contacter
       </a>
@@ -1668,6 +1959,41 @@
     window.addEventListener("scroll", updateProgress, { passive: true });
     window.addEventListener("resize", updateProgress);
     updateProgress();
+  })();
+
+  /* ============================================================
+     PRÉPARATION À L'IMPRESSION
+     Les chiffres des statistiques partent de 0 et ne s'incrémentent
+     qu'une fois entrés dans le champ de vision. Imprimer la page sans
+     l'avoir entièrement parcourue afficherait donc « 0+ » au lieu des
+     valeurs réelles — ce qu'aucune règle CSS ne peut corriger, la
+     valeur étant dans le texte du document.
+     ============================================================ */
+  (function () {
+    function settleCounters() {
+      document.querySelectorAll(".count").forEach(function (el) {
+        el.textContent = el.getAttribute("data-target");
+      });
+      document.querySelectorAll(".reveal").forEach(function (el) {
+        el.classList.add("is-visible");
+      });
+    }
+
+    window.addEventListener("beforeprint", settleCounters);
+
+    /* Safari ne déclenche pas beforeprint : on écoute aussi le passage
+       du média en mode impression. */
+    if (window.matchMedia) {
+      var printQuery = window.matchMedia("print");
+      var onChange = function (event) {
+        if (event.matches) settleCounters();
+      };
+      if (printQuery.addEventListener) {
+        printQuery.addEventListener("change", onChange);
+      } else if (printQuery.addListener) {
+        printQuery.addListener(onChange);
+      }
+    }
   })();
 </script>
 
