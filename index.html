@@ -901,15 +901,11 @@
   .timeline-item .org { margin-top: 0.25rem; font-size: 0.875rem; color: var(--muted-foreground); }
   .timeline-item .body { margin-top: 1rem; max-width: 34rem; line-height: 1.625; color: var(--muted-foreground); }
 
-  /* ── Colonne droite : formation académique (style terminal / CLI) ── */
-  .formation-label {
-    margin-bottom: 1.25rem;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.24em;
-    color: var(--muted-foreground);
-  }
+  /* ── Colonne droite : formation académique (fenêtre) ──────────
+     Le bloc n'a pas de libellé au-dessus : c'est la barre de titre
+     de la fenêtre qui nomme le contenu, d'où le poids typographique
+     un peu renforcé de .terminal-path.
+     ------------------------------------------------------------ */
   .terminal {
     overflow: hidden;
     border-radius: 0.7rem;
@@ -931,11 +927,22 @@
   .terminal-dot.one { background: var(--primary); }
   .terminal-dot.two { background: rgba(27, 39, 36, 0.4); }
   .terminal-dot.three { background: rgba(27, 39, 36, 0.2); }
-  .terminal-path { margin-left: 0.75rem; font-size: 0.75rem; color: var(--muted-foreground); }
+  /* Reprend la convention des petits libellés de la page (mono,
+     capitales, interlettrage large). La couleur sombre est explicite
+     car --muted-foreground vaut du crème dans la section Curriculum,
+     alors que la barre de titre reste en beige clair. */
+  .terminal-path {
+    margin-left: 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(27, 39, 36, 0.8);
+  }
+
+
   .terminal-body { display: flex; flex-direction: column; gap: 1.5rem; padding: 1.5rem; }
-  .terminal-prompt, .terminal-result { color: var(--muted-foreground); }
   .diploma-line1 { display: flex; align-items: flex-start; gap: 0.5rem; }
-  .diploma-line1 .prompt { color: var(--primary); user-select: none; }
   .diploma-line1 .title { color: var(--card-foreground); }
   .diploma-line2 { margin-top: 0.25rem; padding-left: 1rem; font-size: 0.75rem; color: var(--muted-foreground); }
   .diploma-line2 .arrow { color: var(--primary); }
@@ -1368,37 +1375,32 @@
           </div>
         </div>
 
-        <!-- Colonne droite : parcours académique (style terminal / CLI) -->
+        <!-- Colonne droite : formation académique (fenêtre) -->
         <div class="reveal" style="transition-delay: 90ms;">
-          <p class="formation-label">Formation · CLI</p>
           <div class="terminal">
             <div class="terminal-bar">
               <span class="terminal-dot one"></span>
               <span class="terminal-dot two"></span>
               <span class="terminal-dot three"></span>
-              <span class="terminal-path">~/formation</span>
+              <span class="terminal-path">Formation académique</span>
             </div>
             <div class="terminal-body">
-              <p class="terminal-prompt">$ parcours --formation</p>
-
               <div>
-                <div class="diploma-line1"><span class="prompt">$</span><span class="title">Maîtrise en Sciences de l'Éducation</span></div>
+                <div class="diploma-line1"><span class="title">Maîtrise en Sciences de l'Éducation</span></div>
                 <div class="diploma-line2"><span class="arrow">→</span> 2021 • Université de Montréal (Québec, Canada)</div>
               </div>
               <div>
-                <div class="diploma-line1"><span class="prompt">$</span><span class="title">Diplôme d'État d'enseignement de la musique en musiques actuelles</span></div>
+                <div class="diploma-line1"><span class="title">Diplôme d'État d'enseignement de la musique en musiques actuelles</span></div>
                 <div class="diploma-line2"><span class="arrow">→</span> 2013 • Cefedem Rhône-Alpes (France)</div>
               </div>
               <div>
-                <div class="diploma-line1"><span class="prompt">$</span><span class="title">Licence en musique</span></div>
+                <div class="diploma-line1"><span class="title">Licence en musique</span></div>
                 <div class="diploma-line2"><span class="arrow">→</span> 2005 • Université Lyon II (France)</div>
               </div>
               <div>
-                <div class="diploma-line1"><span class="prompt">$</span><span class="title">Diplôme d'Études Musicales en Jazz</span></div>
+                <div class="diploma-line1"><span class="title">Diplôme d'Études Musicales en Jazz</span></div>
                 <div class="diploma-line2"><span class="arrow">→</span> 2003 • Conservatoire de Lyon (France)</div>
               </div>
-
-              <p class="terminal-result">✓ 4 diplômes trouvés</p>
             </div>
           </div>
         </div>
