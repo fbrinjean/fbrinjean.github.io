@@ -844,15 +844,8 @@
     color: var(--foreground);
     border-top: 1px solid var(--border);
   }
-  .curriculum-title {
-    margin: 0.75rem 0 3.5rem;
-    font-family: var(--font-serif);
-    font-weight: 500;
-    font-size: 1.5rem;
-  }
-  @media (min-width: 768px) {
-    .curriculum-title { font-size: 1.875rem; }
-  }
+  /* Reprend .expertise-title pour la typographie ; ne gère que la marge */
+  .curriculum-title { margin: 0.75rem 0 3.5rem; }
 
   .curriculum-grid {
     display: grid;
@@ -1343,7 +1336,7 @@
   <section id="parcours" class="section-curriculum">
     <div class="container section-pad">
       <p class="eyebrow">Parcours professionnel et académique</p>
-      <h2 class="curriculum-title">Curriculum</h2>
+      <h2 class="expertise-title curriculum-title">Curriculum</h2>
 
       <div class="curriculum-grid">
 
