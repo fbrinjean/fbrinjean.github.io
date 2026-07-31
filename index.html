@@ -18,6 +18,11 @@
      VARIABLES — thème unique clair (v0 curriculum.html)
      ============================================================ */
   :root {
+    /* Hauteur réelle de l'en-tête collant, mesurée en JS au chargement
+       et au redimensionnement. La valeur ci-dessous n'est qu'un repli
+       si le script ne s'exécute pas. */
+    --header-height: 4.3rem;
+
     --background: #f5f1e8;
     --foreground: #1b2724;
 
@@ -86,8 +91,12 @@
     background: #b4472c;
     color: #fffaf0;
   }
-  section[id] {
-    scroll-margin-top: 5rem;
+  /* La cible d'un ancrage s'arrête juste sous l'en-tête collant.
+     Le retrait d'1px absorbe les arrondis sous-pixel qui laisseraient
+     apparaître une bande de la section précédente. */
+  section[id],
+  footer[id] {
+    scroll-margin-top: calc(var(--header-height) - 1px);
   }
 
   .icon {
@@ -1028,7 +1037,7 @@
      ============================================================ -->
 <header class="site-header">
   <div class="container">
-    <a href="#philosophie" class="brand">Fabien Brinjean</a>
+    <a href="#accueil" class="brand" aria-label="Retour en haut de la page">Fabien Brinjean</a>
 
     <nav class="main-nav" aria-label="Navigation principale">
       <a href="#expertise">Expertise</a>
@@ -1046,7 +1055,7 @@
   <!-- ============================================================
        HERO / MANIFESTE — progression typographique (entete.html Option 1)
        ============================================================ -->
-  <section id="philosophie" class="hero">
+  <section id="accueil" class="hero">
     <div class="container hero-grid">
 
       <div class="hero-main">
@@ -1488,6 +1497,33 @@
         dialog.classList.remove("is-open");
       });
     });
+  })();
+
+  /* ============================================================
+     HAUTEUR RÉELLE DE L'EN-TÊTE COLLANT
+     Publie la hauteur mesurée dans --header-height, utilisée par
+     scroll-margin-top pour que les ancrages s'arrêtent pile sous
+     l'en-tête, sans laisser voir la section précédente.
+     ============================================================ */
+  (function () {
+    var header = document.querySelector(".site-header");
+    if (!header) return;
+
+    function publishHeaderHeight() {
+      document.documentElement.style.setProperty(
+        "--header-height",
+        header.offsetHeight + "px"
+      );
+    }
+
+    publishHeaderHeight();
+    window.addEventListener("resize", publishHeaderHeight);
+
+    /* Les polices Google modifient la hauteur de l'en-tête une fois
+       chargées : on remesure à ce moment-là. */
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(publishHeaderHeight);
+    }
   })();
 
   /* ============================================================
