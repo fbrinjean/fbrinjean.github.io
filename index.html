@@ -631,13 +631,16 @@
   @media (min-width: 768px) {
     .case-study h2:not(.expertise-title) { font-size: 1.875rem; }
   }
-  .case-study > .container > p {
+  /* Paragraphes d'introduction de l'étude de cas */
+  .case-intro {
     font-size: 1rem;
     line-height: 1.625;
     color: var(--muted-foreground);
-    max-width: 36rem;
-    margin-bottom: 2.5rem;
+    max-width: 42rem;
+    margin: 2rem 0 0;
   }
+  .case-intro + .case-intro { margin-top: 1rem; }
+  .case-intro:last-of-type { margin-bottom: 2.5rem; }
   .stats-row {
     display: flex;
     flex-wrap: wrap;
@@ -835,14 +838,6 @@
   }
   .timeline-item .org { margin-top: 0.25rem; font-size: 0.875rem; color: var(--muted-foreground); }
   .timeline-item .body { margin-top: 1rem; max-width: 34rem; line-height: 1.625; color: var(--muted-foreground); }
-
-  .guitar-details {
-    margin-top: 1.5rem;
-    display: grid;
-    gap: 1.25rem;
-  }
-  .guitar-details dt { font-weight: 500; color: var(--foreground); }
-  .guitar-details dd { margin-top: 0.4rem; font-size: 0.8125rem; line-height: 1.6; color: var(--muted-foreground); }
 
   /* ── Colonne droite : formation académique (style terminal / CLI) ── */
   .formation-label {
@@ -1088,7 +1083,7 @@
               <p>Sur le terrain, ma polyvalence me permet d'intervenir à différentes étapes d'un projet. Je peux accompagner un enseignant dans la production d'une vidéo - de la scénarisation au montage, jusqu'à l'intégration dans l'environnement numérique d'apprentissage et, parfois, la composition de sa musique. Pour répondre à un besoin didactique précis, je suis en mesure de programmer avec IA un outil web sur-mesure (génération d'étude de cas + environnement pour le visualiser avec quiz intégré, outil de présentation de l'enseignement comodal avec autodiagnostic et recommandations personnalisées). J'ai aussi collaboré avec un auteur de jeux pour ludifier des enseignements théoriques traditionnellement plus difficiles d'accès pour les étudiants.</p>
               <p>Nombre d'outils technologiques sont puissants et doivent être utilisés à bon escient. Mais ils ne sont pas la clef de la préservation des développements cognitifs essentiels (lecture, synthèse, communication) ni de la qualité du lien entre l'enseignant et sa classe.</p>
               <p><mark class="highlight">Ainsi, de telles réalisations, aussi brillantes soient-elles, ne sont aucunement des prérequis pour le succès d'une collaboration avec un enseignant.</mark> D'une part, car ce ne sont pas forcément les attentes de notre collaborateur, mais d'autre part, car la solution à ses enjeux est peut-être ailleurs, sous une forme plus pragmatique et accessible.</p>
-              <p>Une activité de lecture bien planifiée sera peut-être plus pertinente - et moins coûteuse en temps et en énergie - qu'une vidéo, tout en accompagnant les étudiants à développer leur compétence de lecture de textes disciplinaires. L'identification de mécanismes vertueux pour encadrer une activité collaborative sera bien plus pertinente que l'ajout d'une innovation technique superflue. <em></em>Et cetera.</em></p>
+              <p>Une activité de lecture bien planifiée sera peut-être plus pertinente - et moins coûteuse en temps et en énergie - qu'une vidéo, tout en accompagnant les étudiants à développer leur compétence de lecture de textes disciplinaires. L'identification de mécanismes vertueux pour encadrer une activité collaborative sera bien plus pertinente que l'ajout d'une innovation technique superflue. <em>Et cetera.</em></p>
             </div>
           </div>
         </dialog>
@@ -1154,7 +1149,9 @@
 
     <h3 style="margin-top: 2.5rem; font-family: var(--font-serif); font-weight: 500; font-size: 1.5rem; line-height: 1.25; max-width: 42rem;">Hybridation de programme à la Faculté des Sciences de l'Éducation</h3>
 
-    <p style="margin: 2rem 0;">Partenariat étroit avec le décanat pour encadrer la transition numérique sur plusieurs années. Conception et déploiement d'un dispositif complet d'accompagnement du corps enseignant — de la réflexion stratégique initiale jusqu'à la production des ressources et l'évaluation des pratiques.</p>
+    <p class="case-intro">Partenariat étroit avec le décanat pour amorcer un changement de pratique au sein de la faculté, motivé par des facteurs externes (s'aligner sur les pratiques d'autres universités, répondre aux attentes des étudiants) comme internes (volonté de bénéficier des apports de l'enseignement hybride). Cette collaboration pose les bases d'une transition qui se fera sur plusieurs années.</p>
+
+    <p class="case-intro">Conception et déploiement d'un accompagnement complet à plusieurs niveaux : soutien du décanat dans ses prises de décision, formations auprès du corps enseignant, productions de ressources et suivis individuels.</p>
 
     <div class="stats-row reveal">
       <div class="stat-card">
