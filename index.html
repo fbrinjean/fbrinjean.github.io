@@ -35,8 +35,6 @@
     --muted: #ded8cc;
     --muted-foreground: #59635f;
 
-    --accent: #e4dfd5;
-
     --border: #c7c0b4;
     --ring: #b4472c;
 
@@ -104,9 +102,7 @@
     flex-shrink: 0;
     vertical-align: middle;
   }
-  .icon-sm { width: 0.875rem; height: 0.875rem; }
-  .icon-4   { width: 1rem;      height: 1rem; }
-  .icon-5   { width: 1.25rem;   height: 1.25rem; }
+  .icon-4 { width: 1rem; height: 1rem; }
 
   .container {
     max-width: 80rem;
@@ -116,10 +112,6 @@
   @media (min-width: 768px) {
     .container { padding: 0 2.5rem; }
   }
-  .font-serif { font-family: var(--font-serif); }
-  .font-mono  { font-family: var(--font-mono); }
-  .text-gold  { color: var(--primary); }
-
   .eyebrow {
     font-family: var(--font-mono);
     font-size: 0.75rem;
@@ -288,9 +280,6 @@
     gap: 1.75rem;
   }
 
-  /* Eyebrow mono */
-  .hero-main .eyebrow { margin-bottom: 0; }
-
   /* Texte d'introduction — grisé, normal */
   .hero-intro {
     font-size: 1.2rem;
@@ -317,15 +306,6 @@
     color: var(--primary);
   }
 
-  /* Sous-texte */
-  .hero-sub {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: var(--muted-foreground);
-    max-width: 44rem;
-    text-wrap: pretty;
-  }
-
   /* Badges / CV */
   .hero-badges {
     display: flex;
@@ -335,11 +315,16 @@
     padding-top: 0.5rem;
   }
 
-  /* Colonne photo — style v0 */
+  /* Colonne photo — style v0
+     Le plafond de largeur vaut la largeur de la colonne à ≥1024px.
+     Il n'a donc aucun effet sur la disposition à deux colonnes, mais
+     empêche la photo de s'étirer sur toute la page en dessous de ce
+     seuil, où la grille repasse sur une seule colonne. */
   .hero-side {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    max-width: 18rem;
   }
 
   .hero-photo {
@@ -357,6 +342,17 @@
     text-align: center;
     padding: 1rem;
     width: 100%;
+  }
+
+  /* Quand .hero-photo porte une vraie image : object-fit recadre au
+     lieu de déformer si les proportions du fichier ne sont pas 4:5,
+     et le retrait du padding évite que l'image soit rentrée dans son
+     cadre. object-position privilégie le haut, donc le visage. */
+  img.hero-photo {
+    display: block;
+    padding: 0;
+    object-fit: cover;
+    object-position: center top;
   }
 
   .hero-location {
@@ -424,8 +420,8 @@
     border: 1px solid var(--border);
     border-radius: 0.5rem;
     display: grid;
-    grid-template-rows: auto 1fr auto;
-    min-height: 280px;
+    grid-template-rows: auto 1fr;
+    min-height: 17.5rem;
     gap: 1rem;
   }
 
@@ -873,7 +869,6 @@
   }
   .timeline-item { position: relative; padding-bottom: 3.5rem; }
   .timeline-item:last-child { padding-bottom: 0; }
-  .timeline-item--aside { opacity: 0.82; }
   .timeline-dot {
     position: absolute;
     left: calc(-2rem - 5px);
@@ -897,13 +892,6 @@
     margin-top: 0.75rem;
     font-family: var(--font-serif);
     font-size: 1.25rem;
-    font-weight: 500;
-    color: var(--foreground);
-  }
-  .timeline-item h4 {
-    margin-top: 0.75rem;
-    font-family: var(--font-serif);
-    font-size: 1.0625rem;
     font-weight: 500;
     color: var(--foreground);
   }
@@ -1082,7 +1070,16 @@
 
       <!-- Photo + localisation — style v0 curriculum -->
       <div class="hero-side">
-        <!-- Remplacez le div par <img src="photo.jpg" alt="[Votre nom]"> quand prête -->
+        <!-- PHOTO — format 4:5 (portrait), idéalement 600 × 750 px.
+             Quand elle sera prête, remplacer le div ci-dessous par :
+
+             <img class="hero-photo" src="photo.jpg" width="600" height="750"
+                  alt="Portrait de Fabien Brinjean" />
+
+             Conserver class, width et height : les deux dimensions
+             réservent la place avant le chargement et évitent que la
+             page sursaute. Ne pas ajouter loading="lazy", l'image étant
+             visible d'emblée. -->
         <div class="hero-photo">[Votre photo]</div>
         <p class="hero-location">Conseiller pédagogique<br>Pédagogue<br>Artiste</p>
       </div>
