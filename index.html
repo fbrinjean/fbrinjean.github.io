@@ -373,7 +373,7 @@
     gap: 3rem;
   }
   @media (min-width: 1024px) {
-    .hero-grid { grid-template-columns: 1fr 18rem; align-items: start; }
+    .hero-grid { grid-template-columns: 1fr 16rem; align-items: start; }
   }
 
   .hero-main {
@@ -430,38 +430,55 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    max-width: 18rem;
+    max-width: 16rem;
   }
 
-  .hero-photo {
-    aspect-ratio: 4 / 5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  /* Conteneur du duo de photos */
+  .hero-photo-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 5;
+    overflow: hidden;
     border: 1px solid var(--border);
-    background: var(--muted);
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--muted-foreground);
-    text-align: center;
-    padding: 1rem;
-    width: 100%;
   }
 
-  /* Quand .hero-photo porte une vraie image. On redéclare width,
-     height et aspect-ratio explicitement : une <img> calcule sa
-     hauteur depuis ses dimensions intrinsèques par défaut, ce qui
-     écrase l'aspect-ratio du sélecteur parent. */
-  img.hero-photo {
-    display: block;
+  /* Les deux photos occupent exactement le même cadre */
+  .hero-photo-wrap img {
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: auto;
-    aspect-ratio: 4 / 5;
-    padding: 0;
+    height: 100%;
     object-fit: cover;
-    object-position: center top;
+    object-position: center 15%;
+    display: block;
+  }
+
+  /* Photo N&B — en dessous, toujours visible (pas de transition) */
+  .hero-photo-bw {
+    filter: grayscale(100%);
+    opacity: 1;
+    z-index: 1;
+  }
+
+  /* Photo couleur — par-dessus, invisible par défaut.
+     Seule cette couche fait la transition : si les deux
+     images transitaient ensemble, leur opacité se sommerait
+     et produirait un flash lumineux au milieu du fondu. */
+  .hero-photo-color {
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    z-index: 2;
+  }
+
+  /* Au survol : la couleur apparaît, révélant la photo dessous */
+  .hero-photo-wrap:hover .hero-photo-color,
+  .hero-photo-wrap:focus-within .hero-photo-color {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-photo-bw,
+    .hero-photo-color { transition: none; }
   }
 
   .hero-location {
@@ -1199,9 +1216,9 @@
       display: none !important;
     }
 
-    /* Le placeholder de photo ne s'imprime pas, mais une vraie image
-       (img.hero-photo) reste imprimée : le sélecteur ne vise que le div. */
-    div.hero-photo { display: none; }
+    /* À l'impression, on garde uniquement la photo N&B */
+    .hero-photo-color { display: none; }
+    .hero-photo-bw { opacity: 1; }
 
     /* Le titre principal est masqué à l'écran par .sr-only. À
        l'impression il devient le titre du document, sans quoi la page
@@ -1384,20 +1401,22 @@
 
       <!-- Photo + localisation — style v0 curriculum -->
       <div class="hero-side">
-        <!-- PHOTO — format 4:5 (portrait), idéalement 600 × 750 px.
-             Quand elle sera prête, remplacer le div ci-dessous par :
-
-             <img class="hero-photo" src="photo.jpg" width="600" height="750"
-                  alt="Portrait de Fabien Brinjean" />
-
-             Conserver class, width et height : les deux dimensions
-             réservent la place avant le chargement et évitent que la
-             page sursaute. Ne pas ajouter loading="lazy", l'image étant
-             visible d'emblée. -->
-        <img class="hero-photo"
-             src="assets/images/photo01.jpg"
-             alt="Portrait de Fabien Brinjean" />
-        <p class="hero-location">Conseiller pédagogique<br>Pédagogue<br>Artiste</p>
+        <!-- PHOTOS — même fichier source, dimensions 1639 × 2048 px (3:5).
+             photo03.jpg : version noir et blanc (affichée par défaut via CSS filter)
+             photo04.jpg : version couleur (apparaît au survol)
+             Les attributs width/height reproduisent les dimensions réelles du
+             fichier pour que le navigateur réserve l'espace avant le chargement. -->
+        <div class="hero-photo-wrap" role="img" aria-label="Portrait de Fabien Brinjean">
+          <img class="hero-photo-bw"
+               src="assets/images/photo03.jpg"
+               alt="Portrait de Fabien Brinjean en noir et blanc"
+               width="1639" height="2048" />
+          <img class="hero-photo-color"
+               src="assets/images/photo04.jpg"
+               alt=""
+               width="1639" height="2048"
+               aria-hidden="true" />
+        </div>
       </div>
 
     </div>
