@@ -450,12 +450,15 @@
     width: 100%;
   }
 
-  /* Quand .hero-photo porte une vraie image : object-fit recadre au
-     lieu de déformer si les proportions du fichier ne sont pas 4:5,
-     et le retrait du padding évite que l'image soit rentrée dans son
-     cadre. object-position privilégie le haut, donc le visage. */
+  /* Quand .hero-photo porte une vraie image. On redéclare width,
+     height et aspect-ratio explicitement : une <img> calcule sa
+     hauteur depuis ses dimensions intrinsèques par défaut, ce qui
+     écrase l'aspect-ratio du sélecteur parent. */
   img.hero-photo {
     display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
     padding: 0;
     object-fit: cover;
     object-position: center top;
@@ -1391,7 +1394,9 @@
              réservent la place avant le chargement et évitent que la
              page sursaute. Ne pas ajouter loading="lazy", l'image étant
              visible d'emblée. -->
-        <div class="hero-photo">[Votre photo]</div>
+        <img class="hero-photo"
+             src="assets/images/photo01.jpg"
+             alt="Portrait de Fabien Brinjean" />
         <p class="hero-location">Conseiller pédagogique<br>Pédagogue<br>Artiste</p>
       </div>
 
