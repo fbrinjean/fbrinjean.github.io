@@ -1165,6 +1165,31 @@
     min-height: 5rem;
   }
   .contact-form .btn-contact { margin-top: 0.75rem; align-self: flex-start; }
+
+  /* Message de confirmation / erreur après soumission */
+  .form-feedback {
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    padding: 0.6rem 0.875rem;
+    border-radius: 0.375rem;
+    border-left: 3px solid;
+  }
+  .form-feedback.is-success {
+    border-color: var(--primary-foreground);
+    background: rgba(255, 250, 240, 0.12);
+    color: var(--primary-foreground);
+  }
+  .form-feedback.is-error {
+    border-color: #fca5a5;
+    background: rgba(252, 165, 165, 0.1);
+    color: #fca5a5;
+  }
+  /* Bouton désactivé pendant l'envoi */
+  .btn-contact:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
   .contact-bottom {
     margin-top: 4rem;
     display: flex;
@@ -1767,7 +1792,8 @@
       </div>
 
       <!-- ── Formulaire de contact (Formspree) -->
-      <form class="contact-form" action="https://formspree.io/f/xppaabka" method="POST">
+      <form class="contact-form" id="contact-form"
+            action="https://formspree.io/f/xppaabka" method="POST">
         <label class="form-label" for="contact-name">Nom</label>
         <input class="form-input" id="contact-name" type="text" name="name" autocomplete="name" required />
 
@@ -1777,10 +1803,12 @@
         <label class="form-label" for="contact-message">Message</label>
         <textarea class="form-input form-textarea" id="contact-message" name="message" rows="4" required></textarea>
 
-        <button class="btn-contact" type="submit">
+        <button class="btn-contact" type="submit" id="contact-submit">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
-          Envoyer
+          <span id="contact-submit-label">Envoyer</span>
         </button>
+
+        <p class="form-feedback" id="contact-feedback" aria-live="polite" hidden></p>
       </form>
     </div>
 
@@ -2016,6 +2044,61 @@
     window.addEventListener("scroll", updateProgress, { passive: true });
     window.addEventListener("resize", updateProgress);
     updateProgress();
+  })();
+
+  /* ============================================================
+     FORMULAIRE DE CONTACT — soumission asynchrone (Formspree)
+     Intercepte le POST, envoie les données en arrière-plan avec
+     fetch(), affiche un message de confirmation dans la page sans
+     redirection. Le formulaire HTML natif reste fonctionnel si
+     JavaScript est désactivé (repli vers la page Formspree).
+     ============================================================ */
+  (function () {
+    var form = document.getElementById("contact-form");
+    if (!form) return;
+
+    var submitBtn   = document.getElementById("contact-submit");
+    var submitLabel = document.getElementById("contact-submit-label");
+    var feedback    = document.getElementById("contact-feedback");
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      /* État : en cours */
+      submitBtn.disabled = true;
+      submitLabel.textContent = "Envoi…";
+      feedback.hidden = true;
+      feedback.className = "form-feedback";
+
+      fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { "Accept": "application/json" }
+      })
+      .then(function (response) {
+        if (response.ok) {
+          /* Succès */
+          feedback.textContent = "Message envoyé. Je vous répondrai dès que possible.";
+          feedback.classList.add("is-success");
+          feedback.hidden = false;
+          form.reset();
+          submitLabel.textContent = "Envoyer";
+          submitBtn.disabled = false;
+        } else {
+          return response.json().then(function (data) {
+            throw new Error(data.error || "Erreur lors de l'envoi.");
+          });
+        }
+      })
+      .catch(function (err) {
+        /* Erreur */
+        feedback.textContent = "Une erreur est survenue. Veuillez réessayer ou me contacter directement.";
+        feedback.classList.add("is-error");
+        feedback.hidden = false;
+        submitLabel.textContent = "Envoyer";
+        submitBtn.disabled = false;
+      });
+    });
   })();
 
   /* ============================================================
