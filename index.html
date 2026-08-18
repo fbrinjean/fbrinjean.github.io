@@ -916,9 +916,6 @@
     grid-template-columns: 1fr;
     gap: 2.5rem;
   }
-  @media (min-width: 768px) {
-    .engagements-grid { grid-template-columns: repeat(3, 1fr); }
-  }
   .engagement {
     display: flex;
     flex-direction: column;
@@ -937,13 +934,24 @@
     font-weight: 500;
     line-height: 1.375;
   }
-  @media (min-width: 768px) {
-    .engagement h3 { min-height: 3rem; }
-  }
   .engagement p {
     font-size: 1rem;
     line-height: 1.625;
     color: var(--muted-foreground);
+  }
+  @media (min-width: 768px) {
+    .engagements-grid {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto auto;
+      align-items: start;
+    }
+    .engagement {
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-row: span 3;
+      gap: 0;
+      row-gap: 1rem;
+    }
   }
   .mini-list {
     display: flex;
