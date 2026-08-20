@@ -482,7 +482,8 @@
 
   /* Au survol : la couleur apparaît, révélant la photo dessous */
   .hero-photo-wrap:hover .hero-photo-color,
-  .hero-photo-wrap:focus-within .hero-photo-color {
+  .hero-photo-wrap:focus-within .hero-photo-color,
+  .hero-photo-wrap.is-color .hero-photo-color {
     opacity: 1;
   }
 
@@ -2148,6 +2149,22 @@
         printQuery.addListener(onChange);
       }
     }
+  })();
+
+  /* ============================================================
+     PHOTO HERO — TOGGLE TACTILE
+     Sur mobile, :hover reste collé après le toucher. On gère
+     le passage couleur/N&B via une classe togglee au tap,
+     en ignorant les événements souris (pointerfine = souris).
+     ============================================================ */
+  (function () {
+    var wrap = document.querySelector(".hero-photo-wrap");
+    if (!wrap) return;
+
+    wrap.addEventListener("touchend", function (e) {
+      e.preventDefault(); /* évite le :hover synthétique du navigateur */
+      wrap.classList.toggle("is-color");
+    });
   })();
 </script>
 
