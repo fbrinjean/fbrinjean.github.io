@@ -480,14 +480,9 @@
     z-index: 2;
   }
 
-  /* Au survol souris : la couleur apparaît (pointeur précis uniquement) */
-  @media (pointer: fine) {
-    .hero-photo-wrap:hover .hero-photo-color,
-    .hero-photo-wrap:focus-within .hero-photo-color {
-      opacity: 1;
-    }
-  }
-  /* Toggle tactile géré par JS */
+  /* Au survol : la couleur apparaît, révélant la photo dessous */
+  .hero-photo-wrap:hover .hero-photo-color,
+  .hero-photo-wrap:focus-within .hero-photo-color,
   .hero-photo-wrap.is-color .hero-photo-color {
     opacity: 1;
   }
@@ -1457,11 +1452,11 @@
              fichier pour que le navigateur réserve l'espace avant le chargement. -->
         <div class="hero-photo-wrap" role="img" aria-label="Portrait de Fabien Brinjean">
           <img class="hero-photo-bw"
-               src="assets/images/photo03.jpg"
+               src="assets/images/photo01.jpg"
                alt="Portrait de Fabien Brinjean en noir et blanc"
                width="1639" height="2048" />
           <img class="hero-photo-color"
-               src="assets/images/photo04.jpg"
+               src="assets/images/photo02.jpg"
                alt=""
                width="1639" height="2048"
                aria-hidden="true" />
