@@ -480,9 +480,14 @@
     z-index: 2;
   }
 
-  /* Au survol : la couleur apparaît, révélant la photo dessous */
-  .hero-photo-wrap:hover .hero-photo-color,
-  .hero-photo-wrap:focus-within .hero-photo-color,
+  /* Au survol souris : la couleur apparaît (pointeur précis uniquement) */
+  @media (pointer: fine) {
+    .hero-photo-wrap:hover .hero-photo-color,
+    .hero-photo-wrap:focus-within .hero-photo-color {
+      opacity: 1;
+    }
+  }
+  /* Toggle tactile géré par JS */
   .hero-photo-wrap.is-color .hero-photo-color {
     opacity: 1;
   }
