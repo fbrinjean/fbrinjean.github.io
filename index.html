@@ -458,8 +458,6 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    object-position: center 15%;
     display: block;
   }
 
@@ -1445,20 +1443,18 @@
 
       <!-- Photo + localisation — style v0 curriculum -->
       <div class="hero-side">
-        <!-- PHOTOS — même fichier source, dimensions 1639 × 2048 px (3:5).
-             photo03.jpg : version noir et blanc (affichée par défaut via CSS filter)
-             photo04.jpg : version couleur (apparaît au survol)
-             Les attributs width/height reproduisent les dimensions réelles du
-             fichier pour que le navigateur réserve l'espace avant le chargement. -->
+        <!-- PHOTOS — dimensions 480 × 800 px (3:5).
+             photo21.jpg : version noir et blanc (affichée par défaut via CSS filter)
+             photo22.jpg : version couleur (apparaît au survol / au tap) -->
         <div class="hero-photo-wrap" role="img" aria-label="Portrait de Fabien Brinjean">
           <img class="hero-photo-bw"
                src="assets/images/photo01.jpg"
                alt="Portrait de Fabien Brinjean en noir et blanc"
-               width="1639" height="2048" />
+               width="480" height="800" />
           <img class="hero-photo-color"
                src="assets/images/photo02.jpg"
                alt=""
-               width="1639" height="2048"
+               width="480" height="800"
                aria-hidden="true" />
         </div>
       </div>
