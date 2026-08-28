@@ -478,8 +478,13 @@
     z-index: 2;
   }
 
-  /* Au survol : la couleur apparaît, révélant la photo dessous */
-  .hero-photo-wrap:hover .hero-photo-color,
+  /* Au survol (souris uniquement) : la couleur apparaît.
+     On restreint :hover aux pointeurs fins pour éviter qu'un tap
+     mobile ne déclenche brièvement la couleur puis la reperde.
+     Le tactile est géré via la classe .is-color (voir le script). */
+  @media (hover: hover) and (pointer: fine) {
+    .hero-photo-wrap:hover .hero-photo-color { opacity: 1; }
+  }
   .hero-photo-wrap:focus-within .hero-photo-color,
   .hero-photo-wrap.is-color .hero-photo-color {
     opacity: 1;
