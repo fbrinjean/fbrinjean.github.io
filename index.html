@@ -402,6 +402,10 @@
     max-width: 48rem;
     text-wrap: pretty;
   }
+  /* Les termes en gras ressortent dans le rouge terracotta du site */
+  .hero-intro strong {
+    color: var(--primary);
+  }
 
   /* Climax — serif avec bordure gauche terracotta
      font-weight est déclaré explicitement : le gras venait autrefois
@@ -471,7 +475,6 @@
 
   /* Photo N&B — en dessous, toujours visible (pas de transition) */
   .hero-photo-bw {
-    filter: grayscale(100%);
     opacity: 1;
     z-index: 1;
   }
@@ -1435,11 +1438,12 @@
         <h1 class="sr-only">Fabien Brinjean, conseiller technopédagogique en enseignement supérieur</h1>
 
         <p class="hero-intro">
-          Face à l'omniprésence de l'IA et à la transition numérique de l'enseignement supérieur, j'accompagne les institutions et le corps enseignant dans l'évolution de leurs méthodes et l'adoption réfléchie des technologies&hellip;
+          Conseiller technopédagogique en enseignement supérieur, j'accompagne les facultés et le corps enseignant dans la diversification des <strong>approches pédagogiques</strong>, l'<strong>hybridation de l'enseignement</strong> ou la préservation de l'<strong>intégrité des évaluations</strong>.
         </p>
+        <p class="hero-intro">Face à l'omniprésence de l'IA et à la transition numérique de l'enseignement supérieur, je promeus une adoption réfléchie des technologies&hellip;</p>
 
         <p class="hero-climax">
-          &hellip;pour à la fois <strong>relever les défis actuels</strong> et <strong>préserver les compétences cognitives essentielles</strong>.
+          &hellip; pour à la fois <strong>relever les défis actuels</strong> et <strong>préserver les compétences cognitives essentielles</strong>.
         </p>
 
         <div class="hero-badges">
