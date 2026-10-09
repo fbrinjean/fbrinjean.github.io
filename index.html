@@ -289,6 +289,9 @@
     text-decoration: none;
     color: var(--foreground);
   }
+  .brand-degree {
+    font-weight: 400;
+  }
   .main-nav {
     display: none;
     align-items: center;
@@ -444,9 +447,13 @@
      empêche la photo de s'étirer sur toute la page en dessous de ce
      seuil, où la grille repasse sur une seule colonne. */
   .hero-side {
+    /* Ces deux valeurs déplacent ensemble le cadre et la signature. */
+    --photo-frame-offset-x: 0.8rem;
+    --photo-frame-offset-y: 0.8rem;
+    --hero-signature-gap: 0.75rem;
+
     display: flex;
     flex-direction: column;
-    gap: 1rem;
     width: 16rem;
     max-width: 100%;
     margin: 0 auto;
@@ -457,11 +464,24 @@
 
   /* Conteneur du duo de photos */
   .hero-photo-wrap {
+    --photo-frame-border-width: 1px;
+    --photo-frame-color: var(--primary);
+
     position: relative;
+    isolation: isolate;
     width: 100%;
     aspect-ratio: 3 / 5;
-    overflow: hidden;
+    overflow: visible;
     border: 1px solid var(--border);
+  }
+  .hero-photo-wrap::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border: var(--photo-frame-border-width) solid var(--photo-frame-color);
+    pointer-events: none;
+    transform: translate(var(--photo-frame-offset-x), var(--photo-frame-offset-y));
   }
 
   /* Les deux photos occupent exactement le même cadre */
@@ -504,6 +524,28 @@
   @media (prefers-reduced-motion: reduce) {
     .hero-photo-bw,
     .hero-photo-color { transition: none; }
+  }
+
+  .hero-signature {
+    display: grid;
+    gap: 0.1rem;
+    margin-top: calc(var(--photo-frame-offset-y) + var(--hero-signature-gap));
+    padding-right: 0.65rem;
+    border-right: 1px solid var(--primary);
+    transform: translateX(var(--photo-frame-offset-x));
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    line-height: 1.35;
+    letter-spacing: 0.06em;
+    text-align: right;
+    color: var(--muted-foreground);
+  }
+  @media (max-width: 639px) {
+    .hero-signature {
+      grid-template-columns: repeat(2, auto);
+      justify-content: end;
+      column-gap: 1rem;
+    }
   }
 
   .hero-location {
@@ -1409,7 +1451,7 @@
      ============================================================ -->
 <header class="site-header">
   <div class="container">
-    <a href="#accueil" class="brand" aria-label="Retour en haut de la page">Fabien Brinjean</a>
+    <a href="#accueil" class="brand" aria-label="Retour en haut de la page">Fabien Brinjean<span class="brand-degree"></span>, M.Éd.</span></a>
 
     <nav class="main-nav" aria-label="Navigation principale">
       <a href="#realisations">Réalisations</a>
@@ -1481,6 +1523,12 @@
                width="480" height="800"
                aria-hidden="true" />
         </div>
+        <ul class="hero-signature" aria-label="Rôles professionnels">
+          <li>Conseiller</li>
+          <li>Formateur</li>
+          <li>Pédagogue</li>
+          <li>Artiste</li>
+        </ul>
       </div>
 
     </div>
@@ -1719,7 +1767,7 @@
             <div class="reading-dialog-content">
               <p>La démocratisation de l'intelligence artificielle générative, combinée aux bouleversements post-crise sanitaire, met au défi certaines approches traditionnelles et impose de repenser en profondeur nos modèles d'évaluation. J'accompagne les facultés et le corps enseignant dans cette transition à la fois stratégique et pédagogique.</p>
               <p>Il est ainsi nécessaire de considérer des solutions technologiques de sécurisation, mais aussi, dans certains cas, un retour à des approches analogiques ou similaires (papier-crayon ou ordinateur verrouillé en salle de classe sous surveillance). J'outille aussi le corps enseignant pour préserver la valeur des travaux collaboratifs en intégrant des mécanismes qui responsabilisent les membres et rendent les notes plus équitables en tenant compte de l'apport individuel.</p>
-              <p><mark class="highlight">Il faut oser scruter et arpenter ce territoire sans carte qui se révèle, sans pour autant s'interdire des mesures de bon sens qui, à ce jour et dans certaines circonstances, sont seules capables de préserver l'intégrité des examens et la valeur des diplômes.</mark></p>
+              <p><mark class="highlight">Il faut oser scruter et arpenter ce territoire sans carte qui se révèle, sans pour autant s'interdire des mesures de bon sens qui permettent de préserver l'intégrité des examens et la valeur des diplômes.</mark></p>
             </div>
           </div>
         </dialog>
