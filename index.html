@@ -179,7 +179,9 @@
      Le retrait d'1px absorbe les arrondis sous-pixel qui laisseraient
      apparaître une bande de la section précédente. */
   section[id],
-  footer[id] {
+  footer[id],
+  .hero-note,
+  .hero-note-call a {
     scroll-margin-top: calc(var(--header-height) - 1px);
   }
 
@@ -439,6 +441,96 @@
     align-items: center;
     gap: 0.75rem;
     padding-top: 0.5rem;
+  }
+
+  /* Note de bas de page « IA » (prototype 02) : appel terracotta après
+     « technologies », note en petit sous les badges, après un filet
+     court. « Textes rédigés sans IA » est souligné d'un trait imparfait
+     (prototype 03) dont on règle l'épaisseur et la couleur ici. */
+  .hero-note-call {
+    margin-left: 0.08em;
+    font-family: var(--font-mono);
+    font-size: 0.6em;
+    font-weight: 600;
+    line-height: 0;
+    /* Décalage relatif plutôt que vertical-align : la ligne garde
+       exactement l'interligne du paragraphe. */
+    position: relative;
+    top: -0.75em;
+    vertical-align: baseline;
+  }
+  .hero-note-call a,
+  .hero-note-num {
+    color: var(--primary);
+  }
+  .hero-note-call a:hover,
+  .hero-note-num:hover {
+    text-decoration: underline;
+  }
+  .hero-note {
+    --hero-note-underline-color: var(--primary);
+    --hero-note-underline-width: 0.5px;
+
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.1rem auto;
+    justify-content: start;
+    column-gap: 0.3rem;
+    row-gap: 0.05rem;
+    margin-top: 0.5rem;
+    padding-top: 0.85rem;
+    font-size: 0.8rem;
+    color: var(--muted-foreground);
+  }
+  .hero-note::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3.5rem;
+    border-top: 1px solid var(--muted-foreground);
+  }
+  .hero-note-num {
+    grid-row: 1 / span 2;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    line-height: 1.6;
+  }
+  .hero-note-code {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    line-height: 1.6;
+  }
+  .hero-note-hand {
+    position: relative;
+    justify-self: start;
+    padding-bottom: 0.3rem;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.9rem;
+    line-height: 1.35;
+    white-space: nowrap;
+    color: var(--foreground);
+  }
+  /* Le SVG s'étire sur la largeur du texte ; non-scaling-stroke garde
+     une épaisseur constante quelle que soit cette largeur. */
+  .hero-note-underline {
+    position: absolute;
+    left: -0.1rem;
+    bottom: -0.05rem;
+    width: calc(100% + 0.5rem);
+    height: 0.5rem;
+    overflow: visible;
+    pointer-events: none;
+  }
+  .hero-note-underline path {
+    fill: none;
+    stroke: var(--hero-note-underline-color);
+    stroke-width: var(--hero-note-underline-width);
+    stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
   }
 
 
@@ -1440,7 +1532,8 @@
     .engagement,
     .timeline-item,
     .tip-bubble,
-    .reading-dialog { break-inside: avoid; }
+    .reading-dialog,
+    .hero-note { break-inside: avoid; }
     h1, h2, h3 { break-after: avoid; }
   }
 </style>
@@ -1483,7 +1576,7 @@
         <p class="hero-intro">
           Conseiller technopédagogique en enseignement supérieur, j'accompagne les facultés et le corps enseignant dans la <strong>diversification des approches pédagogiques</strong>, l'<strong>hybridation de l'enseignement</strong> ou la préservation de l'<strong>intégrité des évaluations</strong>.
         </p>
-        <p class="hero-intro">Face à l'omniprésence de l'IA et à la transition numérique de l'enseignement supérieur, je promeus une adoption réfléchie des technologies&hellip;</p>
+        <p class="hero-intro">Face à l'omniprésence de l'IA et à la transition numérique de l'enseignement supérieur, je promeus une adoption réfléchie des technologies<sup class="hero-note-call"><a href="#note-ia" id="appel-note-ia" role="doc-noteref" aria-label="Note 1">1</a></sup>&hellip;</p>
 
         <p class="hero-climax">
           &hellip; pour à la fois <strong>relever les défis actuels</strong> et <strong>préserver les compétences cognitives essentielles</strong>.
@@ -1506,6 +1599,13 @@
             Télécharger le CV
           </a>
         </div>
+
+        <!-- Note de bas de page appelée après « technologies » -->
+        <p class="hero-note" id="note-ia" role="doc-footnote">
+          <a class="hero-note-num" href="#appel-note-ia" role="doc-backlink" aria-label="Note 1, retour au texte">1</a>
+          <span class="hero-note-code">Site codé avec IA</span>
+          <span class="hero-note-hand">Textes rédigés sans IA<!--<svg class="hero-note-underline" viewBox="0 0 120 8" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M1.5 5.2 C 18 3.4, 34 6.4, 52 4.6 S 88 2.6, 104 4.4 C 110 5, 115 4.2, 118.5 3" /></svg>--></span>
+        </p>
       </div>
 
       <!-- Photo + localisation — style v0 curriculum -->
