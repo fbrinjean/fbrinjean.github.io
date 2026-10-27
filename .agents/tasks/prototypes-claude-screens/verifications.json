@@ -1,0 +1,143 @@
+{
+  "375": {
+    "scrollWidth": 375,
+    "clientWidth": 375,
+    "bodyScroll": 375,
+    "height": 14444,
+    "protos": [
+      {
+        "n": 1,
+        "Codé avec IA": "visible (\"IBM Plex Mono\", 11.52px)",
+        "Rédigé sans IA": "visible (Lora italique, 14.72px)"
+      },
+      {
+        "n": 2,
+        "Codé avec IA": "visible (\"IBM Plex Mono\", 12px)",
+        "Rédigé sans IA": "visible (Lora italique, 14.4px)"
+      },
+      {
+        "n": 3,
+        "Codé avec IA": "visible (\"IBM Plex Mono\", 12px)",
+        "Rédigé sans IA": "visible (Lora italique, 16.8px)"
+      },
+      {
+        "n": 4,
+        "Codé avec IA": "visible (\"IBM Plex Mono\", 10.88px)",
+        "Rédigé sans IA": "visible (Lora italique, 14.72px)"
+      },
+      {
+        "n": 5,
+        "Codé avec IA": "visible (\"IBM Plex Mono\", 12px)",
+        "Rédigé sans IA": "visible (Lora italique, 16px)"
+      },
+      {
+        "n": 6,
+        "Codé avec IA": "visible (\"IBM Plex Mono\", 10.88px)",
+        "Rédigé sans IA": "visible (Lora italique, 14.4px)"
+      }
+    ],
+    "imgsOk": true,
+    "imgCount": 6,
+    "imgsKo": [],
+    "over": [],
+    "fonts": [
+      "IBM Plex Mono:true",
+      "Lora:true",
+      "Source Sans 3:true"
+    ]
+  },
+  "768": {
+    "scrollWidth": 768,
+    "clientWidth": 768,
+    "bodyScroll": 768,
+    "height": 10887,
+    "protos": [
+      {
+        "n": 1,
+        "Codé avec IA": "visible (\"IBM Plex Mono\", 11.52px)",
+        "Rédigé sans IA": "visible (Lora italique, 14.72px)"
+      },
+      {
+        "n": 2,
+        "Codé avec IA": "visible (\"IBM Plex Mono\", 12px)",
+        "Rédigé sans IA": "visible (Lora italique, 14.4px)"
+      },
+      {
+        "n": 3,
+        "Codé avec IA": "visible (\"IBM Plex Mono\", 12px)",
+        "Rédigé sans IA": "visible (Lora italique, 16.8px)"
+      },
+      {
+        "n": 4,
+        "Codé avec IA": "visible (\"IBM Plex Mono\", 10.88px)",
+        "Rédigé sans IA": "visible (Lora italique, 14.72px)"
+      },
+      {
+        "n": 5,
+        "Codé avec IA": "visible (\"IBM Plex Mono\", 12px)",
+        "Rédigé sans IA": "visible (Lora italique, 16px)"
+      },
+      {
+        "n": 6,
+        "Codé avec IA": "visible (\"IBM Plex Mono\", 10.88px)",
+        "Rédigé sans IA": "visible (Lora italique, 14.4px)"
+      }
+    ],
+    "imgsOk": true,
+    "imgCount": 6,
+    "imgsKo": [],
+    "over": [],
+    "fonts": [
+      "IBM Plex Mono:true",
+      "Lora:true",
+      "Source Sans 3:true"
+    ]
+  },
+  "1440": {
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "bodyScroll": 1440,
+    "height": 7145,
+    "protos": [
+      {
+        "n": 1,
+        "Codé avec IA": "visible (\"IBM Plex Mono\", 11.52px)",
+        "Rédigé sans IA": "visible (Lora italique, 14.72px)"
+      },
+      {
+        "n": 2,
+        "Codé avec IA": "visible (\"IBM Plex Mono\", 12px)",
+        "Rédigé sans IA": "visible (Lora italique, 14.4px)"
+      },
+      {
+        "n": 3,
+        "Codé avec IA": "visible (\"IBM Plex Mono\", 12px)",
+        "Rédigé sans IA": "visible (Lora italique, 16.8px)"
+      },
+      {
+        "n": 4,
+        "Codé avec IA": "visible (\"IBM Plex Mono\", 10.88px)",
+        "Rédigé sans IA": "visible (Lora italique, 14.72px)"
+      },
+      {
+        "n": 5,
+        "Codé avec IA": "visible (\"IBM Plex Mono\", 12px)",
+        "Rédigé sans IA": "visible (Lora italique, 16px)"
+      },
+      {
+        "n": 6,
+        "Codé avec IA": "visible (\"IBM Plex Mono\", 10.88px)",
+        "Rédigé sans IA": "visible (Lora italique, 14.4px)"
+      }
+    ],
+    "imgsOk": true,
+    "imgCount": 6,
+    "imgsKo": [],
+    "over": [],
+    "fonts": [
+      "IBM Plex Mono:true",
+      "Lora:true",
+      "Source Sans 3:true"
+    ]
+  }
+}

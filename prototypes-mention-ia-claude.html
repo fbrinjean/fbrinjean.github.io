@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Prototypes — mention «&nbsp;Codé avec IA / Rédigé sans IA&nbsp;» (planche B)</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300..700;1,300..700&family=Lora:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;600&display=swap"
+  rel="stylesheet"
+/>
+
+<style>
+  /* ============================================================
+     VARIABLES — reprises telles quelles de index.html
+     ============================================================ */
+  :root {
+    --background: #f5f1e8;
+    --foreground: #1b2724;
+
+    --card: #ebe5d9;
+    --card-foreground: #1b2724;
+
+    --primary: #b4472c;
+    --primary-foreground: #fffaf0;
+
+    --muted: #ded8cc;
+    --muted-foreground: #59635f;
+
+    --border: #c7c0b4;
+    --ring: #b4472c;
+
+    --font-sans: 'Source Sans 3', system-ui, sans-serif;
+    --font-serif: 'Lora', Georgia, 'Times New Roman', serif;
+    --font-mono: 'IBM Plex Mono', 'Fira Code', monospace;
+  }
+
+  /* ============================================================
+     BASE
+     ============================================================ */
+  * { box-sizing: border-box; border-color: var(--border); }
+  body {
+    margin: 0;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4, p, ul, ol, dl, dd, dt, figure { margin: 0; }
+  ul, ol { list-style: none; padding: 0; }
+  ::selection { background: #b4472c; color: #fffaf0; }
+
+  .container {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .container { padding: 0 2.5rem; }
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--primary);
+  }
+
+  /* Filtre SVG partagé, défini une seule fois dans le document */
+  .svg-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+  /* ============================================================
+     PLANCHE — éléments propres à la page de comparaison
+     ============================================================ */
+  .board-header {
+    padding: 3.5rem 0 3rem;
+  }
+  .board-title {
+    margin-top: 0.75rem;
+    font-family: var(--font-serif);
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  .board-lede {
+    margin-top: 1rem;
+    max-width: 46rem;
+    font-size: 1.05rem;
+    color: var(--muted-foreground);
+    text-wrap: pretty;
+  }
+  .board-lede + .board-lede { margin-top: 0.6rem; }
+  .board-index {
+    margin-top: 1.75rem;
+    display: grid;
+    gap: 0.35rem 2rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    color: var(--muted-foreground);
+  }
+  @media (min-width: 640px) {
+    .board-index { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 40rem; }
+  }
+  .board-index b { color: var(--primary); font-weight: 600; margin-right: 0.5rem; }
+
+  .proto { border-top: 1px solid var(--border); }
+  .proto-head {
+    background: var(--card);
+    padding: 2.5rem 0 2.25rem;
+  }
+  .proto-head .container {
+    display: grid;
+    gap: 1.25rem;
+  }
+  @media (min-width: 900px) {
+    .proto-head .container { grid-template-columns: 15rem 1fr; gap: 2.5rem; }
+  }
+  .proto-num {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--primary);
+  }
+  .proto-name {
+    margin-top: 0.35rem;
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  .proto-notes {
+    display: grid;
+    gap: 0.7rem;
+    max-width: 52rem;
+  }
+  .proto-notes > div { display: grid; gap: 0.1rem; }
+  @media (min-width: 640px) {
+    .proto-notes > div { grid-template-columns: 7rem 1fr; gap: 1rem; }
+  }
+  .proto-notes dt {
+    padding-top: 0.2rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+  }
+  .proto-notes dd { font-size: 0.98rem; line-height: 1.55; text-wrap: pretty; }
+
+  .sim {
+    background: var(--background);
+    border-top: 1px dashed var(--border);
+  }
+  .sim-label {
+    padding-top: 0.9rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--border);
+  }
+
+  .board-reco {
+    border-top: 3px solid var(--primary);
+    background: var(--card);
+    padding: 3.5rem 0 4rem;
+  }
+  .board-reco h2 {
+    margin-top: 0.75rem;
+    font-family: var(--font-serif);
+    font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+  }
+  .reco-grid {
+    margin-top: 2rem;
+    display: grid;
+    gap: 2rem;
+  }
+  @media (min-width: 900px) {
+    .reco-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
+  }
+  .reco-grid h3 {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .reco-grid h3 span {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--primary);
+  }
+  .reco-grid p { margin-top: 0.6rem; max-width: 36rem; text-wrap: pretty; }
+  .reco-foot {
+    margin-top: 2.5rem;
+    max-width: 52rem;
+    font-size: 0.95rem;
+    color: var(--muted-foreground);
+    text-wrap: pretty;
+  }
+
+  /* ============================================================
+     HERO — copie des règles de index.html (sans transitions,
+     survol ni script : la photo reste en noir et blanc)
+     ============================================================ */
+  .hero {
+    padding-top: 4rem;
+    padding-bottom: 6rem;
+  }
+  @media (min-width: 768px) {
+    .hero { padding-top: 6rem; padding-bottom: 6rem; }
+  }
+  .sim .hero { padding-top: 3rem; }
+  @media (min-width: 768px) {
+    .sim .hero { padding-top: 4.5rem; }
+  }
+
+  .hero-grid {
+    display: grid;
+    gap: 3rem;
+  }
+  @media (min-width: 1024px) {
+    .hero-grid { grid-template-columns: 1fr 16rem; align-items: start; }
+  }
+
+  .hero-main {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+
+  .hero-intro {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: var(--muted-foreground);
+    max-width: 48rem;
+    text-wrap: pretty;
+  }
+  .hero-intro strong { color: var(--primary); }
+
+  .hero-climax {
+    font-family: var(--font-serif);
+    font-size: clamp(1.75rem, 3.5vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    color: var(--foreground);
+    border-left: 3px solid var(--primary);
+    padding-left: 1.5rem;
+    max-width: 52rem;
+    text-wrap: balance;
+  }
+  .hero-climax strong { font-weight: 700; color: var(--primary); }
+
+  .hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    padding-top: 0.5rem;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 0.875rem;
+    border-radius: 9999px;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    letter-spacing: 0.05em;
+    font-weight: 550;
+    white-space: nowrap;
+    border: 1px solid var(--border);
+    color: var(--muted-foreground);
+  }
+  .badge.badge-gold {
+    border-color: rgba(180, 71, 44, 0.35);
+    color: var(--primary);
+    background: rgba(180, 71, 44, 0.07);
+  }
+  .btn-outline {
+    border: 1px solid var(--foreground);
+    padding: 0.5rem 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--foreground);
+    white-space: nowrap;
+  }
+
+  .hero-side {
+    --photo-frame-offset-x: 0.8rem;
+    --photo-frame-offset-y: 0.8rem;
+    --hero-signature-gap: 0.75rem;
+
+    display: flex;
+    flex-direction: column;
+    width: 16rem;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  @media (min-width: 1024px) {
+    .hero-side { width: 16rem; margin: 0; }
+  }
+
+  .hero-photo-wrap {
+    --photo-frame-border-width: 1px;
+    --photo-frame-color: var(--primary);
+
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    aspect-ratio: 3 / 5;
+    overflow: visible;
+    border: 1px solid var(--border);
+  }
+  .hero-photo-wrap::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border: var(--photo-frame-border-width) solid var(--photo-frame-color);
+    pointer-events: none;
+    transform: translate(var(--photo-frame-offset-x), var(--photo-frame-offset-y));
+  }
+  .hero-photo-wrap img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 1;
+  }
+
+  .hero-signature {
+    display: grid;
+    gap: 0.1rem;
+    margin-top: calc(var(--photo-frame-offset-y) + var(--hero-signature-gap));
+    padding-right: 0.65rem;
+    border-right: 1px solid var(--primary);
+    transform: translateX(var(--photo-frame-offset-x));
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    line-height: 1.35;
+    letter-spacing: 0.06em;
+    text-align: right;
+    color: var(--muted-foreground);
+  }
+  @media (max-width: 639px) {
+    .hero-signature {
+      grid-template-columns: repeat(2, auto);
+      justify-content: end;
+      column-gap: 1rem;
+    }
+  }
+
+  /* ============================================================
+     PROTOTYPE 1 — Colophon de la signature
+     La mention prolonge la liste des rôles, sous le même filet
+     vertical, mais le filet change de nature : trame pointillée
+     face au code, trait d'encre ondulé face à l'écriture.
+     ============================================================ */
+  .p1-colophon {
+    display: grid;
+    justify-items: end;
+    gap: 0.3rem;
+    margin-top: 1.1rem;
+    transform: translateX(var(--photo-frame-offset-x));
+    text-align: right;
+  }
+  .p1-colophon > span {
+    position: relative;
+    display: block;
+    padding-right: 0.65rem;
+  }
+  .p1-code {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    line-height: 1.35;
+    letter-spacing: 0.06em;
+    color: var(--muted-foreground);
+  }
+  .p1-code::after {
+    content: "";
+    position: absolute;
+    top: 0.15em;
+    bottom: 0.1em;
+    right: -0.5px;
+    width: 2px;
+    background: repeating-linear-gradient(
+      to bottom,
+      var(--primary) 0 2px,
+      transparent 2px 4px
+    );
+  }
+  .p1-hand {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.92rem;
+    line-height: 1.25;
+    color: var(--foreground);
+  }
+  .p1-ink {
+    position: absolute;
+    top: -0.1em;
+    right: -2px;
+    width: 5px;
+    height: calc(100% + 0.2em);
+    overflow: visible;
+  }
+
+  /* ============================================================
+     PROTOTYPE 2 — Note de bas de page
+     Un appel de note sur « l'IA » du manifeste, résolu par une
+     note académique sous les badges.
+     ============================================================ */
+  .p2-call {
+    margin-left: 0.08em;
+    font-family: var(--font-mono);
+    font-size: 0.6em;
+    font-weight: 600;
+    line-height: 0;
+    /* Décalage relatif plutôt que vertical-align : la ligne de texte
+       garde exactement l'interligne du paragraphe. */
+    position: relative;
+    top: -0.75em;
+    vertical-align: baseline;
+    color: var(--primary);
+  }
+  .p2-note {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.1rem auto;
+    justify-content: start;
+    column-gap: 0.3rem;
+    row-gap: 0.05rem;
+    margin-top: 0.5rem;
+    padding-top: 0.85rem;
+    font-size: 0.8rem;
+    color: var(--muted-foreground);
+  }
+  .p2-note::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3.5rem;
+    border-top: 1px solid var(--muted-foreground);
+  }
+  .p2-num {
+    grid-row: 1 / span 2;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    line-height: 1.6;
+    color: var(--primary);
+  }
+  .p2-code {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    line-height: 1.6;
+  }
+  .p2-hand {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.9rem;
+    line-height: 1.35;
+    color: var(--foreground);
+  }
+
+  /* ============================================================
+     PROTOTYPE 3 — Commentaire de source
+     Une ligne de code commentée, curseur compris, puis sa
+     réponse manuscrite, en tête du manifeste.
+     ============================================================ */
+  .p3-source {
+    display: grid;
+    gap: 0.2rem;
+    margin-bottom: -0.25rem;
+  }
+  .p3-code {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+    color: var(--muted-foreground);
+  }
+  .p3-slash { color: var(--primary); }
+  .p3-caret {
+    display: inline-block;
+    width: 0.55em;
+    height: 1.1em;
+    margin-left: 0.3em;
+    vertical-align: -0.2em;
+    background: var(--primary);
+    opacity: 0.7;
+  }
+  .p3-hand {
+    /* Aligne l'écriture sur le texte du commentaire, après « // » :
+       trois caractères de 0,6 em à 0,75 rem. */
+    margin-left: 1.35rem;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.35;
+    color: var(--foreground);
+  }
+  .p3-hand-text {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.3rem;
+  }
+  .p3-underline {
+    position: absolute;
+    left: -0.1rem;
+    bottom: -0.05rem;
+    width: calc(100% + 0.5rem);
+    height: 0.5rem;
+    overflow: visible;
+  }
+
+  /* ============================================================
+     PROTOTYPE 4 — Tampon d'atelier
+     Une étiquette tamponnée posée de biais sur l'angle inférieur
+     gauche du portrait, qui déborde du cadre.
+     ============================================================ */
+  .p4-anchor { position: relative; }
+  .p4-stamp {
+    position: absolute;
+    left: -1.75rem;
+    bottom: 2.5rem;
+    z-index: 3;
+    display: grid;
+    justify-items: center;
+    gap: 0.25rem;
+    padding: 0.6rem 0.9rem 0.65rem;
+    background: rgba(245, 241, 232, 0.95);
+    color: var(--primary);
+    text-align: center;
+    transform: rotate(-5deg);
+    box-shadow: 0 1px 2px rgba(27, 39, 36, 0.12);
+  }
+  .p4-stamp::before {
+    content: "";
+    position: absolute;
+    inset: 0.2rem;
+    border: 1.5px solid currentColor;
+    outline: 1px solid currentColor;
+    outline-offset: 2px;
+    opacity: 0.85;
+    filter: url(#ink-rough);
+    pointer-events: none;
+  }
+  .p4-code {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    line-height: 1.4;
+  }
+  .p4-sep {
+    display: block;
+    width: 2.25rem;
+    border-top: 1px solid currentColor;
+    opacity: 0.6;
+  }
+  .p4-hand {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.92rem;
+    line-height: 1.2;
+  }
+
+  /* ============================================================
+     PROTOTYPE 5 — Le trait
+     Un même trait, d'abord en pixels sur une grille, puis à
+     l'encre. Chaque moitié porte sa ligne de texte.
+     ============================================================ */
+  .p5-trace {
+    display: flex;
+    align-items: stretch;
+    gap: 0.8rem;
+    margin-top: 0.25rem;
+  }
+  .p5-svg {
+    flex-shrink: 0;
+    width: 4.6rem;
+    height: 3.5rem;
+  }
+  .p5-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .p5-code {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+    color: var(--muted-foreground);
+  }
+  .p5-hand {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.1;
+    color: var(--foreground);
+  }
+
+  /* ============================================================
+     PROTOTYPE 6 — Les deux bords
+     Les deux lignes encadrent le portrait verticalement : le code
+     longe le bord gris de la photo, l'écriture longe le cadre
+     terracotta. Deux sens de lecture opposés.
+     ============================================================ */
+  .p6-anchor { position: relative; }
+  .p6-mention { margin: 0; }
+  .p6-code,
+  .p6-hand {
+    position: absolute;
+    writing-mode: vertical-rl;
+    white-space: nowrap;
+  }
+  .p6-code {
+    left: -1.45rem;
+    bottom: 0;
+    transform: rotate(180deg);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    color: var(--muted-foreground);
+  }
+  .p6-hand {
+    top: var(--photo-frame-offset-y);
+    right: calc(-1 * (var(--photo-frame-offset-x) + 1.5rem));
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.9rem;
+    line-height: 1;
+    color: var(--foreground);
+  }
+  .p6-pixel,
+  .p6-drop {
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+  .p6-pixel { margin-bottom: 0.45rem; }
+  .p6-drop { margin-top: 0.45rem; }
+</style>
+</head>
+<body>
+
+<!-- Filtre d'encre irrégulière utilisé par le tampon du prototype 4 -->
+<svg class="svg-defs" aria-hidden="true" focusable="false">
+  <filter id="ink-rough" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="7" />
+    <feDisplacementMap in="SourceGraphic" scale="2.4" />
+  </filter>
+</svg>
+
+<!-- ============================================================
+     INTRODUCTION DE LA PLANCHE
+     ============================================================ -->
+<header class="board-header">
+  <div class="container">
+    <p class="eyebrow">Planche de comparaison · proposition B</p>
+    <h1 class="board-title">Six manières de dire «&nbsp;Codé avec IA / Rédigé sans IA&nbsp;» dans le hero</h1>
+    <p class="board-lede">Chaque bloc ci-dessous simule la première section du site, à l’identique, avec une seule différence&#8239;: la mention. Les photos, liens et animations sont figés. Chaque prototype a sa propre logique de placement et de forme, précédée d’une note sur son parti pris.</p>
+    <p class="board-lede">Fil conducteur&#8239;: la machine en IBM Plex Mono (trame, curseur, pixel), la main en Lora italique (encre, trait, papier). Les visuels sont en SVG, décoratifs, en terracotta ou vert sombre.</p>
+    <ol class="board-index">
+      <li><b>01</b>Colophon de la signature</li>
+      <li><b>02</b>Note de bas de page</li>
+      <li><b>03</b>Commentaire de source</li>
+      <li><b>04</b>Tampon d’atelier</li>
+      <li><b>05</b>Le trait</li>
+      <li><b>06</b>Les deux bords</li>
+    </ol>
+  </div>
+</header>
+
+<main>
+
+  <!-- ==========================================================
+       PROTOTYPE 01 — COLOPHON DE LA SIGNATURE
+       ========================================================== -->
+  <article class="proto" aria-labelledby="p1-title">
+    <div class="proto-head">
+      <div class="container">
+        <div>
+          <p class="proto-num">Prototype 01</p>
+          <h2 class="proto-name" id="p1-title">Colophon de la signature</h2>
+        </div>
+        <dl class="proto-notes">
+          <div><dt>Placement</dt><dd>Sous la liste Conseiller / Formateur / Pédagogue / Artiste, alignée sur le même filet vertical, après une courte interruption.</dd></div>
+          <div><dt>Intention</dt><dd>Le colophon des livres, qui dit comment l’objet a été fabriqué. Le filet terracotta change de nature&#8239;: une trame de points face au code, un trait d’encre ondulé face à l’écriture. Le dispositif existant fait tout le travail, sans ajout d’élément.</dd></div>
+          <div><dt>Limites</dt><dd>Très discret, presque caché sous la photo. La proximité avec les rôles peut faire lire la mention comme un cinquième rôle&#8239;; l’espace et le changement de typographie doivent suffire à l’éviter.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="sim">
+      <div class="container sim-label" aria-hidden="true">Simulation · hero</div>
+      <section class="hero" aria-label="Simulation du hero, prototype 01">
+        <div class="container hero-grid">
+          <div class="hero-main">
+            <p class="hero-intro">
+              Conseiller technopédagogique en enseignement supérieur, j'accompagne les facultés et le corps enseignant dans la <strong>diversification des approches pédagogiques</strong>, l'<strong>hybridation de l'enseignement</strong> ou la préservation de l'<strong>intégrité des évaluations</strong>.
+            </p>
+            <p class="hero-intro">Face à l'omniprésence de l'IA et à la transition numérique de l'enseignement supérieur, je promeus une adoption réfléchie des technologies&hellip;</p>
+            <p class="hero-climax">
+              &hellip; pour à la fois <strong>relever les défis actuels</strong> et <strong>préserver les compétences cognitives essentielles</strong>.
+            </p>
+            <div class="hero-badges">
+              <span class="badge badge-gold">+12 ans d'enseignement</span>
+              <span class="badge badge-gold">+6 ans de conseil pédagogique</span>
+              <span class="badge badge-gold">Bilingue français/anglais</span>
+              <span class="btn-outline">Télécharger le CV</span>
+            </div>
+          </div>
+
+          <div class="hero-side">
+            <div class="hero-photo-wrap" role="img" aria-label="Portrait de Fabien Brinjean">
+              <img src="assets/images/photo02.jpg" alt="Portrait de Fabien Brinjean" width="480" height="800" />
+            </div>
+            <ul class="hero-signature" aria-label="Rôles professionnels">
+              <li>Conseiller</li>
+              <li>Formateur</li>
+              <li>Pédagogue</li>
+              <li>Artiste</li>
+            </ul>
+            <p class="p1-colophon">
+              <span class="p1-code">Codé avec IA</span>
+              <span class="p1-hand">Rédigé sans IA<svg class="p1-ink" viewBox="0 0 5 20" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M2.6 0.6 C 3.9 5, 1.2 9.5, 2.5 13.5 S 3.4 18.4, 2.2 19.6" fill="none" stroke="#b4472c" stroke-width="1.3" stroke-linecap="round" vector-effect="non-scaling-stroke" /></svg></span>
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </article>
+
+  <!-- ==========================================================
+       PROTOTYPE 02 — NOTE DE BAS DE PAGE
+       ========================================================== -->
+  <article class="proto" aria-labelledby="p2-title">
+    <div class="proto-head">
+      <div class="container">
+        <div>
+          <p class="proto-num">Prototype 02</p>
+          <h2 class="proto-name" id="p2-title">Note de bas de page</h2>
+        </div>
+        <dl class="proto-notes">
+          <div><dt>Placement</dt><dd>Un appel de note terracotta après «&nbsp;l’IA&nbsp;» dans le deuxième paragraphe du manifeste&#8239;; la note elle-même ferme la colonne de gauche, sous les badges, après un filet court.</dd></div>
+          <div><dt>Intention</dt><dd>Le geste le plus universitaire de la planche. La mention s’accroche au mot exact où le site parle d’IA&#8239;: le manifeste énonce une adoption réfléchie, la note montre qu’elle est appliquée au site lui-même. Le numéro et le filet suffisent comme visuel.</dd></div>
+          <div><dt>Limites</dt><dd>Touche au texte du manifeste (un caractère). Sur mobile, la note arrive avant la photo, donc plus tôt dans la lecture. L’appel ne doit pas devenir un lien tant qu’aucune autre note n’existe.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="sim">
+      <div class="container sim-label" aria-hidden="true">Simulation · hero</div>
+      <section class="hero" aria-label="Simulation du hero, prototype 02">
+        <div class="container hero-grid">
+          <div class="hero-main">
+            <p class="hero-intro">
+              Conseiller technopédagogique en enseignement supérieur, j'accompagne les facultés et le corps enseignant dans la <strong>diversification des approches pédagogiques</strong>, l'<strong>hybridation de l'enseignement</strong> ou la préservation de l'<strong>intégrité des évaluations</strong>.
+            </p>
+            <p class="hero-intro">Face à l'omniprésence de l'IA<sup class="p2-call">1</sup> et à la transition numérique de l'enseignement supérieur, je promeus une adoption réfléchie des technologies&hellip;</p>
+            <p class="hero-climax">
+              &hellip; pour à la fois <strong>relever les défis actuels</strong> et <strong>préserver les compétences cognitives essentielles</strong>.
+            </p>
+            <div class="hero-badges">
+              <span class="badge badge-gold">+12 ans d'enseignement</span>
+              <span class="badge badge-gold">+6 ans de conseil pédagogique</span>
+              <span class="badge badge-gold">Bilingue français/anglais</span>
+              <span class="btn-outline">Télécharger le CV</span>
+            </div>
+            <p class="p2-note">
+              <span class="p2-num" aria-hidden="true">1</span>
+              <span class="p2-code">Codé avec IA</span>
+              <span class="p2-hand">Rédigé sans IA</span>
+            </p>
+          </div>
+
+          <div class="hero-side">
+            <div class="hero-photo-wrap" role="img" aria-label="Portrait de Fabien Brinjean">
+              <img src="assets/images/photo02.jpg" alt="Portrait de Fabien Brinjean" width="480" height="800" />
+            </div>
+            <ul class="hero-signature" aria-label="Rôles professionnels">
+              <li>Conseiller</li>
+              <li>Formateur</li>
+              <li>Pédagogue</li>
+              <li>Artiste</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </article>
+
+  <!-- ==========================================================
+       PROTOTYPE 03 — COMMENTAIRE DE SOURCE
+       ========================================================== -->
+  <article class="proto" aria-labelledby="p3-title">
+    <div class="proto-head">
+      <div class="container">
+        <div>
+          <p class="proto-num">Prototype 03</p>
+          <h2 class="proto-name" id="p3-title">Commentaire de source</h2>
+        </div>
+        <dl class="proto-notes">
+          <div><dt>Placement</dt><dd>En tête de la colonne de gauche, au-dessus du premier paragraphe, comme l’en-tête d’un fichier.</dd></div>
+          <div><dt>Intention</dt><dd>La première ligne est un commentaire de code, avec ses barres obliques et un curseur en attente. La seconde lui répond à la main, soulignée d’un trait de plume et alignée sur le texte du commentaire. La conversation entre les deux registres se lit dans l’ordre.</dd></div>
+          <div><dt>Limites</dt><dd>C’est la première chose lue&#8239;: la mention passe avant le manifeste, ce qui contredit la hiérarchie souhaitée. Le «&nbsp;//&nbsp;» parle aux développeurs plus qu’au public universitaire.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="sim">
+      <div class="container sim-label" aria-hidden="true">Simulation · hero</div>
+      <section class="hero" aria-label="Simulation du hero, prototype 03">
+        <div class="container hero-grid">
+          <div class="hero-main">
+            <div class="p3-source">
+              <p class="p3-code"><span class="p3-slash" aria-hidden="true">//&nbsp;</span>Codé avec IA<span class="p3-caret" aria-hidden="true"></span></p>
+              <p class="p3-hand"><span class="p3-hand-text">Rédigé sans IA<svg class="p3-underline" viewBox="0 0 120 8" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M1.5 5.2 C 18 3.4, 34 6.4, 52 4.6 S 88 2.6, 104 4.4 C 110 5, 115 4.2, 118.5 3" fill="none" stroke="#b4472c" stroke-width="1.4" stroke-linecap="round" vector-effect="non-scaling-stroke" /></svg></span></p>
+            </div>
+            <p class="hero-intro">
+              Conseiller technopédagogique en enseignement supérieur, j'accompagne les facultés et le corps enseignant dans la <strong>diversification des approches pédagogiques</strong>, l'<strong>hybridation de l'enseignement</strong> ou la préservation de l'<strong>intégrité des évaluations</strong>.
+            </p>
+            <p class="hero-intro">Face à l'omniprésence de l'IA et à la transition numérique de l'enseignement supérieur, je promeus une adoption réfléchie des technologies&hellip;</p>
+            <p class="hero-climax">
+              &hellip; pour à la fois <strong>relever les défis actuels</strong> et <strong>préserver les compétences cognitives essentielles</strong>.
+            </p>
+            <div class="hero-badges">
+              <span class="badge badge-gold">+12 ans d'enseignement</span>
+              <span class="badge badge-gold">+6 ans de conseil pédagogique</span>
+              <span class="badge badge-gold">Bilingue français/anglais</span>
+              <span class="btn-outline">Télécharger le CV</span>
+            </div>
+          </div>
+
+          <div class="hero-side">
+            <div class="hero-photo-wrap" role="img" aria-label="Portrait de Fabien Brinjean">
+              <img src="assets/images/photo02.jpg" alt="Portrait de Fabien Brinjean" width="480" height="800" />
+            </div>
+            <ul class="hero-signature" aria-label="Rôles professionnels">
+              <li>Conseiller</li>
+              <li>Formateur</li>
+              <li>Pédagogue</li>
+              <li>Artiste</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </article>
+
+  <!-- ==========================================================
+       PROTOTYPE 04 — TAMPON D'ATELIER
+       ========================================================== -->
+  <article class="proto" aria-labelledby="p4-title">
+    <div class="proto-head">
+      <div class="container">
+        <div>
+          <p class="proto-num">Prototype 04</p>
+          <h2 class="proto-name" id="p4-title">Tampon d’atelier</h2>
+        </div>
+        <dl class="proto-notes">
+          <div><dt>Placement</dt><dd>Sur l’angle inférieur gauche du portrait, de biais, à cheval entre la photo et l’extérieur du cadre.</dd></div>
+          <div><dt>Intention</dt><dd>La mention traitée comme un objet&#8239;: une étiquette tamponnée à l’encre terracotta, double filet irrégulier, comme sur un tirage d’artiste ou une pièce d’archive. Le tampon est le geste manuel par excellence et il certifie ici les deux registres à la fois.</dd></div>
+          <div><dt>Limites</dt><dd>Le plus visible de la planche, il attire l’œil vers la photo plutôt que vers le manifeste. Il masque une partie du portrait et l’inclinaison rompt avec la rigueur orthogonale du site.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="sim">
+      <div class="container sim-label" aria-hidden="true">Simulation · hero</div>
+      <section class="hero" aria-label="Simulation du hero, prototype 04">
+        <div class="container hero-grid">
+          <div class="hero-main">
+            <p class="hero-intro">
+              Conseiller technopédagogique en enseignement supérieur, j'accompagne les facultés et le corps enseignant dans la <strong>diversification des approches pédagogiques</strong>, l'<strong>hybridation de l'enseignement</strong> ou la préservation de l'<strong>intégrité des évaluations</strong>.
+            </p>
+            <p class="hero-intro">Face à l'omniprésence de l'IA et à la transition numérique de l'enseignement supérieur, je promeus une adoption réfléchie des technologies&hellip;</p>
+            <p class="hero-climax">
+              &hellip; pour à la fois <strong>relever les défis actuels</strong> et <strong>préserver les compétences cognitives essentielles</strong>.
+            </p>
+            <div class="hero-badges">
+              <span class="badge badge-gold">+12 ans d'enseignement</span>
+              <span class="badge badge-gold">+6 ans de conseil pédagogique</span>
+              <span class="badge badge-gold">Bilingue français/anglais</span>
+              <span class="btn-outline">Télécharger le CV</span>
+            </div>
+          </div>
+
+          <div class="hero-side">
+            <div class="p4-anchor">
+              <div class="hero-photo-wrap" role="img" aria-label="Portrait de Fabien Brinjean">
+                <img src="assets/images/photo02.jpg" alt="Portrait de Fabien Brinjean" width="480" height="800" />
+              </div>
+              <p class="p4-stamp">
+                <span class="p4-code">Codé avec IA</span>
+                <span class="p4-sep" aria-hidden="true"></span>
+                <span class="p4-hand">Rédigé sans IA</span>
+              </p>
+            </div>
+            <ul class="hero-signature" aria-label="Rôles professionnels">
+              <li>Conseiller</li>
+              <li>Formateur</li>
+              <li>Pédagogue</li>
+              <li>Artiste</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </article>
+
+  <!-- ==========================================================
+       PROTOTYPE 05 — LE TRAIT
+       ========================================================== -->
+  <article class="proto" aria-labelledby="p5-title">
+    <div class="proto-head">
+      <div class="container">
+        <div>
+          <p class="proto-num">Prototype 05</p>
+          <h2 class="proto-name" id="p5-title">Le trait</h2>
+        </div>
+        <dl class="proto-notes">
+          <div><dt>Placement</dt><dd>Sous la rangée de badges, au pied de la colonne de gauche, alignée sur le bord du manifeste.</dd></div>
+          <div><dt>Intention</dt><dd>Un petit pictogramme raconte la distinction à lui seul&#8239;: un même trait descend en marches de pixels sur une grille, puis se poursuit à l’encre jusqu’à une goutte. La ligne en mono se place face à la partie pixelisée, la ligne manuscrite face à la partie à l’encre.</dd></div>
+          <div><dt>Limites</dt><dd>Le pictogramme demande une seconde de lecture et reste petit sur mobile. Placée après le bouton CV, la mention peut sembler détachée du reste si les badges passent sur deux lignes.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="sim">
+      <div class="container sim-label" aria-hidden="true">Simulation · hero</div>
+      <section class="hero" aria-label="Simulation du hero, prototype 05">
+        <div class="container hero-grid">
+          <div class="hero-main">
+            <p class="hero-intro">
+              Conseiller technopédagogique en enseignement supérieur, j'accompagne les facultés et le corps enseignant dans la <strong>diversification des approches pédagogiques</strong>, l'<strong>hybridation de l'enseignement</strong> ou la préservation de l'<strong>intégrité des évaluations</strong>.
+            </p>
+            <p class="hero-intro">Face à l'omniprésence de l'IA et à la transition numérique de l'enseignement supérieur, je promeus une adoption réfléchie des technologies&hellip;</p>
+            <p class="hero-climax">
+              &hellip; pour à la fois <strong>relever les défis actuels</strong> et <strong>préserver les compétences cognitives essentielles</strong>.
+            </p>
+            <div class="hero-badges">
+              <span class="badge badge-gold">+12 ans d'enseignement</span>
+              <span class="badge badge-gold">+6 ans de conseil pédagogique</span>
+              <span class="badge badge-gold">Bilingue français/anglais</span>
+              <span class="btn-outline">Télécharger le CV</span>
+            </div>
+            <div class="p5-trace">
+              <svg class="p5-svg" viewBox="0 0 58 44" aria-hidden="true" focusable="false">
+                <!-- Grille de points : le support de la machine -->
+                <g fill="#59635f" opacity="0.6">
+                  <circle cx="2" cy="2" r="0.55" /><circle cx="6" cy="2" r="0.55" /><circle cx="10" cy="2" r="0.55" /><circle cx="14" cy="2" r="0.55" /><circle cx="18" cy="2" r="0.55" /><circle cx="22" cy="2" r="0.55" /><circle cx="26" cy="2" r="0.55" />
+                  <circle cx="2" cy="6" r="0.55" /><circle cx="6" cy="6" r="0.55" /><circle cx="10" cy="6" r="0.55" /><circle cx="14" cy="6" r="0.55" /><circle cx="18" cy="6" r="0.55" /><circle cx="22" cy="6" r="0.55" /><circle cx="26" cy="6" r="0.55" />
+                  <circle cx="2" cy="10" r="0.55" /><circle cx="6" cy="10" r="0.55" /><circle cx="10" cy="10" r="0.55" /><circle cx="14" cy="10" r="0.55" /><circle cx="18" cy="10" r="0.55" /><circle cx="22" cy="10" r="0.55" /><circle cx="26" cy="10" r="0.55" />
+                  <circle cx="2" cy="14" r="0.55" /><circle cx="6" cy="14" r="0.55" /><circle cx="10" cy="14" r="0.55" /><circle cx="14" cy="14" r="0.55" /><circle cx="18" cy="14" r="0.55" /><circle cx="22" cy="14" r="0.55" /><circle cx="26" cy="14" r="0.55" />
+                  <circle cx="2" cy="18" r="0.55" /><circle cx="6" cy="18" r="0.55" /><circle cx="10" cy="18" r="0.55" /><circle cx="14" cy="18" r="0.55" /><circle cx="18" cy="18" r="0.55" /><circle cx="22" cy="18" r="0.55" /><circle cx="26" cy="18" r="0.55" />
+                </g>
+                <!-- Marches de pixels -->
+                <g fill="#1b2724">
+                  <rect x="2" y="2" width="4" height="4" />
+                  <rect x="6" y="2" width="4" height="4" />
+                  <rect x="10" y="6" width="4" height="4" />
+                  <rect x="14" y="6" width="4" height="4" />
+                  <rect x="18" y="10" width="4" height="4" />
+                  <rect x="22" y="14" width="4" height="4" />
+                </g>
+                <!-- Le même trait, à l'encre -->
+                <path d="M26 16.5 C 31 18, 34 26, 39 31 S 49 38.5, 54 39" fill="none" stroke="#b4472c" stroke-width="1.8" stroke-linecap="round" />
+                <path d="M30 19.5 C 33 23, 35 27.5, 38.5 30.5" fill="none" stroke="#b4472c" stroke-width="1" stroke-linecap="round" opacity="0.55" />
+                <ellipse cx="55.2" cy="39.2" rx="1.6" ry="1.35" fill="#b4472c" />
+              </svg>
+              <p class="p5-text">
+                <span class="p5-code">Codé avec IA</span>
+                <span class="p5-hand">Rédigé sans IA</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="hero-side">
+            <div class="hero-photo-wrap" role="img" aria-label="Portrait de Fabien Brinjean">
+              <img src="assets/images/photo02.jpg" alt="Portrait de Fabien Brinjean" width="480" height="800" />
+            </div>
+            <ul class="hero-signature" aria-label="Rôles professionnels">
+              <li>Conseiller</li>
+              <li>Formateur</li>
+              <li>Pédagogue</li>
+              <li>Artiste</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </article>
+
+  <!-- ==========================================================
+       PROTOTYPE 06 — LES DEUX BORDS
+       ========================================================== -->
+  <article class="proto" aria-labelledby="p6-title">
+    <div class="proto-head">
+      <div class="container">
+        <div>
+          <p class="proto-num">Prototype 06</p>
+          <h2 class="proto-name" id="p6-title">Les deux bords</h2>
+        </div>
+        <dl class="proto-notes">
+          <div><dt>Placement</dt><dd>Verticalement, de part et d’autre du portrait. «&nbsp;Codé avec IA&nbsp;» longe le bord gris de la photo, à gauche, en montant. «&nbsp;Rédigé sans IA&nbsp;» longe le cadre terracotta, à droite, en descendant.</dd></div>
+          <div><dt>Intention</dt><dd>Le site a déjà deux bords autour de la photo&#8239;: le filet gris, net, et le cadre terracotta décalé, comme posé à la main. Chaque registre prend le sien. Les deux sens de lecture opposés, comme deux dos de livres, marquent l’écart. Un pixel ouvre la première ligne, une goutte d’encre ferme la seconde.</dd></div>
+          <div><dt>Limites</dt><dd>Le texte vertical se lit moins vite et la mention est coupée en deux par le portrait. Entre 1024 et 1100&nbsp;px de large, la ligne de droite frôle la marge du conteneur.</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="sim">
+      <div class="container sim-label" aria-hidden="true">Simulation · hero</div>
+      <section class="hero" aria-label="Simulation du hero, prototype 06">
+        <div class="container hero-grid">
+          <div class="hero-main">
+            <p class="hero-intro">
+              Conseiller technopédagogique en enseignement supérieur, j'accompagne les facultés et le corps enseignant dans la <strong>diversification des approches pédagogiques</strong>, l'<strong>hybridation de l'enseignement</strong> ou la préservation de l'<strong>intégrité des évaluations</strong>.
+            </p>
+            <p class="hero-intro">Face à l'omniprésence de l'IA et à la transition numérique de l'enseignement supérieur, je promeus une adoption réfléchie des technologies&hellip;</p>
+            <p class="hero-climax">
+              &hellip; pour à la fois <strong>relever les défis actuels</strong> et <strong>préserver les compétences cognitives essentielles</strong>.
+            </p>
+            <div class="hero-badges">
+              <span class="badge badge-gold">+12 ans d'enseignement</span>
+              <span class="badge badge-gold">+6 ans de conseil pédagogique</span>
+              <span class="badge badge-gold">Bilingue français/anglais</span>
+              <span class="btn-outline">Télécharger le CV</span>
+            </div>
+          </div>
+
+          <div class="hero-side">
+            <div class="p6-anchor">
+              <div class="hero-photo-wrap" role="img" aria-label="Portrait de Fabien Brinjean">
+                <img src="assets/images/photo02.jpg" alt="Portrait de Fabien Brinjean" width="480" height="800" />
+              </div>
+              <p class="p6-mention">
+                <span class="p6-code"><svg class="p6-pixel" viewBox="0 0 8 8" aria-hidden="true" focusable="false"><rect x="0" y="0" width="4" height="4" fill="#1b2724" /><rect x="4" y="4" width="4" height="4" fill="#b4472c" /></svg>Codé avec IA</span>
+                <span class="p6-hand">Rédigé sans IA<svg class="p6-drop" viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M4 0.6 C 5.6 3, 7 4.4, 7 5.6 A 3 2.4 0 0 1 1 5.6 C 1 4.4, 2.4 3, 4 0.6 Z" fill="#b4472c" /></svg></span>
+              </p>
+            </div>
+            <ul class="hero-signature" aria-label="Rôles professionnels">
+              <li>Conseiller</li>
+              <li>Formateur</li>
+              <li>Pédagogue</li>
+              <li>Artiste</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </article>
+
+  <!-- ==========================================================
+       RECOMMANDATION
+       ========================================================== -->
+  <section class="board-reco" aria-labelledby="reco-title">
+    <div class="container">
+      <p class="eyebrow">Recommandation</p>
+      <h2 id="reco-title">Ce que je retiendrais, sans fermer les autres pistes</h2>
+      <div class="reco-grid">
+        <div>
+          <h3><span>Recommandé</span>02 — Note de bas de page</h3>
+          <p>C’est la seule proposition où la mention a un sens à l’endroit où elle se trouve. Elle s’attache au mot «&nbsp;IA&nbsp;» du manifeste et transforme une déclaration de principe en pratique vérifiable&#8239;: le site applique l’adoption réfléchie qu’il défend. La forme (appel de note, filet court, note en corps réduit) est celle de la publication universitaire, donc lisible par votre public sans explication.</p>
+          <p>La hiérarchie est respectée&#8239;: la note ferme la colonne, sous les badges, en petit. Le seul coût est un chiffre en exposant dans le texte du manifeste.</p>
+        </div>
+        <div>
+          <h3><span>Alternative</span>01 — Colophon de la signature</h3>
+          <p>Si vous préférez ne pas toucher au texte du manifeste, le colophon est l’option la plus sûre. Il réutilise le filet terracotta déjà en place et ne crée aucun élément nouveau. Le changement de nature du filet (points, puis encre) porte le contraste machine / main avec un minimum de moyens.</p>
+          <p>Il est aussi le plus discret, au point de pouvoir passer inaperçu&#8239;: c’est un avantage si la mention doit rester un clin d’œil.</p>
+        </div>
+      </div>
+      <p class="reco-foot">Le tampon (04) et le trait (05) sont les plus expressifs et conviendraient si vous souhaitez que la mention soit remarquée. Le commentaire de source (03) inverse la hiérarchie voulue et les deux bords (06) sacrifient la lisibilité&#8239;: je les garderais comme pistes de réflexion. Les éléments se combinent aussi&#8239;: le pictogramme du trait (05) pourrait accompagner la note (02) en remplacement du chiffre.</p>
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>
